@@ -8,7 +8,7 @@ demo:
 
 ## Instructions
 
-1. Quisque dictum convallis metus, vitae vestibulum turpis dapibus non.
+1. Quisque dictum convallis metus, and follow these instructions.
 
     1. Suspendisse commodo tempor convallis. 
 
