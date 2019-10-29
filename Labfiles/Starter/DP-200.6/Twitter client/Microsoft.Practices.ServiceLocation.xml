@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Practices.ServiceLocation</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Practices.ServiceLocation.ActivationException">
+            <summary>ServiceLocator でオブジェクトの解決にエラーが発生した場合にスローされる標準の例外です。</summary>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ActivationException.#ctor">
+            <summary><see cref="T:System.Exception" /> クラスの新しいインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ActivationException.#ctor(System.String)">
+            <summary><see cref="T:System.Exception" /> クラスの新しいインスタンスを、指定されたエラー メッセージを使用して、初期化します。</summary>
+            <param name="message">エラーを説明するメッセージです。</param>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ActivationException.#ctor(System.String,System.Exception)">
+            <summary><see cref="T:System.Exception" /> クラスの新しいインスタンスを、指定されたエラー メッセージと、この例外の原因である内部例外への参照を使用して初期化します。</summary>
+            <param name="message">例外の理由を説明するエラー メッセージです。</param>
+            <param name="innerException">現在の例外の原因である例外、または内部例外が指定されていない場合は null 参照 (Visual Basic では Nothing)。</param>
+        </member>
+        <member name="T:Microsoft.Practices.ServiceLocation.IServiceLocator">
+            <summary>汎用サービス ロケーター インターフェイスです。このインターフェイスは、コンテナーからサービス (タイプとオプション名で識別されるインスタンス) を取得するために使用されます。</summary>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.IServiceLocator.GetInstance(System.Type)">
+            <summary>指定された <paramref name="serviceType"/> のインスタンスを取得します。</summary>
+            <param name="serviceType">要求されたオブジェクトのタイプです。</param>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求されたサービス インスタンスです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.IServiceLocator.GetInstance(System.Type,System.String)">
+            <summary>指定された名前の<paramref name="serviceType"/> インスタンスを取得します。</summary>
+            <param name="serviceType">要求されたオブジェクトのタイプです。</param>
+            <param name="key">登録されたオブジェクトに名前を付けます。</param>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求されたサービス インスタンスです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.IServiceLocator.GetAllInstances(System.Type)">
+            <summary>コンテナーに現在登録されている指定された <paramref name="serviceType"/> のインスタンスをすべて取得します。</summary>
+            <param name="serviceType">要求されたオブジェクトのタイプです。</param>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求された <paramref name="serviceType"/> のインスタンスの シーケンス。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.IServiceLocator.GetInstance``1">
+            <summary>指定された <typeparamref name="TService"/> のインスタンスを取得します。</summary>
+            <typeparam name="TService">要求されたオブジェクトのタイプです。</typeparam>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求されたサービス インスタンスです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.IServiceLocator.GetInstance``1(System.String)">
+            <summary>指定された名前の<typeparamref name="TService"/> インスタンスを取得します。</summary>
+            <typeparam name="TService">要求されたオブジェクトのタイプです。</typeparam>
+            <param name="key">登録されたオブジェクトに名前を付けます。</param>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求されたサービス インスタンスです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.IServiceLocator.GetAllInstances``1">
+            <summary>コンテナーに現在登録されている指定された <typeparamref name="TService"/> のインスタンスをすべて取得します。</summary>
+            <typeparam name="TService">要求されたオブジェクトのタイプです。</typeparam>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求された <typeparamref name="TService"/> のインスタンスの シーケンス。</returns>
+        </member>
+        <member name="T:Microsoft.Practices.ServiceLocation.ServiceLocator">
+            <summary>このクラスは、このアプリケーションのアンビエント コンテナーを提供します。フレームワークでこのようなアンビエント コンテナーが定義される場合は、ServiceLocator.Current を使用して取得します。</summary>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocator.SetLocatorProvider(Microsoft.Practices.ServiceLocation.ServiceLocatorProvider)">
+            <summary>現在のコンテナーの取得に使用するデリゲートを設定します。</summary>
+            <param name="newProvider">呼び出されると、現在のアンビエント コンテナーを返すデリゲートです。</param>
+        </member>
+        <member name="P:Microsoft.Practices.ServiceLocation.ServiceLocator.Current">
+            <summary>現在のアンビエント コンテナーです。</summary>
+        </member>
+        <member name="T:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase">
+            <summary>このクラスは、<see cref="T:Microsoft.Practices.ServiceLocation.IServiceLocator"/> のほとんどのメソッドの、既定の実装を提供するヘルパー です。</summary>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.GetService(System.Type)">
+            <summary><see cref="M:System.IServiceProvider.GetService(System.Type)"/> の実装。</summary>
+            <param name="serviceType">要求されたサービスです。</param>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求されたオブジェクトです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.GetInstance(System.Type)">
+            <summary>指定された <paramref name="serviceType"/> のインスタンスを取得します。</summary>
+            <param name="serviceType">要求されたオブジェクトのタイプです。</param>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求されたサービス インスタンスです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.GetInstance(System.Type,System.String)">
+            <summary>指定された名前の<paramref name="serviceType"/> インスタンスを取得します。</summary>
+            <param name="serviceType">要求されたオブジェクトのタイプです。</param>
+            <param name="key">登録されたオブジェクトに名前を付けます。</param>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求されたサービス インスタンスです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.GetAllInstances(System.Type)">
+            <summary>コンテナーに現在登録されている指定された <paramref name="serviceType"/> のインスタンスをすべて取得します。</summary>
+            <param name="serviceType">要求されたオブジェクトのタイプです。</param>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求された <paramref name="serviceType"/> のインスタンスの シーケンス。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.GetInstance``1">
+            <summary>指定された <typeparamref name="TService"/> のインスタンスを取得します。</summary>
+            <typeparam name="TService">要求されたオブジェクトのタイプです。</typeparam>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求されたサービス インスタンスです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.GetInstance``1(System.String)">
+            <summary>指定された名前の<typeparamref name="TService"/> インスタンスを取得します。</summary>
+            <typeparam name="TService">要求されたオブジェクトのタイプです。</typeparam>
+            <param name="key">登録されたオブジェクトに名前を付けます。</param>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求されたサービス インスタンスです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.GetAllInstances``1">
+            <summary>コンテナーに現在登録されている指定された <typeparamref name="TService"/> のインスタンスをすべて取得します。</summary>
+            <typeparam name="TService">要求されたオブジェクトのタイプです。</typeparam>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">サービス インスタンスの解決にエラーがある場合。</exception>
+            <returns>要求された <typeparamref name="TService"/> のインスタンスの シーケンス。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.DoGetInstance(System.Type,System.String)">
+            <summary>クラスの継承によって実装された場合、このメソッドは要求されたサービス インスタンスを解決する実際の処理を行います。</summary>
+            <param name="serviceType">要求されたインスタンスのタイプです。</param>
+            <param name="key">必要な登録済みサービスの名前です。null とすることができます。</param>
+            <returns>要求されたサービス インスタンスです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.DoGetAllInstances(System.Type)">
+            <summary>クラスの継承によって実装された場合、このメソッドは、要求されたすべてのサービス インスタンスを解決する実際の処理を行います。</summary>
+            <param name="serviceType">要求されたサービスのタイプです。</param>
+            <returns>サービス インスタンス オブジェクトのシーケンスです。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.FormatActivationExceptionMessage(System.Exception,System.Type,System.String)">
+            <summary>1 つのサービスの解決する間に発生する <see cref="T:Microsoft.Practices.ServiceLocation.ActivationException"/> で使用する例外メッセージの書式を設定します。</summary>
+            <param name="actualException">実装によってスローされる実際の例外です。</param>
+            <param name="serviceType">要求されたサービスのタイプです。</param>
+            <param name="key">要求された名前です。</param>
+            <returns>フォーマットされた例外メッセージ文字列。</returns>
+        </member>
+        <member name="M:Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.FormatActivateAllExceptionMessage(System.Exception,System.Type)">
+            <summary>複数のサービス インスタンスを解決する間に発生する <see cref="T:Microsoft.Practices.ServiceLocation.ActivationException"/> で使用する例外メッセージの書式を設定します。</summary>
+            <param name="actualException">実装によってスローされる実際の例外です。</param>
+            <param name="serviceType">要求されたサービスのタイプです。</param>
+            <returns>フォーマットされた例外メッセージ文字列。</returns>
+        </member>
+        <member name="T:Microsoft.Practices.ServiceLocation.ServiceLocatorProvider">
+            <summary>このデリゲート タイプは、現在のコンテナーを返すメソッドを提供するために使用されます。  <see cref="T:Microsoft.Practices.ServiceLocation.ServiceLocator"/>静的アクセサ クラスで使用されます。</summary>
+            <returns><see cref="T:Microsoft.Practices.ServiceLocation.IServiceLocator"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Practices.ServiceLocation.Properties.Resources">
+            <summary>ローカライズされた文字列などを検索するための厳密にタイプ指定されたリソース クラスです。</summary>
+        </member>
+        <member name="P:Microsoft.Practices.ServiceLocation.Properties.Resources.ResourceManager">
+            <summary>このクラスで使用されるキャッシュされた ResourceManager インスタンスを返します。</summary>
+        </member>
+        <member name="P:Microsoft.Practices.ServiceLocation.Properties.Resources.Culture">
+            <summary>この厳密にタイプ指定されたリソース クラスを使用するすべてのリソース ルックアップに対して、現在のスレッドの CurrentUICulture プロパティをオーバーライドします。</summary>
+        </member>
+        <member name="P:Microsoft.Practices.ServiceLocation.Properties.Resources.ActivateAllExceptionMessage">
+            <summary>{0} タイプのすべてのインスタンスを取得しようとする間に発生したアクティブ化エラーに類似する、ローカライズされた文字列を検索します。</summary>
+        </member>
+        <member name="P:Microsoft.Practices.ServiceLocation.Properties.Resources.ActivationExceptionMessage">
+            <summary>{0} タイプ、 &quot;{1}&quot; キーのインスタンスを取得しようとする間に発生したアクティブ化エラーに類似する、ローカライズされた文字列を検索します。</summary>
+        </member>
+        <member name="P:Microsoft.Practices.ServiceLocation.Properties.Resources.ServiceLocationProviderNotSetMessage">
+            <summary>ServiceLocationProvider に類似する、ローカライズされた文字列をの検索を設定する必要が...</summary>
+        </member>
+    </members>
+</doc>

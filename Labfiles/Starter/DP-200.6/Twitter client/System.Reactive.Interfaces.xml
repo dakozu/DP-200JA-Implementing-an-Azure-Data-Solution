@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>System.Reactive.Interfaces</name>
+    </assembly>
+    <members>
+        <member name="T:System.Reactive.NamespaceDoc">
+            <summary><b>System.Reactive</b> 名前空間には、Reactive Extensions ライブラリ全体で使用されるインターフェイスとクラスが含まれています。 </summary>
+        </member>
+        <member name="T:System.Reactive.Concurrency.NamespaceDoc">
+            <summary><b>System.Reactive.Concurrency</b> 名前空間には、イベント ストリームの構築と処理で Reactive Extensions が使用する Scheduler インフラストラクチャを提供するインターフェイスとクラスが含まれています。  Scheduler は、クエリ演算子によって導入される同時実行のパラメーター化、時間を仮想化する手段の提供、履歴データの処理、Reactive Extensions コンストラクトを使用して構築される機能の単体テストの記述で使用されます。</summary>
+        </member>
+        <member name="T:System.Reactive.Disposables.NamespaceDoc">
+            <summary><b>System.Reactive.Disposables</b> 名前空間には、Reactive Extensions のリソースおよびサブスクリプション管理を扱うために使用されるコンストラクトの構成セットを提供するインターフェイスとクラスが含まれています。  これらのタイプは、Reactive Extensions の実装内で広く使用されており、カスタム クエリ演算子または Scheduler を作成する場合に便利です。</summary>
+        </member>
+        <member name="T:System.Reactive.Linq.NamespaceDoc">
+            <summary><b>System.Reactive.Linq</b> 名前空間には、統合言語クエリ (LINQ) を使用して、観察可能なシーケンスに対するクエリの表現をサポートするインターフェイスとクラスが含まれています。  クエリ演算子はそれぞれ、Observable クラスと Qbservable クラスで定義されたIObservable&lt;T&gt; と IQbservable&lt;T&gt; の拡張メソッドとして使用できます。</summary>
+        </member>
+        <member name="T:System.Reactive.Subjects.NamespaceDoc">
+            <summary><b>System.Reactive.Subjects</b> 名空間には、IObservable&lt;T&gt; と IObserver&lt;T&gt; の両方を実装するオブジェクトであるサブジェクトを表すインターフェイスとクラスが含まれています。  サブジェクトはイベントのソースとして頻繁に使用され、ある当事者がイベントを発生させ、別の当事者がイベント ストリーム上にクエリを書き込むことを許可します。複数の登録オブザーバーを持てるため、サブジェクトは、クエリ内のイベント ストリームに対してマルチキャスト動作を提供する機能としても使用されます。</summary>
+        </member>
+        <member name="T:System.Reactive.Concurrency.ISchedulerPeriodic">
+            <summary>定期的なタスクの実行をサポートする Scheduler。このタイプの Scheduler を使用すると、再帰スケジューリングを使用する代わりに、タイマーをより効率的に実行できます。</summary>
+        </member>
+        <member name="M:System.Reactive.Concurrency.ISchedulerPeriodic.SchedulePeriodic``1(``0,System.TimeSpan,System.Func{``0,``0})">
+            <summary>定期的な作業をスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡される状態のタイプ。</typeparam>
+            <param name="state">最初の繰り返し後、アクションに渡される初期状態。</param>
+            <param name="period">作業を定期的に実行する期間。</param>
+            <param name="action">実行するアクション。状態が更新される可能性があります。</param>
+            <returns>スケジュールされた定期アクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+        </member>
+        <member name="T:System.Reactive.Concurrency.IStopwatchProvider">
+            <summary>IStopwatch オブジェクトのプロバイダー。</summary>
+        </member>
+        <member name="M:System.Reactive.Concurrency.IStopwatchProvider.StartStopwatch">
+            <summary>新しいストップウォッチ オブジェクトを開始します。</summary>
+            <returns>新しいストップウォッチ オブジェクト。要求の時点で開始されます。</returns>
+        </member>
+        <member name="T:System.Reactive.Concurrency.IScheduledItem`1">
+            <summary>スケジュールされた作業項目を表します。</summary>
+            <typeparam name="TAbsolute">絶対時間表現タイプ。</typeparam>
+        </member>
+        <member name="M:System.Reactive.Concurrency.IScheduledItem`1.Invoke">
+            <summary>作業項目を呼び出します。</summary>
+        </member>
+        <member name="P:System.Reactive.Concurrency.IScheduledItem`1.DueTime">
+            <summary>項目の呼び出しの期限が切れる絶対時間を取得します。</summary>
+        </member>
+        <member name="T:System.Reactive.Concurrency.IScheduler">
+            <summary>作業単位をスケジュールするオブジェクトを表します。</summary>
+        </member>
+        <member name="M:System.Reactive.Concurrency.IScheduler.Schedule``1(``0,System.Func{System.Reactive.Concurrency.IScheduler,``0,System.IDisposable})">
+            <summary>実行するアクションをスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡される状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+        </member>
+        <member name="M:System.Reactive.Concurrency.IScheduler.Schedule``1(``0,System.TimeSpan,System.Func{System.Reactive.Concurrency.IScheduler,``0,System.IDisposable})">
+            <summary>dueTime 後に実行するアクションをスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡される状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <param name="dueTime">その後にアクションを実行する相対時間。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+        </member>
+        <member name="M:System.Reactive.Concurrency.IScheduler.Schedule``1(``0,System.DateTimeOffset,System.Func{System.Reactive.Concurrency.IScheduler,``0,System.IDisposable})">
+            <summary>dueTime に実行するアクションをスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡される状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <param name="dueTime">アクションを実行する絶対時間。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+        </member>
+        <member name="P:System.Reactive.Concurrency.IScheduler.Now">
+            <summary>Scheduler の現在の時刻の概念を取得します。</summary>
+        </member>
+        <member name="T:System.Reactive.Concurrency.ISchedulerLongRunning">
+            <summary>実行時間の長いタスクを開始するためのサポートがある Scheduler。このタイプの Scheduler を使用すると、再帰スケジューリングを使う代わりに、ループをより効率的に実行できます。</summary>
+        </member>
+        <member name="M:System.Reactive.Concurrency.ISchedulerLongRunning.ScheduleLongRunning``1(``0,System.Action{``0,System.Reactive.Disposables.ICancelable})">
+            <summary>長時間実行する作業をスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡される状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <remarks><para><b>実装者への注意事項</b></para> 返された破棄可能なオブジェクトは、作業の開始を妨げるのではなく、指定されたアクションに渡された取り消しフラグのみを設定する必要があります。</remarks>
+        </member>
+        <member name="T:System.Reactive.Concurrency.IStopwatch">
+            <summary>開始点に対する時間を計算するストップウォッチの抽象化。</summary>
+        </member>
+        <member name="P:System.Reactive.Concurrency.IStopwatch.Elapsed">
+            <summary>ストップウォッチ オブジェクトが取得されてから経過した時間を取得します。</summary>
+        </member>
+        <member name="T:System.Reactive.Disposables.ICancelable">
+            <summary>破棄可能な状態を追跡する破棄可能なリソース。</summary>
+        </member>
+        <member name="P:System.Reactive.Disposables.ICancelable.IsDisposed">
+            <summary>オブジェクトが破棄されるかどうかを示す値を取得します。</summary>
+        </member>
+        <member name="T:System.Reactive.IEventPattern`2">
+            <summary>イベントを発生させた厳密に型指定されたオブジェクトと、イベントによって生成されたデータで構成される .NET イベント呼び出しを表します。</summary>
+            <typeparam name="TSender">イベントを発生させたセンダーのタイプ。このタイプ パラメーターは共変です。つまり、指定したタイプ、またはもっと派生的なタイプを使用できます。共変と反変の詳細については、「一般」の「共変と反変」を参照してください。</typeparam>
+            <typeparam name="TEventArgs">イベントによって生成されるイベント データのタイプ。このタイプ パラメーターは共変です。つまり、指定したタイプ、またはもっと派生的なタイプを使用できます。共変と反変の詳細については、「一般」の「共変と反変」を参照してください。</typeparam>
+        </member>
+        <member name="P:System.Reactive.IEventPattern`2.Sender">
+            <summary>イベントを発生させたセンダー オブジェクトを取得します。</summary>
+        </member>
+        <member name="P:System.Reactive.IEventPattern`2.EventArgs">
+            <summary>イベントによって生成されたイベント データを取得します。</summary>
+        </member>
+        <member name="T:System.Reactive.IEventPatternSource`1">
+            <summary>イベントによって要素を通知するデータ ストリームを表します。</summary>
+            <typeparam name="TEventArgs">イベントによって生成されるイベント データのタイプ。</typeparam>
+        </member>
+        <member name="E:System.Reactive.IEventPatternSource`1.OnNext">
+            <summary>データ ストリーム内の次の要素を通知するイベント。</summary>
+        </member>
+        <member name="T:System.Reactive.IEventSource`1">
+            <summary>イベントによって要素を通知するデータ ストリームを表します。</summary>
+            <typeparam name="T">イベントによって生成されるイベント データのタイプ。このタイプ パラメーターは共変です。つまり、指定したタイプ、またはもっと派生的なタイプを使用できます。共変と反変の詳細については、「一般」の「共分散と反変」を参照してください。</typeparam>
+        </member>
+        <member name="E:System.Reactive.IEventSource`1.OnNext">
+            <summary>データ ストリーム内の次の要素を通知するイベント。</summary>
+        </member>
+        <member name="T:System.Reactive.IObserver`2">
+            <summary>プッシュ ベースの通知を受信し、応答を返すメカニズムを提供します。</summary>
+            <typeparam name="TValue">オブザーバーが受け取る要素のタイプ。このタイプ パラメーターは反変です。つまり、指定したタイプまたは派生の少ないタイプを使用できます。共変と反変の詳細については、「一般」の「共変と反変」を参照してください。</typeparam>
+            <typeparam name="TResult">オブザーバーの通知ハンドラから返される結果の型。このタイプ パラメーターは共変です。つまり、指定したタイプ、またはもっと派生的なタイプを使用できます。共変と反変の詳細については、「一般」の「共分散と反変」を参照してください。</typeparam>
+        </member>
+        <member name="M:System.Reactive.IObserver`2.OnNext(`0)">
+            <summary>シーケンス内の新しい要素のオブザーバーに通知します。</summary>
+            <param name="value">シーケンス内の新しい要素。</param>
+            <returns>新しい要素の観察後に返された結果。</returns>
+        </member>
+        <member name="M:System.Reactive.IObserver`2.OnError(System.Exception)">
+            <summary>例外が発生したことをオブザーバーに知らせます。</summary>
+            <param name="exception">発生した例外。</param>
+            <returns>エラーの観測後に返された結果。</returns>
+        </member>
+        <member name="M:System.Reactive.IObserver`2.OnCompleted">
+            <summary>シーケンスの終了をオブザーバーに知らせます。</summary>
+            <returns>シーケンス完了の観察後に返された結果。</returns>
+        </member>
+        <member name="T:System.Reactive.Linq.IGroupedObservable`2">
+            <summary>共通のキーを持つ要素の監視可能なシーケンスを表します。</summary>
+            <typeparam name="TKey">グループ内のすべての要素で共有されるキーのタイプ。このタイプ パラメーターは共変です。つまり、指定したタイプ、またはもっと派生的なタイプを使用できます。共変と反変の詳細については、「一般」の「共変と反変」を参照してください。</typeparam>
+            <typeparam name="TElement">グループ内の要素のタイプ。このタイプ パラメーターは共変です。つまり、指定したタイプ、またはもっと派生的なタイプを使用できます。共変と反変の詳細については、「一般」の「共変と反変」を参照してください。</typeparam>
+        </member>
+        <member name="P:System.Reactive.Linq.IGroupedObservable`2.Key">
+            <summary>共通キーを取得します。</summary>
+        </member>
+        <member name="T:System.Reactive.Linq.IQbservable`1">
+            <summary>データのタイプがわかっている特定のデータ ソースに対してクエリを評価する機能を提供します。</summary>
+            <typeparam name="T">データ ソース内のデータのタイプ。このタイプ パラメーターは共変です。つまり、指定したタイプ、またはもっと派生的なタイプを使用できます。共変と反変の詳細については、「一般」の「共変と反変」を参照してください。</typeparam>
+        </member>
+        <member name="T:System.Reactive.Linq.IQbservable">
+            <summary>データのタイプが指定されていない特定のデータ ソースに対するクエリを評価する機能を提供します。</summary>
+        </member>
+        <member name="P:System.Reactive.Linq.IQbservable.ElementType">
+            <summary>IQbservable のこのインスタンスに関連付けられた式ツリーが実行されたときに返される要素のタイプを取得します。</summary>
+        </member>
+        <member name="P:System.Reactive.Linq.IQbservable.Expression">
+            <summary>IQbservable のインスタンスに関連付けられている式ツリーを取得します。</summary>
+        </member>
+        <member name="P:System.Reactive.Linq.IQbservable.Provider">
+            <summary>このデータ ソースに関連付けられているクエリ プロバイダーを取得します。</summary>
+        </member>
+        <member name="T:System.Reactive.Linq.IQbservableProvider">
+            <summary>IQbservable オブジェクトによって記述されたクエリを作成および実行するメソッドを定義します。</summary>
+        </member>
+        <member name="M:System.Reactive.Linq.IQbservableProvider.CreateQuery``1(System.Linq.Expressions.Expression)">
+            <summary>特定の式ツリーで表されるクエリを評価できる IQbservable&gt;TResult&lt; オブジェクトを構築します。</summary>
+            <typeparam name="TResult">返される System.Reactive.Linq.IQbservable&lt;T&gt; の要素のタイプ。</typeparam>
+            <param name="expression">クエリを表す式ツリー。</param>
+            <returns>特定のクエリ式を評価できる IQbservable オブジェクト。</returns>
+        </member>
+        <member name="T:System.Reactive.Subjects.IConnectableObservable`1">
+            <summary>基になる監視可能なシーケンスに接続および切断できる監視可能なラッパーを表します。</summary>
+            <typeparam name="T">シーケンス内の要素のタイプ。このタイプ パラメーターは共変です。つまり、指定したタイプ、またはもっと派生的なタイプを使用できます。共変と反変の詳細については、「一般」の「共変と反変」を参照してください。</typeparam>
+        </member>
+        <member name="M:System.Reactive.Subjects.IConnectableObservable`1.Connect">
+            <summary>監視可能なラッパーをそのソースに接続します。サブスクライブしているオブザーバーはすべて、接続が確立されている限り、基になる監視可能なシーケンスから値を受け取ります。</summary>
+            <returns>監視可能なラッパーをソースから切り離すために使用される破棄可能によって、サブスクライブしているオブザーバーが基になる監視可能なシーケンスからの値の受信を停止します。</returns>
+        </member>
+        <member name="T:System.Reactive.Subjects.ISubject`1">
+            <summary>監視可能なシーケンスとオブザーバーの両方であるオブジェクトを表します。</summary>
+            <typeparam name="T">サブジェクトによって処理される要素のタイプ。</typeparam>
+        </member>
+        <member name="T:System.Reactive.Subjects.ISubject`2">
+            <summary>監視可能なシーケンスとオブザーバーの両方であるオブジェクトを表します。</summary>
+            <typeparam name="TSource">サブジェクトが受け取る要素のタイプ。このタイプ パラメーターは反変です。つまり、指定したタイプまたは派生の少ないタイプを使用できます。共変と反変の詳細については、「一般」の「共変と反変」を参照してください。</typeparam>
+            <typeparam name="TResult">サブジェクトによって生成される要素のタイプ。このタイプ パラメーターは共変です。つまり、指定したタイプ、またはもっと派生的なタイプを使用できます。共変と反変の詳細については、「一般」の「共変と反変」を参照してください。</typeparam>
+        </member>
+    </members>
+</doc>

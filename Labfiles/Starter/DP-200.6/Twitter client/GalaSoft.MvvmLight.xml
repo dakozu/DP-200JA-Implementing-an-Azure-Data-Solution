@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>GalaSoft.MvvmLight</name>
+    </assembly>
+    <members>
+        <member name="T:GalaSoft.MvvmLight.Command.RelayCommand">
+            <summary>これは、デリゲートを呼び出すことによって、その機能を他のオブジェクトに中継することを唯一の目的とするコマンドです。CanExecute メソッドの規定の戻り値は &apos;true&apos; です。このクラスでは、Execute および CanExecute コールバック メソッドでコマンド パラメーターを受け入れることができません。</summary>
+            <remarks>WPF4.5 以上でこのクラスを使用している場合は、GalaSoft.MvvmLight.CommandWpf 名前空間 (GalaSoft.MvvmLight.Command の代わりに) を使用する必要があります。これにより、CanExecute デリゲートに基づいて制御の自動有効化/無効化を処理する CommandManager クラスが有効化 (または復元) されます。</remarks>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand.#ctor(System.Action)">
+            <summary>常に実行できるRelayCommand クラスの新しいインスタンスを初期化します。</summary>
+            <param name="execute">実行ロジックです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+            <exception cref="T:System.ArgumentNullException">実行引数が null の場合。</exception>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand.#ctor(System.Action,System.Func{System.Boolean})">
+            <summary>RelayCommand クラスの新しいインスタンスを初期化します。</summary>
+            <param name="execute">実行ロジックです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+            <param name="canExecute">実行ステータス ロジックです。</param>
+            <exception cref="T:System.ArgumentNullException">実行引数が null の場合。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</exception>
+        </member>
+        <member name="E:GalaSoft.MvvmLight.Command.RelayCommand.CanExecuteChanged">
+            <summary>コマンドを実行するかどうかに影響する変更がある場合に発生します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand.RaiseCanExecuteChanged">
+            <summary><see cref="E:GalaSoft.MvvmLight.Command.RelayCommand.CanExecuteChanged" />イベントを発生させます。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand.CanExecute(System.Object)">
+            <summary>コマンドを、現在の状態で実行できるかどうかを決定するメソッドを定義します。</summary>
+            <param name="parameter">このパラメーターは常に無視されます。</param>
+            <returns>このコマンドを実行できる場合は true。それ以外の場合は、false となります。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand.Execute(System.Object)">
+            <summary>コマンドが起動される際に、呼び出されるメソッドを定義します。</summary>
+            <param name="parameter">このパラメーターは常に無視されます。</param>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Command.RelayCommand`1">
+            <summary>これは、デリゲートを呼び出すことによって、その機能を他のオブジェクトに中継することを唯一の目的とする汎用コマンドです。CanExecute メソッドの規定の戻り値は &apos;true&apos; です。このクラスを使用すると、Execute および CanExecute コールバック メソッドでコマンド パラメーターを受け入れることができます。</summary>
+            <typeparam name="T">コマンド パラメーターのタイプです。</typeparam>
+            <remarks>WPF4.5 以上でこのクラスを使用している場合は、GalaSoft.MvvmLight.CommandWpf 名前空間 (GalaSoft.MvvmLight.Command の代わりに) を使用する必要があります。これにより、CanExecute デリゲートに基づいて制御の自動有効化/無効化を処理する CommandManager クラスが有効化 (または復元) されます。</remarks>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand`1.#ctor(System.Action{`0})">
+            <summary>常に実行できるRelayCommand クラスの新しいインスタンスを初期化します。</summary>
+            <param name="execute">実行ロジックです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+            <exception cref="T:System.ArgumentNullException">実行引数が null の場合。</exception>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean})">
+            <summary>RelayCommand クラスの新しいインスタンスを初期化します。</summary>
+            <param name="execute">実行ロジックです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+            <param name="canExecute">実行ステータス ロジックです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+            <exception cref="T:System.ArgumentNullException">実行引数が null の場合。</exception>
+        </member>
+        <member name="E:GalaSoft.MvvmLight.Command.RelayCommand`1.CanExecuteChanged">
+            <summary>コマンドを実行するかどうかに影響する変更がある場合に発生します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand`1.RaiseCanExecuteChanged">
+            <summary><see cref="E:GalaSoft.MvvmLight.Command.RelayCommand`1.CanExecuteChanged" />イベントを発生させます。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand`1.CanExecute(System.Object)">
+            <summary>コマンドを、現在の状態で実行できるかどうかを決定するメソッドを定義します。</summary>
+            <param name="parameter">コマンドで使用されるデータです。コマンドがデータの引き渡しを要求しない場合、このオブジェクトは null 参照に設定できます。</param>
+            <returns>このコマンドを実行できる場合は true。それ以外の場合は、false となります。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Command.RelayCommand`1.Execute(System.Object)">
+            <summary>コマンドが起動される際に、呼び出されるメソッドを定義します。</summary>
+            <param name="parameter">コマンドで使用されるデータです。コマンドがデータの引き渡しを要求しない場合、このオブジェクトは null 参照に設定できます。</param>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Helpers.DesignerLibrary">
+            <summary>プラットフォーム検出用のヘルパー クラスです。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Helpers.Empty">
+            <summary>非同期メソッドが要求される場合に使用されるヘルパー クラスですが、コンテキストは同期です。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.Empty.Task">
+            <summary>空のタスクを取得します。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Helpers.FeatureDetection">
+            <summary>プラットフォーム、および機能検出用のヘルパー クラスです。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Helpers.IExecuteWithObject">
+            <summary>このインターフェイスは <see cref="T:GalaSoft.MvvmLight.Helpers.WeakAction`1" /> クラス用です。複数の WeakAction{T} インスタンスを、タイプ T が何を表すか事前に知らないで保存する場合に便利です。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.IExecuteWithObject.Target">
+            <summary>WeakAction のターゲットです。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.IExecuteWithObject.ExecuteWithObject(System.Object)">
+            <summary>アクションを実行します。</summary>
+            <param name="parameter">オブジェクトとして渡され、適切なタイプにキャストされるパラメーターです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.IExecuteWithObject.MarkForDeletion">
+            <summary>すべての参照を削除します。それにより、このエントリを削除する必要があるクリーンアップ メソッドを通知します。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Helpers.IExecuteWithObjectAndResult">
+            <summary>このインターフェイスは <see cref="T:GalaSoft.MvvmLight.Helpers.WeakFunc`1" /> クラス用です。複数の WeakFunc{T} インスタンスを、タイプ T が何を表すか事前に知らないで保存する場合に便利です。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.IExecuteWithObjectAndResult.ExecuteWithObject(System.Object)">
+            <summary>Func を実行し、結果を返します。</summary>
+            <param name="parameter">オブジェクトとして渡され、適切なタイプにキャストされるパラメーターです。</param>
+            <returns>操作の結果です。</returns>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Helpers.WeakAction">
+            <summary><see cref="T:System.Action" /> を、アクションの所有者に、ハード リファレンスが作成される原因となることなく保存します。所有者はいつでもガベージ コレクションできます。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.Method">
+            <summary>コンストラクターで渡される、この WeakAction メソッドに対応する <see cref="T:System.Reflection.MethodInfo" />を取得または設定します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.MethodName">
+            <summary>この WeakAction が表すメソッドの名前を取得します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.ActionReference">
+            <summary>この WeakAction のアクションのターゲットへの WeakReference を、取得または設定します。必ずしも <see cref="P:GalaSoft.MvvmLight.Helpers.WeakAction.Reference" /> と同じではありません。たとえば、メソッドが匿名の場合です。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.Reference">
+            <summary>WeakAction を構築する際に渡される、ターゲットへの WeakReference を取得または設定します。必ずしも <see cref="P:GalaSoft.MvvmLight.Helpers.WeakAction.ActionReference" /> と同じではありません。たとえば、メソッドが匿名の場合です。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.IsStatic">
+            <summary>WeakAction が静的であるかどうかを示す値を取得します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction.#ctor">
+            <summary><see cref="T:GalaSoft.MvvmLight.Helpers.WeakAction" /> クラスの、空のインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction.#ctor(System.Action)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Helpers.WeakAction" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="action">このインスタンスに関連付けられるアクションです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction.#ctor(System.Object,System.Action)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Helpers.WeakAction" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="target">アクションの所有者です。</param>
+            <param name="action">このインスタンスに関連付けられるアクションです。</param>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.IsAlive">
+            <summary>アクションの所有者がまだ存在しているか、またはガベージ コレクターによって既に収集済みかを示す値を取得します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.Target">
+            <summary>アクションの所有者を取得します。このオブジェクトは、 <see cref="T:System.WeakReference" />として保存されます。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction.ActionTarget">
+            <summary>弱い参照のターゲットです。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction.Execute">
+            <summary>アクションを実行します。これは、アクションの所有者がまだ存在している場合のみ発生します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction.MarkForDeletion">
+            <summary>このインスタンスが保存する参照を null に設定します。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Helpers.WeakAction`1">
+            <summary>アクションを、アクションの所有者に、ハード リファレンスが作成される原因となることなく保存します。所有者はいつでもガベージ コレクションできます。</summary>
+            <typeparam name="T">アクションのパラメーターのタイプです。</typeparam>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction`1.MethodName">
+            <summary>この WeakAction が表すメソッドの名前を取得します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakAction`1.IsAlive">
+            <summary>アクションの所有者がまだ動作中か、またはガベージ コレクターによって既に収集済みかを示す値を取得します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.#ctor(System.Action{`0})">
+            <summary>WeakAction クラスの新しいインスタンスを初期化します。</summary>
+            <param name="action">このインスタンスに関連付けられるアクションです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.#ctor(System.Object,System.Action{`0})">
+            <summary>WeakAction クラスの新しいインスタンスを初期化します。</summary>
+            <param name="target">アクションの所有者です。</param>
+            <param name="action">このインスタンスに関連付けられるアクションです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.Execute">
+            <summary>アクションを実行します。これは、アクションの所有者がまだ動作中の場合のみ発生します。アクションのパラメーターは default(T) に設定されています。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.Execute(`0)">
+            <summary>アクションを実行します。これは、アクションの所有者がまだ動作中の場合のみ発生します。</summary>
+            <param name="parameter">アクションに渡されるパラメーターです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.ExecuteWithObject(System.Object)">
+            <summary>タイプ オブジェクトのパラメーターを使用して、アクションを実行します。このパラメータは T にキャストされます。このメソッドは<see cref="M:GalaSoft.MvvmLight.Helpers.IExecuteWithObject.ExecuteWithObject(System.Object)" />を実装します。複数の WeakAction{T} インスタンスを、タイプ T が何を表すか事前に知らないで保存する場合に便利です。</summary>
+            <param name="parameter">T にキャストされた後、アクションに渡されるパラメーターです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakAction`1.MarkForDeletion">
+            <summary>この WeakAction に含まれるすべてのアクションを null に設定します。このことは、この WeakAction が削除される必要があるオブジェクトが含まれていることのシグナルです。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Helpers.WeakFunc`1">
+            <summary> Func&lt;T&gt; を、Func の所有者に、ハード リファレンスが作成される原因となることなく保存します。所有者はいつでもガベージ コレクションできます。</summary>
+            <typeparam name="TResult">この弱い参照によって保存される、Func の結果のタイプです。</typeparam>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.Method">
+            <summary>コンストラクターで渡される、この WeakFunc メソッドに対応する <see cref="T:System.Reflection.MethodInfo" />を取得または設定します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.IsStatic">
+            <summary>WeakFunc が静的であるかどうかを示す値を取得します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.MethodName">
+            <summary>この WeakFunc が表すメソッドの名前を取得します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.FuncReference">
+            <summary>この WeakFunc のアクションのターゲットへの WeakReference を、取得または設定します。必ずしも <see cref="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.Reference" /> と同じではありません。たとえば、メソッドが匿名の場合です。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.Reference">
+            <summary>WeakFunc を構築する際に渡される、ターゲットへの WeakReference を取得または設定します。必ずしも <see cref="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.FuncReference" /> と同じではありません。たとえば、メソッドが匿名の場合です。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`1.#ctor">
+            <summary>WeakFunc クラスの空のインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`1.#ctor(System.Func{`0})">
+            <summary>WeakFunc クラスの新しいインスタンスを初期化します。</summary>
+            <param name="func">このインスタンスに関連付けられる Func です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`1.#ctor(System.Object,System.Func{`0})">
+            <summary>WeakFunc クラスの新しいインスタンスを初期化します。</summary>
+            <param name="target">Func の所有者です。</param>
+            <param name="func">このインスタンスに関連付けられる Func です。</param>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.IsAlive">
+            <summary>Func の所有者がまだ存在しているか、またはガベージ コレクターによって既に収集済みかを示す値を取得します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.Target">
+            <summary>Func の所有者を取得します。このオブジェクトは、 <see cref="T:System.WeakReference" />として保存されます。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.FuncTarget">
+            <summary>パラメーターとして渡された Func の所有者を取得します。必ずしも <see cref="P:GalaSoft.MvvmLight.Helpers.WeakFunc`1.Target" /> と同じではありません。たとえば、メソッドが匿名の場合です。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`1.Execute">
+            <summary>アクションを実行します。これは、Func の所有者がまだ存在している場合にのみ発生します。</summary>
+            <returns>参照として保存された Func の結果です。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`1.MarkForDeletion">
+            <summary>このインスタンスが保存する参照を null に設定します。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Helpers.WeakFunc`2">
+            <summary>Func を、Func の所有者に、ハード リファレンスが作成される原因となることなく保存します。所有者はいつでもガベージ コレクションできます。</summary>
+            <typeparam name="T">Func のパラメーターのタイプです。</typeparam>
+            <typeparam name="TResult">Func の戻り値のタイプです。</typeparam>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`2.MethodName">
+            <summary>この WeakFunc が表すメソッドの名前を取得または設定します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Helpers.WeakFunc`2.IsAlive">
+            <summary>Func の所有者がまだ存在しているか、またはガベージ コレクターによって既に収集済みかを示す値を取得します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.#ctor(System.Func{`0,`1})">
+            <summary>WeakFunc クラスの新しいインスタンスを初期化します。</summary>
+            <param name="func">このインスタンスに関連付けられる Func です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.#ctor(System.Object,System.Func{`0,`1})">
+            <summary>WeakFunc クラスの新しいインスタンスを初期化します。</summary>
+            <param name="target">Func の所有者です。</param>
+            <param name="func">このインスタンスに関連付けられる Func です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.Execute">
+            <summary>Func を実行します。これは、Func の所有者がまだ存在している場合にのみ発生します。Func のパラメーターは default(T) に設定されています。</summary>
+            <returns>参照として保存された Func の結果です。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.Execute(`0)">
+            <summary>Func を実行します。これは、Func の所有者がまだ動作中の場合にのみ発生します。</summary>
+            <param name="parameter">アクションに渡されるパラメーターです。</param>
+            <returns>参照として保存された Func の結果です。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.ExecuteWithObject(System.Object)">
+            <summary>タイプ オブジェクトのパラメーターを使用して Func を実行します。このパラメータは T にキャストされます。このメソッドは<see cref="M:GalaSoft.MvvmLight.Helpers.IExecuteWithObject.ExecuteWithObject(System.Object)" />を実装します。複数の WeakFunc{T} インスタンスを、タイプ T が何を表すか事前に知らないで保存する場合に便利です。</summary>
+            <param name="parameter">T にキャストされた後に Func に渡されるパラメーターです。</param>
+            <returns>オブジェクトとしての実行の結果で、Tにキャストされます。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Helpers.WeakFunc`2.MarkForDeletion">
+            <summary>この WeakFunc に含まれるすべての Func を null に設定します。このことは、この WeakFunc が削除される必要があるオブジェクトが含まれていることのシグナルです。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.ICleanup">
+            <summary>クリーンアップする必要があるクラスの共通インターフェイスを定義しますが、IDisposable が前提とする影響はありません。ICleanup を実装するインスタンスは、破棄され、ガベージ コレクションされることなく、クリーンアップできます。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ICleanup.Cleanup">
+            <summary>インスタンスをクリーンアップします。たとえば、その状態の保存、リソースの削除、などによります。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.GenericMessage`1">
+            <summary>汎用値 (コンテンツ) を受信者に渡します。</summary>
+            <typeparam name="T">Content プロパティのタイプです。</typeparam>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.GenericMessage`1.#ctor(`0)">
+            <summary>GenericMessage クラスの新しいインスタンスを初期化します。</summary>
+            <param name="content">メッセージの内容です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.GenericMessage`1.#ctor(System.Object,`0)">
+            <summary>GenericMessage クラスの新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="content">メッセージの内容です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.GenericMessage`1.#ctor(System.Object,System.Object,`0)">
+            <summary>GenericMessage クラスの新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="target">メッセージが目的とするターゲットです。このパラメーターは、メッセージが誰を目的としていたかを示唆するために使用できます。もちろん、これは単なる示唆であり、amd は null とすることができます。</param>
+            <param name="content">メッセージの内容です。</param>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Messaging.GenericMessage`1.Content">
+            <summary>メッセージの内容を取得または設定します。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.IMessenger">
+            <summary>Messenger は、オブジェクトがメッセージを交換できるようにするクラスです。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Action{``0})">
+            <summary>メッセージ TMessage のタイプの受信者を登録します。アクション パラメーターは、対応するメッセージが送信される際に実行されます。<para>受信者を登録してもハードリファレンスは作成されません。そのため、この受信者を削除してもメモリ リークの原因とはなりません。</para></summary>
+            <typeparam name="TMessage">受信者が登録するメッセージのタイプです。</typeparam>
+            <param name="recipient">メッセージを受信する受信者です。</param>
+            <param name="action">タイプ TMessage のメッセージが送信される際に実行されるアクションです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Object,System.Action{``0})">
+            <summary>メッセージ TMessage のタイプの受信者を登録します。アクション パラメーターは、対応するメッセージが送信される際に実行されます。TMessage から派生するメッセージ (または、TMessage がインターフェイスの場合は TMessage を実装するメッセージ) も受信可能となる方法の詳細は、receiveDerivedMessagesToo パラメーターを参照してください。<para>受信者を登録してもハードリファレンスは作成されません。そのため、この受信者を削除してもメモリ リークの原因とはなりません。</para></summary>
+            <typeparam name="TMessage">受信者が登録するメッセージのタイプです。</typeparam>
+            <param name="recipient">メッセージを受信する受信者です。</param>
+            <param name="token">メッセージング チャネルのトークンです。受信者がトークンを使用して登録し、送信者が同じトークンを使用してメッセージを送信すると、このメッセージは受信者に配信されます。登録時にトークンを使用しなかった (または別のトークンを使用した) 他の受信者は、メッセージを取得しません。同様に、どのトークンも使用しないで、または別のトークンを使用して送信されたメッセージは、その受信者に配信されません。</param>
+            <param name="action">タイプ TMessage のメッセージが送信される際に実行されるアクションです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Object,System.Boolean,System.Action{``0})">
+            <summary>メッセージ TMessage のタイプの受信者を登録します。アクション パラメーターは、対応するメッセージが送信される際に実行されます。TMessage から派生するメッセージ (または、TMessage がインターフェイスの場合は TMessage を実装するメッセージ) も受信可能となる方法の詳細は、receiveDerivedMessagesToo パラメーターを参照してください。<para>受信者を登録してもハードリファレンスは作成されません。そのため、この受信者を削除してもメモリ リークの原因とはなりません。</para></summary>
+            <typeparam name="TMessage">受信者が登録するメッセージのタイプです。</typeparam>
+            <param name="recipient">メッセージを受信する受信者です。</param>
+            <param name="token">メッセージング チャネルのトークンです。受信者がトークンを使用して登録し、送信者が同じトークンを使用してメッセージを送信すると、このメッセージは受信者に配信されます。登録時にトークンを使用しなかった (または別のトークンを使用した) 他の受信者は、メッセージを取得しません。同様に、どのトークンも使用しないで、または別のトークンを使用して送信されたメッセージは、その受信者に配信されません。</param>
+            <param name="receiveDerivedMessagesToo">true の場合、TMessage から派生したメッセージ タイプも受信者に送信されます。たとえば、SendOrderMessage と ExecuteOrderMessage が OrderMessage から派生した場合、OrderMessage のために登録し、receiveDerivedMessagesToo を true に設定すると、SendOrderMessage と ExecuteOrderMessage は登録した受信者に送信されます。<para>また、TMessage がインターフェイスの場合、TMessage を実装するメッセージ タイプも受信者に送信されます。たとえば、SendOrderMessage と ExecuteOrderMessage が IOrderMessage を実装する場合、IOrderMessage のために登録し、receiveDerivedMessagesToo を true に設定すると、SendOrderMessage と ExecuteOrderMessage は登録した受信者に送信されます。</para></param>
+            <param name="action">タイプ TMessage のメッセージが送信される際に実行されるアクションです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Register``1(System.Object,System.Boolean,System.Action{``0})">
+            <summary>メッセージ TMessage のタイプの受信者を登録します。アクション パラメーターは、対応するメッセージが送信される際に実行されます。TMessage から派生するメッセージ (または、TMessage がインターフェイスの場合は TMessage を実装するメッセージ) も受信可能となる方法の詳細は、receiveDerivedMessagesToo パラメーターを参照してください。<para>受信者を登録してもハードリファレンスは作成されません。そのため、この受信者を削除してもメモリ リークの原因とはなりません。</para></summary>
+            <typeparam name="TMessage">受信者が登録するメッセージのタイプです。</typeparam>
+            <param name="recipient">メッセージを受信する受信者です。</param>
+            <param name="receiveDerivedMessagesToo">true の場合、TMessage から派生したメッセージ タイプも受信者に送信されます。たとえば、SendOrderMessage と ExecuteOrderMessage が OrderMessage から派生した場合、OrderMessage のために登録し、receiveDerivedMessagesToo を true に設定すると、SendOrderMessage と ExecuteOrderMessage は登録した受信者に送信されます。<para>また、TMessage がインターフェイスの場合、TMessage を実装するメッセージ タイプも受信者に送信されます。たとえば、SendOrderMessage と ExecuteOrderMessage が IOrderMessage を実装する場合、IOrderMessage のために登録し、receiveDerivedMessagesToo を true に設定すると、SendOrderMessage と ExecuteOrderMessage は登録した受信者に送信されます。</para></param>
+            <param name="action">タイプ TMessage のメッセージが送信される際に実行されるアクションです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Send``1(``0)">
+            <summary>メッセージを、登録された受信者に送信します。メッセージは、Register メソッドの 1 つを使用してこのメッセージ タイプに登録されている、すべての受信者に届きます。</summary>
+            <typeparam name="TMessage">送信されるメッセージ タイプです。</typeparam>
+            <param name="message">登録された受信者に送信されるメッセージです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Send``2(``0)">
+            <summary>メッセージを、登録された受信者に送信します。このメッセージは、Register メソッドの 1 つを使用してこのメッセージ タイプに登録され、 targetType である受信者にのみ送信されます。</summary>
+            <typeparam name="TMessage">送信されるメッセージ タイプです。</typeparam>
+            <typeparam name="TTarget">メッセージを受信する受信者のタイプです。メッセージは別のタイプの受信者には送信されません。</typeparam>
+            <param name="message">登録された受信者に送信されるメッセージです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Send``1(``0,System.Object)">
+            <summary>メッセージを、登録された受信者に送信します。このメッセージは、Register メソッドの 1 つを使用してこのメッセージ タイプに登録され、 targetType である受信者にのみ送信されます。</summary>
+            <typeparam name="TMessage">送信されるメッセージ タイプです。</typeparam>
+            <param name="message">登録された受信者に送信されるメッセージです。</param>
+            <param name="token">メッセージング チャネルのトークンです。受信者がトークンを使用して登録し、送信者が同じトークンを使用してメッセージを送信すると、このメッセージは受信者に配信されます。登録時にトークンを使用しなかった (または別のトークンを使用した) 他の受信者は、メッセージを取得しません。同様に、どのトークンも使用しないで、または別のトークンを使用して送信されたメッセージは、その受信者に配信されません。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Unregister(System.Object)">
+            <summary>メッセージ受信者の登録を完全に解除します。このメソッドが実行された後、受信者は、もはやどのようなメッセージも受信しません。</summary>
+            <param name="recipient">登録を解除する必要がある受信者です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Unregister``1(System.Object)">
+            <summary>指定されたタイプのメッセージのみ、メッセージ受信者の登録を解除します。このメソッドが実行された後、受信者は、もう TMessage タイプのメッセージを受信しませんが、他のメッセージ タイプは受信します (以前に登録されている場合)。</summary>
+            <typeparam name="TMessage">受信者が登録解除を望むメッセージのタイプです。</typeparam>
+            <param name="recipient">登録を解除する必要がある受信者です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Unregister``1(System.Object,System.Object)">
+            <summary>指定されたタイプの種類のメッセージのみ、および指定されたトークンの、メッセージ受信者の登録を解除します。このメソッドが実行された後、受信者は、指定されたトークンによる TMessage タイプのメッセージは、もう受信しませんが、他のメッセージ タイプまたは他のトークンによるメッセージは受信します (以前に登録されている場合)。</summary>
+            <param name="recipient">登録を解除する必要がある受信者です。</param>
+            <param name="token">受信者の登録を解除する必要があるトークンです。</param>
+            <typeparam name="TMessage">受信者が登録解除を望むメッセージのタイプです。</typeparam>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Unregister``1(System.Object,System.Action{``0})">
+            <summary>指定されたタイプの種類のメッセージ、および指定されたアクションの、メッセージ受信者の登録を解除します。他のメッセージ タイプは、受信者に送信されます (以前に登録されている場合)。メッセージ タイプ TMessage のために、また指定された受信者 (使用可能な場合) のために登録されている、その他のアクションも引き続き使用できます。</summary>
+            <typeparam name="TMessage">受信者が登録解除を望むメッセージのタイプです。</typeparam>
+            <param name="recipient">登録を解除する必要がある受信者です。</param>
+            <param name="action">受信者、およびメッセージ タイプ TMessage のための登録を解除する必要があるアクションです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.IMessenger.Unregister``1(System.Object,System.Object,System.Action{``0})">
+            <summary>指定されたタイプの種類のメッセージ、指定されたアクション、および指定されたトークンの、メッセージ受信者の登録を解除します。他のメッセージ タイプは、受信者に送信されます (以前に登録されている場合)。メッセージ タイプ TMessage のために、指定された受信者のために、また他のトークン (使用可能な場合) のために登録されている、その他のアクションも引き続き使用できます。</summary>
+            <typeparam name="TMessage">受信者が登録解除を望むメッセージのタイプです。</typeparam>
+            <param name="recipient">登録を解除する必要がある受信者です。</param>
+            <param name="token">受信者の登録を解除する必要があるトークンです。</param>
+            <param name="action">受信者、およびメッセージ タイプ TMessage のための登録を解除する必要があるアクションです。</param>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.MessageBase">
+            <summary>Messenger によってブロードキャストされるすべてのメッセージの基本クラスです。このクラスを拡張することにより、独自のメッセージタイプを作成できます。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.MessageBase.#ctor">
+            <summary>MessageBase クラスの新しいインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.MessageBase.#ctor(System.Object)">
+            <summary>MessageBase クラスの新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージの元のセンダーです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.MessageBase.#ctor(System.Object,System.Object)">
+            <summary>MessageBase クラスの新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージの元のセンダーです。</param>
+            <param name="target">メッセージが目的とするターゲットです。このパラメーターは、メッセージが誰を目的としていたかを示唆するために使用できます。もちろん、これは単なる示唆であり、amd は null とすることができます。</param>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Messaging.MessageBase.Sender">
+            <summary>メッセージのセンダーを取得または設定します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Messaging.MessageBase.Target">
+            <summary>メッセージが目的とするターゲットを取得または設定します。このプロパティは、メッセージが誰を目的としていたかを示唆するために使用できます。もちろん、これは単なる示唆であり、amd は null とすることができます。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.Messenger">
+            <summary>Messenger は、オブジェクトがメッセージを交換できるようにするクラスです。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Messaging.Messenger.Default">
+            <summary>Messenger の既定のインスタンスを取得し、登録して、静的な方法でメッセージを送信できるようにします。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Action{``0})">
+            <summary>メッセージ TMessage のタイプの受信者を登録します。アクション パラメーターは、対応するメッセージが送信される際に実行されます。<para>受信者を登録してもハードリファレンスは作成されません。そのため、この受信者を削除してもメモリ リークの原因とはなりません。</para></summary>
+            <typeparam name="TMessage">受信者が登録するメッセージのタイプです。</typeparam>
+            <param name="recipient">メッセージを受信する受信者です。</param>
+            <param name="action">タイプ TMessage のメッセージが送信される際に実行されるアクションです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Boolean,System.Action{``0})">
+            <summary>メッセージ TMessage のタイプの受信者を登録します。アクション パラメーターは、対応するメッセージが送信される際に実行されます。TMessage から派生するメッセージ (または、TMessage がインターフェイスの場合は TMessage を実装するメッセージ) も受信可能となる方法の詳細は、receiveDerivedMessagesToo パラメーターを参照してください。<para>受信者を登録してもハードリファレンスは作成されません。そのため、この受信者を削除してもメモリ リークの原因とはなりません。</para></summary>
+            <typeparam name="TMessage">受信者が登録するメッセージのタイプです。</typeparam>
+            <param name="recipient">メッセージを受信する受信者です。</param>
+            <param name="receiveDerivedMessagesToo">true の場合、TMessage から派生したメッセージ タイプも受信者に送信されます。たとえば、SendOrderMessage と ExecuteOrderMessage が OrderMessage から派生した場合、OrderMessage のために登録し、receiveDerivedMessagesToo を true に設定すると、SendOrderMessage と ExecuteOrderMessage は登録した受信者に送信されます。<para>また、TMessage がインターフェイスの場合、TMessage を実装するメッセージ タイプも受信者に送信されます。たとえば、SendOrderMessage と ExecuteOrderMessage が IOrderMessage を実装する場合、IOrderMessage のために登録し、receiveDerivedMessagesToo を true に設定すると、SendOrderMessage と ExecuteOrderMessage は登録した受信者に送信されます。</para></param>
+            <param name="action">タイプ TMessage のメッセージが送信される際に実行されるアクションです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Object,System.Action{``0})">
+            <summary>メッセージ TMessage のタイプの受信者を登録します。アクション パラメーターは、対応するメッセージが送信される際に実行されます。<para>受信者を登録してもハードリファレンスは作成されません。そのため、この受信者を削除してもメモリ リークの原因とはなりません。</para></summary>
+            <typeparam name="TMessage">受信者が登録するメッセージのタイプです。</typeparam>
+            <param name="recipient">メッセージを受信する受信者です。</param>
+            <param name="token">メッセージング チャネルのトークンです。受信者がトークンを使用して登録し、送信者が同じトークンを使用してメッセージを送信すると、このメッセージは受信者に配信されます。登録時にトークンを使用しなかった (または別のトークンを使用した) 他の受信者は、メッセージを取得しません。同様に、どのトークンも使用しないで、または別のトークンを使用して送信されたメッセージは、その受信者に配信されません。</param>
+            <param name="action">タイプ TMessage のメッセージが送信される際に実行されるアクションです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Register``1(System.Object,System.Object,System.Boolean,System.Action{``0})">
+            <summary>メッセージ TMessage のタイプの受信者を登録します。アクション パラメーターは、対応するメッセージが送信される際に実行されます。TMessage から派生するメッセージ (または、TMessage がインターフェイスの場合は TMessage を実装するメッセージ) も受信可能となる方法の詳細は、receiveDerivedMessagesToo パラメーターを参照してください。<para>受信者を登録してもハードリファレンスは作成されません。そのため、この受信者を削除してもメモリ リークの原因とはなりません。</para></summary>
+            <typeparam name="TMessage">受信者が登録するメッセージのタイプです。</typeparam>
+            <param name="recipient">メッセージを受信する受信者です。</param>
+            <param name="token">メッセージング チャネルのトークンです。受信者がトークンを使用して登録し、送信者が同じトークンを使用してメッセージを送信すると、このメッセージは受信者に配信されます。登録時にトークンを使用しなかった (または別のトークンを使用した) 他の受信者は、メッセージを取得しません。同様に、どのトークンも使用しないで、または別のトークンを使用して送信されたメッセージは、その受信者に配信されません。</param>
+            <param name="receiveDerivedMessagesToo">true の場合、TMessage から派生したメッセージ タイプも受信者に送信されます。たとえば、SendOrderMessage と ExecuteOrderMessage が OrderMessage から派生した場合、OrderMessage のために登録し、receiveDerivedMessagesToo を true に設定すると、SendOrderMessage と ExecuteOrderMessage は登録した受信者に送信されます。<para>また、TMessage がインターフェイスの場合、TMessage を実装するメッセージ タイプも受信者に送信されます。たとえば、SendOrderMessage と ExecuteOrderMessage が IOrderMessage を実装する場合、IOrderMessage のために登録し、receiveDerivedMessagesToo を true に設定すると、SendOrderMessage と ExecuteOrderMessage は登録した受信者に送信されます。</para></param>
+            <param name="action">タイプ TMessage のメッセージが送信される際に実行されるアクションです。重要: WeakActions を使用しているため、現時点ではクロージャはサポートされていませんのでご注意ください (http://stackoverflow.com/questions/25730530/参照)。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Send``1(``0)">
+            <summary>メッセージを、登録された受信者に送信します。メッセージは、Register メソッドの 1 つを使用してこのメッセージ タイプに登録されている、すべての受信者に届きます。</summary>
+            <typeparam name="TMessage">送信されるメッセージ タイプです。</typeparam>
+            <param name="message">登録された受信者に送信されるメッセージです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Send``2(``0)">
+            <summary>メッセージを、登録された受信者に送信します。このメッセージは、Register メソッドの 1 つを使用してこのメッセージ タイプに登録され、 targetType である受信者にのみ送信されます。</summary>
+            <typeparam name="TMessage">送信されるメッセージ タイプです。</typeparam>
+            <typeparam name="TTarget">メッセージを受信する受信者のタイプです。メッセージは別のタイプの受信者には送信されません。</typeparam>
+            <param name="message">登録された受信者に送信されるメッセージです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Send``1(``0,System.Object)">
+            <summary>メッセージを、登録された受信者に送信します。このメッセージは、Register メソッドの 1 つを使用してこのメッセージ タイプに登録され、 targetType である受信者にのみ送信されます。</summary>
+            <typeparam name="TMessage">送信されるメッセージ タイプです。</typeparam>
+            <param name="message">登録された受信者に送信されるメッセージです。</param>
+            <param name="token">メッセージング チャネルのトークンです。受信者がトークンを使用して登録し、送信者が同じトークンを使用してメッセージを送信すると、このメッセージは受信者に配信されます。登録時にトークンを使用しなかった (または別のトークンを使用した) 他の受信者は、メッセージを取得しません。同様に、どのトークンも使用しないで、または別のトークンを使用して送信されたメッセージは、その受信者に配信されません。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Unregister(System.Object)">
+            <summary>メッセージ受信者の登録を完全に解除します。このメソッドが実行された後、受信者は、もはやどのようなメッセージも受信しません。</summary>
+            <param name="recipient">登録を解除する必要がある受信者です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Unregister``1(System.Object)">
+            <summary>指定されたタイプのメッセージのみ、メッセージ受信者の登録を解除します。このメソッドが実行された後、受信者は、もう TMessage タイプのメッセージを受信しませんが、他のメッセージ タイプは受信します (以前に登録されている場合)。</summary>
+            <param name="recipient">登録を解除する必要がある受信者です。</param>
+            <typeparam name="TMessage">受信者が登録解除を望むメッセージのタイプです。</typeparam>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Unregister``1(System.Object,System.Object)">
+            <summary>指定されたタイプの種類のメッセージのみ、および指定されたトークンの、メッセージ受信者の登録を解除します。このメソッドが実行された後、受信者は、指定されたトークンによる TMessage タイプのメッセージは、もう受信しませんが、他のメッセージ タイプまたは他のトークンによるメッセージは受信します (以前に登録されている場合)。</summary>
+            <param name="recipient">登録を解除する必要がある受信者です。</param>
+            <param name="token">受信者の登録を解除する必要があるトークンです。</param>
+            <typeparam name="TMessage">受信者が登録解除を望むメッセージのタイプです。</typeparam>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Unregister``1(System.Object,System.Action{``0})">
+            <summary>指定されたタイプの種類のメッセージ、および指定されたアクションの、メッセージ受信者の登録を解除します。他のメッセージ タイプは、受信者に送信されます (以前に登録されている場合)。メッセージ タイプ TMessage のために、また指定された受信者 (使用可能な場合) のために登録されている、その他のアクションも引き続き使用できます。</summary>
+            <typeparam name="TMessage">受信者が登録解除を望むメッセージのタイプです。</typeparam>
+            <param name="recipient">登録を解除する必要がある受信者です。</param>
+            <param name="action">受信者、およびメッセージ タイプ TMessage のための登録を解除する必要があるアクションです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Unregister``1(System.Object,System.Object,System.Action{``0})">
+            <summary>指定されたタイプの種類のメッセージ、指定されたアクション、および指定されたトークンの、メッセージ受信者の登録を解除します。他のメッセージ タイプは、受信者に送信されます (以前に登録されている場合)。メッセージ タイプ TMessage のために、指定された受信者のために、また他のトークン (使用可能な場合) のために登録されている、その他のアクションも引き続き使用できます。</summary>
+            <typeparam name="TMessage">受信者が登録解除を望むメッセージのタイプです。</typeparam>
+            <param name="recipient">登録を解除する必要がある受信者です。</param>
+            <param name="token">受信者の登録を解除する必要があるトークンです。</param>
+            <param name="action">受信者、およびメッセージ タイプ TMessage のための登録を解除する必要があるアクションです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.OverrideDefault(GalaSoft.MvvmLight.Messaging.IMessenger)">
+            <summary>たとえばユニット テストの目的で、Messenger.Default インスタンスを、カスタム インスタンスによりオーバーライドする方法を提供します。</summary>
+            <param name="newMessenger">Messenger.Default として使用されるインスタンスです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Reset">
+            <summary>Messenger の既定の (静的) インスタンスを null に設定します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.ResetAll">
+            <summary>静的 <see cref="M:GalaSoft.MvvmLight.Messaging.Messenger.Reset"/> メソッドへの非静的アクセスを提供します。Messenger の既定の (静的) インスタンスを null に設定します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.RequestCleanup">
+            <summary>Messenger に、受信者の一覧をスキャンしてクリーンアップする必要があることを通知します。受信者は、 <see cref="T:System.WeakReference"/> として保存されるので、Messenger が受信者を一覧に保持していても、受信者のガベージ コレクションを行うことができます。クリーンアップ操作の間に、すべての &quot;停止&quot; 受信者は一覧から削除されます。この操作には少し時間がかかる可能性があるため、アプリケーションがアイドル状態の場合のみに実行されます。この理由により、Messenger クラスのユーザーは、  <see cref="M:GalaSoft.MvvmLight.Messaging.Messenger.Cleanup" />メソッドにより強制するのではなく、<see cref="M:GalaSoft.MvvmLight.Messaging.Messenger.RequestCleanup"/>を使用する必要があります。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.Messenger.Cleanup">
+            <summary>受信者の一覧で &quot;停止&quot; インスタンスをスキャンし、削除します。受信者は 、 <see cref="T:System.WeakReference"/> として保存されるので、Messenger が受信者を一覧に保持していても、受信者のガベージ コレクションを行うことができます。クリーンアップ操作の間に、すべての &quot;停止&quot; 受信者は一覧から削除されます。この操作には少し時間がかかる可能性があるため、アプリケーションがアイドル状態の場合のみに実行されます。このため、Messenger クラスのユーザーは、 <see cref="M:GalaSoft.MvvmLight.Messaging.Messenger.RequestCleanup"/>を、 <see cref="M:GalaSoft.MvvmLight.Messaging.Messenger.Cleanup" />メソッドにより強制する代わりに使用する必要があります。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.NotificationMessage">
+            <summary>文字列メッセージ (通知) を受信者に渡します。<para>通常、通知は、静的クラスの一意の文字列と定義されます。一意の文字列を定義するには、Guid.NewGuid().ToString()、または他の任意の一意識別子を使用します。</para></summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessage.#ctor(System.String)">
+            <summary>NotificationMessage クラスの新しいインスタンスを初期化します。</summary>
+            <param name="notification">受信者に渡される、任意のメッセージを含む文字列です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessage.#ctor(System.Object,System.String)">
+            <summary>NotificationMessage クラスの新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="notification">受信者に渡される、任意のメッセージを含む文字列です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessage.#ctor(System.Object,System.Object,System.String)">
+            <summary>NotificationMessage クラスの新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="target">メッセージが目的とするターゲットです。このパラメーターは、メッセージが誰を目的としていたかを示唆するために使用できます。もちろん、これは単なる示唆であり、amd は null とすることができます。</param>
+            <param name="notification">受信者に渡される、任意のメッセージを含む文字列です。</param>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Messaging.NotificationMessage.Notification">
+            <summary>受信者に渡される、任意のメッセージを含む文字列を取得します。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction">
+            <summary>組み込みコールバックがあるメッセージ クラスを提供します。受信者のメッセージ処理が完了すると、コールバックを実行し、センダーに完了したことを通知できます。  <see cref="M:GalaSoft.MvvmLight.Messaging.NotificationMessageAction.Execute" />メソッドを使用してコールバックを実行します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageAction.#ctor(System.String,System.Action)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="notification">メッセージにより搬送される任意の文字列です。</param>
+            <param name="callback">受信者が、メッセージが処理されたことを、センダーに通知するために実行できるコールバック メソッドです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageAction.#ctor(System.Object,System.String,System.Action)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="notification">メッセージにより搬送される任意の文字列です。</param>
+            <param name="callback">受信者が、メッセージが処理されたことを、センダーに通知するために実行できるコールバック メソッドです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageAction.#ctor(System.Object,System.Object,System.String,System.Action)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="target">メッセージが目的とするターゲットです。このパラメーターは、メッセージが誰を目的としていたかを示唆するために使用できます。もちろん、これは単なる示唆であり、amd は null とすることができます。</param>
+            <param name="notification">メッセージにより搬送される任意の文字列です。</param>
+            <param name="callback">受信者が、メッセージが処理されたことを、センダーに通知するために実行できるコールバック メソッドです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageAction.Execute">
+            <summary>メッセージ付きのコールバックを実行します。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction`1">
+            <summary>組み込みコールバックがあるメッセージ クラスを提供します。受信者のメッセージ処理が完了すると、コールバックを実行し、センダーに完了したことを通知できます。<see cref="M:GalaSoft.MvvmLight.Messaging.NotificationMessageAction`1.Execute(`0)" />メソッドを使用してコールバックを実行します。コールバック メソッドには 1 つのパラメータがあります。<seealso cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction"/>.</summary>
+            <typeparam name="TCallbackParameter">コールバック メソッドのパラメーターのみのタイプです。</typeparam>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageAction`1.#ctor(System.String,System.Action{`0})">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction`1" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="notification">メッセージにより搬送される任意の文字列です。</param>
+            <param name="callback">受信者が、メッセージが処理されたことを、センダーに通知するために実行できるコールバック メソッドです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageAction`1.#ctor(System.Object,System.String,System.Action{`0})">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction`1" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="notification">メッセージにより搬送される任意の文字列です。</param>
+            <param name="callback">受信者が、メッセージが処理されたことを、センダーに通知するために実行できるコールバック メソッドです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageAction`1.#ctor(System.Object,System.Object,System.String,System.Action{`0})">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction`1" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="target">メッセージが目的とするターゲットです。このパラメーターは、メッセージが誰を目的としていたかを示唆するために使用できます。もちろん、これは単なる示唆であり、amd は null とすることができます。</param>
+            <param name="notification">メッセージにより搬送される任意の文字列です。</param>
+            <param name="callback">受信者が、メッセージが処理されたことを、センダーに通知するために実行できるコールバック メソッドです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageAction`1.Execute(`0)">
+            <summary>メッセージ付きのコールバックを実行します。</summary>
+            <param name="parameter">メッセージのセンダーにより要求され、受信者の状態に関する追加情報を提供するパラメーターです。</param>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.NotificationMessage`1">
+            <summary>文字列メッセージ (通知) と汎用値 (コンテンツ) を受信者に渡します。</summary>
+            <typeparam name="T">Content プロパティのタイプです。</typeparam>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessage`1.#ctor(`0,System.String)">
+            <summary>NotificationMessage クラスの新しいインスタンスを初期化します。</summary>
+            <param name="content">受信者に渡される値です。</param>
+            <param name="notification">受信者に渡される、任意のメッセージを含む文字列です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessage`1.#ctor(System.Object,`0,System.String)">
+            <summary>NotificationMessage クラスの新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="content">受信者に渡される値です。</param>
+            <param name="notification">受信者に渡される、任意のメッセージを含む文字列です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessage`1.#ctor(System.Object,System.Object,`0,System.String)">
+            <summary>NotificationMessage クラスの新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="target">メッセージが目的とするターゲットです。このパラメーターは、メッセージが誰を目的としていたかを示唆するために使用できます。もちろん、これは単なる示唆であり、amd は null とすることができます。</param>
+            <param name="content">受信者に渡される値です。</param>
+            <param name="notification">受信者に渡される、任意のメッセージを含む文字列です。</param>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Messaging.NotificationMessage`1.Notification">
+            <summary>受信者に渡される、任意のメッセージを含む文字列を取得します。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.NotificationMessageWithCallback">
+            <summary>組み込みコールバックがあるメッセージ クラスを提供します。受信者のメッセージ処理が完了すると、コールバックを実行し、センダーに完了したことを通知できます。<see cref="M:GalaSoft.MvvmLight.Messaging.NotificationMessageWithCallback.Execute(System.Object[])" />メソッドを使用してコールバックを実行します。コールバック メソッドには 1 つのパラメータがあります。 <seealso cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction"/> そして <seealso cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageAction`1"/>です。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageWithCallback.#ctor(System.String,System.Delegate)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageWithCallback" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="notification">メッセージにより搬送される任意の文字列です。</param>
+            <param name="callback">受信者が、メッセージが処理されたことを、センダーに通知するために実行できるコールバック メソッドです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageWithCallback.#ctor(System.Object,System.String,System.Delegate)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageWithCallback" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="notification">メッセージにより搬送される任意の文字列です。</param>
+            <param name="callback">受信者が、メッセージが処理されたことを、センダーに通知するために実行できるコールバック メソッドです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageWithCallback.#ctor(System.Object,System.Object,System.String,System.Delegate)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.NotificationMessageWithCallback" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="target">メッセージが目的とするターゲットです。このパラメーターは、メッセージが誰を目的としていたかを示唆するために使用できます。もちろん、これは単なる示唆であり、amd は null とすることができます。</param>
+            <param name="notification">メッセージにより搬送される任意の文字列です。</param>
+            <param name="callback">受信者が、メッセージが処理されたことを、センダーに通知するために実行できるコールバック メソッドです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.NotificationMessageWithCallback.Execute(System.Object[])">
+            <summary>任意の数のパラメーターがある、メッセージ付きのコールバックを実行します。</summary>
+            <param name="arguments">コールバック メソッドに渡される多数のパラメーターです。</param>
+            <returns>コールバック メソッドによって返されるオブジェクトです。</returns>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1">
+            <summary>文字列プロパティ名 (PropertyName) と汎用値 (<see cref="P:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1.OldValue" /> および <see cref="P:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1.NewValue" />) を受信者に渡します。  このメッセージ タイプは、Messenging システムを使って、受信者に PropertyChanged イベントを伝達するために使用できます。</summary>
+            <typeparam name="T">OldValue および NewValue プロパティのタイプです。</typeparam>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1.#ctor(System.Object,`0,`0,System.String)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="oldValue">変更が発生する前のプロパティの値です。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <param name="propertyName">変更されたプロパティの名前です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1.#ctor(`0,`0,System.String)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="oldValue">変更が発生する前のプロパティの値です。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <param name="propertyName">変更されたプロパティの名前です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1.#ctor(System.Object,System.Object,`0,`0,System.String)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="target">メッセージが目的とするターゲットです。このパラメーターは、メッセージが誰を目的としていたかを示唆するために使用できます。もちろん、これは単なる示唆であり、amd は null とすることができます。</param>
+            <param name="oldValue">変更が発生する前のプロパティの値です。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <param name="propertyName">変更されたプロパティの名前です。</param>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1.NewValue">
+            <summary>変更後に、プロパティにある値を取得します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1.OldValue">
+            <summary>変更前に、プロパティにあった値を取得します。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Messaging.PropertyChangedMessageBase">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.PropertyChangedMessage`1" />クラスの基本クラスです。このクラスを使用すると、受信者はタイプ T を指定する必要なく、すべての PropertyChangedMessages のために登録できます。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.PropertyChangedMessageBase.#ctor(System.Object,System.String)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.PropertyChangedMessageBase" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="propertyName">変更されたプロパティの名前です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.PropertyChangedMessageBase.#ctor(System.Object,System.Object,System.String)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.PropertyChangedMessageBase" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="sender">メッセージのセンダーです。</param>
+            <param name="target">メッセージが目的とするターゲットです。このパラメーターは、メッセージが誰を目的としていたかを示唆するために使用できます。もちろん、これは単なる示唆であり、amd は null とすることができます。</param>
+            <param name="propertyName">変更されたプロパティの名前です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Messaging.PropertyChangedMessageBase.#ctor(System.String)">
+            <summary><see cref="T:GalaSoft.MvvmLight.Messaging.PropertyChangedMessageBase" /> クラスの、新しいインスタンスを初期化します。</summary>
+            <param name="propertyName">変更されたプロパティの名前です。</param>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Messaging.PropertyChangedMessageBase.PropertyName">
+            <summary>変更されたプロパティの名前を取得または設定します。</summary>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.ObservableObject">
+            <summary>プロパティが観察可能であることを必要とする、オブジェクトの基本クラスです。</summary>
+        </member>
+        <member name="E:GalaSoft.MvvmLight.ObservableObject.PropertyChanged">
+            <summary>プロパティ値が変更された後に発生します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.ObservableObject.PropertyChangedHandler">
+            <summary>派生されたクラスに対する PropertyChanged イベント ハンドラへのアクセスを可能にします。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ObservableObject.VerifyPropertyName(System.String)">
+            <summary>この ViewModel にプロパティ名が存在することを確認します。このメソッドは、プロパティが使用される前に呼び出すことができます  (たとえば、RaisePropertyChanged を呼び出す前)。そのことにより、プロパティ名が変更され、しかしながら一部の場所が欠落している場合、エラーを回避します。</summary>
+            <remarks>このメソッドは、DEBUG モードのみでアクティブです。</remarks>
+            <param name="propertyName">チェックされるプロパティの名前です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ObservableObject.RaisePropertyChanged(System.String)">
+            <summary>必要に応じて、PropertyChanged イベントを発生させます。</summary>
+            <remarks>propertyName パラメーターが、現在のクラスの既存のプロパティに対応しない場合、例外は DEBUG 設定のみでスローされます。</remarks>
+            <param name="propertyName">(任意) 変更されたプロパティの名前です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ObservableObject.RaisePropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>必要に応じて、PropertyChanged イベントを発生させます。</summary>
+            <typeparam name="T">変更されたプロパティのタイプです。</typeparam>
+            <param name="propertyExpression">変更されたプロパティを識別する式です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ObservableObject.GetPropertyName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>式からプロパティの名前を抽出します。</summary>
+            <typeparam name="T">プロパティのタイプです。</typeparam>
+            <param name="propertyExpression">プロパティの名前を返す式です。</param>
+            <returns>式によって返されるプロパティの名前です。</returns>
+            <exception cref="T:System.ArgumentNullException">式が null の場合。</exception>
+            <exception cref="T:System.ArgumentException">式がプロパティを表さない場合。</exception>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ObservableObject.Set``1(System.Linq.Expressions.Expression{System.Func{``0}},``0@,``0)">
+            <summary>プロパティに新しい値を割り当てます。次に、必要に応じて PropertyChanged イベントを発生させます。</summary>
+            <typeparam name="T">変更されたプロパティのタイプです。</typeparam>
+            <param name="propertyExpression">変更されたプロパティを識別する式です。</param>
+            <param name="field">プロパティの値を保存するフィールドです。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <returns>PropertyChanged イベントが発生した場合は true、それ以外は false です。古い値が新しい値と等しい場合、イベントは発生しません。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ObservableObject.Set``1(System.String,``0@,``0)">
+            <summary>プロパティに新しい値を割り当てます。次に、必要に応じて PropertyChanged イベントを発生させます。</summary>
+            <typeparam name="T">変更されたプロパティのタイプです。</typeparam>
+            <param name="propertyName">変更されたプロパティの名前です。</param>
+            <param name="field">プロパティの値を保存するフィールドです。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <returns>PropertyChanged イベントが発生した場合は true、それ以外は false です。古い値が新しい値と等しい場合、イベントは発生しません。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ObservableObject.Set``1(``0@,``0,System.String)">
+            <summary>プロパティに新しい値を割り当てます。次に、必要に応じて PropertyChanged イベントを発生させます。</summary>
+            <typeparam name="T">変更されたプロパティのタイプです。</typeparam>
+            <param name="field">プロパティの値を保存するフィールドです。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <param name="propertyName">(任意) 変更されたプロパティの名前です。</param>
+            <returns>PropertyChanged イベントが発生した場合は true、それ以外は false です。古い値が新しい値と等しい場合、イベントは発生しません。</returns>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.ViewModelBase">
+            <summary>MVVM パターンの ViewModel クラスの基本クラスです。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ViewModelBase.#ctor">
+            <summary>ViewModelBase クラスの新しいインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ViewModelBase.#ctor(GalaSoft.MvvmLight.Messaging.IMessenger)">
+            <summary>ViewModelBase クラスの新しいインスタンスを初期化します。</summary>
+            <param name="messenger">メッセージを、他のオブジェクトにブロードキャストするために使用される
+ <see cref="T:GalaSoft.MvvmLight.Messaging.Messenger" /> のインスタンスです。null の場合、このクラスは Messenger の既定のインスタンスを使用してブロードキャストを試みます。</param>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.ViewModelBase.IsInDesignMode">
+            <summary>制御が設計モード (Blend または Visual Studio の下で実行中) であるかどうかを示す値を取得します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic">
+            <summary>制御が設計モード (Blend または Visual Studio で実行中) であるかどうかを示す値を取得します。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.ViewModelBase.MessengerInstance">
+            <summary>メッセージを、他のオブジェクトにブロードキャストするために使用される <see cref="T:GalaSoft.MvvmLight.Messaging.IMessenger" />のインスタンスを取得または設定します。null の場合、このクラスは Messenger の既定のインスタンスを使用してブロードキャストを試みます。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ViewModelBase.Cleanup">
+            <summary>このインスタンスを、Messenger クラスから登録解除します。<para>追加リソースをクリーンアップするには、このメソッドをオーバーライドし、クリーンアップし、次にbase.Cleanup(). を呼び出します。</para></summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ViewModelBase.Broadcast``1(``0,``0,System.String)">
+            <summary>このクラスに渡された Messenger のインスタンス (使用可能な場合)、またはMessenger の既定のインスタンスを使用して、PropertyChangedMessage をブロードキャストします。</summary>
+            <typeparam name="T">変更されたプロパティのタイプです。</typeparam>
+            <param name="oldValue">変更前のプロパティの値です。</param>
+            <param name="newValue">変更後のプロパティの値です。</param>
+            <param name="propertyName">変更されたプロパティの名前です。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ViewModelBase.RaisePropertyChanged``1(System.String,``0,``0,System.Boolean)">
+            <summary>必要に応じて PropertyChanged イベントを発生させ、Messenger インスタンスを使用して (または Messenger インスタンスが使用できない場合は静的な既定のインスタンスを使用して)、 PropertyChangedMessage をブロードキャストします。</summary>
+            <typeparam name="T">変更されたプロパティのタイプです。</typeparam>
+            <param name="propertyName">変更されたプロパティの名前です。</param>
+            <param name="oldValue">変更が発生する前のプロパティの値です。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <param name="broadcast">true の場合、PropertyChangedMessage がブロードキャストされます。false の場合は、イベントのみが発生します。</param>
+            <remarks>propertyName パラメーターが、現在のクラスの既存のプロパティに対応しない場合、例外は DEBUG 設定のみでスローされます。</remarks>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ViewModelBase.RaisePropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}},``0,``0,System.Boolean)">
+            <summary>必要に応じて PropertyChanged イベントを発生させ、Messenger インスタンスを使用して (または Messenger インスタンスが使用できない場合は静的な既定のインスタンスを使用して)、 PropertyChangedMessage をブロードキャストします。</summary>
+            <typeparam name="T">変更されたプロパティのタイプです。</typeparam>
+            <param name="propertyExpression">変更されたプロパティを識別する式です。</param>
+            <param name="oldValue">変更が発生する前のプロパティの値です。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <param name="broadcast">true の場合、PropertyChangedMessage がブロードキャストされます。false の場合は、イベントのみが発生します。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ViewModelBase.Set``1(System.Linq.Expressions.Expression{System.Func{``0}},``0@,``0,System.Boolean)">
+            <summary>プロパティに新しい値を割り当てます。次に、必要に応じて PropertyChanged イベントを発生させ、Messenger インスタンスを使用して (または Messenger インスタンスが使用できない場合は静的な既定のインスタンスを使用して)、PropertyChangedMessage をブロードキャストします。</summary>
+            <typeparam name="T">変更されたプロパティのタイプです。</typeparam>
+            <param name="propertyExpression">変更されたプロパティを識別する式です。</param>
+            <param name="field">プロパティの値を保存するフィールドです。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <param name="broadcast">true の場合、PropertyChangedMessage がブロードキャストされます。false の場合は、イベントのみが発生します。</param>
+            <returns>PropertyChanged イベントが発生した場合は true、それ以外は false です。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ViewModelBase.Set``1(System.String,``0@,``0,System.Boolean)">
+            <summary>プロパティに新しい値を割り当てます。次に、必要に応じて PropertyChanged イベントを発生させ、Messenger インスタンスを使用して (または Messenger インスタンスが使用できない場合は静的な既定のインスタンスを使用して)、PropertyChangedMessage をブロードキャストします。</summary>
+            <typeparam name="T">変更されたプロパティのタイプです。</typeparam>
+            <param name="propertyName">変更されたプロパティの名前です。</param>
+            <param name="field">プロパティの値を保存するフィールドです。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <param name="broadcast">true の場合、PropertyChangedMessage がブロードキャストされます。false の場合は、イベントのみが発生します。</param>
+            <returns>PropertyChanged イベントが発生した場合は true、それ以外は false です。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.ViewModelBase.Set``1(``0@,``0,System.Boolean,System.String)">
+            <summary>プロパティに新しい値を割り当てます。次に、必要に応じて PropertyChanged イベントを発生させ、Messenger インスタンスを使用して (または Messenger インスタンスが使用できない場合は静的な既定のインスタンスを使用して)、PropertyChangedMessage をブロードキャストします。</summary>
+            <typeparam name="T">変更されたプロパティのタイプです。</typeparam>
+            <param name="field">プロパティの値を保存するフィールドです。</param>
+            <param name="newValue">変更が発生した後のプロパティの値です。</param>
+            <param name="broadcast">true の場合、PropertyChangedMessage がブロードキャストされます。false の場合は、イベントのみが発生します。</param>
+            <param name="propertyName">(任意) 変更されたプロパティの名前です。</param>
+            <returns>PropertyChanged イベントが発生した場合は true、それ以外は false です。</returns>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Views.IDialogService">
+            <summary>Windows、Windows Phone、Android、iOS など、さまざまなフレームワークで、ダイアログを表示する方法を定義するインターフェイスです。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Views.IDialogService.ShowError(System.String,System.String,System.String,System.Action)">
+            <summary>エラーに関する情報を表示します。</summary>
+            <param name="message">ユーザーに表示されるメッセージです。</param>
+            <param name="title">ダイアログボックスのタイトルです。これは null とすることができます。</param>
+            <param name="buttonText">ダイアログ ボックスのボタンのみに表示されるテキストです。null のままにすると、&quot;OK&quot; というテキストが使用されます。</param>
+            <param name="afterHideCallback">ダイアログ ボックスがユーザーによって閉じられた後に実行されるコールバックです。</param>
+            <returns>この非同期メソッドの待機を許可するタスクです。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Views.IDialogService.ShowError(System.Exception,System.String,System.String,System.Action)">
+            <summary>エラーに関する情報を表示します。</summary>
+            <param name="error">メッセージをユーザーに表示する必要がある例外です。</param>
+            <param name="title">ダイアログボックスのタイトルです。これは null とすることができます。</param>
+            <param name="buttonText">ダイアログ ボックスのボタンのみに表示されるテキストです。null のままにすると、&quot;OK&quot; というテキストが使用されます。</param>
+            <param name="afterHideCallback">ダイアログ ボックスがユーザーによって閉じられた後に実行されるコールバックです。</param>
+            <returns>この非同期メソッドの待機を許可するタスクです。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Views.IDialogService.ShowMessage(System.String,System.String)">
+            <summary>ユーザーに情報を表示します。ダイアログ ボックスには &quot;OK&quot; というテキストのボタン 1 つだけが表示されます。</summary>
+            <param name="message">ユーザーに表示されるメッセージです。</param>
+            <param name="title">ダイアログボックスのタイトルです。これは null とすることができます。</param>
+            <returns>この非同期メソッドの待機を許可するタスクです。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Views.IDialogService.ShowMessage(System.String,System.String,System.String,System.Action)">
+            <summary>ユーザーに情報を表示します。ダイアログ ボックスにはボタンは 1 つしかありません。</summary>
+            <param name="message">ユーザーに表示されるメッセージです。</param>
+            <param name="title">ダイアログボックスのタイトルです。これは null とすることができます。</param>
+            <param name="buttonText">ダイアログ ボックスのボタンのみに表示されるテキストです。null のままにすると、&quot;OK&quot; というテキストが使用されます。</param>
+            <param name="afterHideCallback">ダイアログ ボックスがユーザーによって閉じられた後に実行されるコールバックです。</param>
+            <returns>この非同期メソッドの待機を許可するタスクです。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Views.IDialogService.ShowMessage(System.String,System.String,System.String,System.String,System.Action{System.Boolean})">
+            <summary>ユーザーに情報を表示します。ダイアログ ボックスにはボタンは 1 つしかありません。</summary>
+            <param name="message">ユーザーに表示されるメッセージです。</param>
+            <param name="title">ダイアログボックスのタイトルです。これは null とすることができます。</param>
+            <param name="buttonConfirmText">ダイアログ ボックスの [確認] ボタンに表示されるテキストです。null のままにすると、&quot;OK&quot; というテキストが使用されます。</param>
+            <param name="buttonCancelText">ダイアログ ボックスの [キャンセル] ボタンに表示されるテキストです。null のままにすると、&quot;キャンセル&quot; というテキストが使用されます。</param>
+            <param name="afterHideCallback">ダイアログ ボックスがユーザーによって閉じられた後に実行されるコールバックです。コールバック メソッドは、&quot;確認&quot; ボタン (true) または &quot;キャンセル&quot; ボタン (false) がユーザーによって押されたかどうかを示す、ブール値パラメーターを取得します。</param>
+            <returns>この非同期メソッドの待機を許可するタスクです。タスクは、ダイアログの結果に応じて true または false を返します。</returns>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Views.IDialogService.ShowMessageBox(System.String,System.String)">
+            <summary>ユーザーへの情報を、簡単なダイアログ ボックスに表示します。ダイアログ ボックスには &quot;OK&quot; というテキストのボタン 1 つだけが表示されます。このメソッドは、デバッグ目的で使用する必要があります。</summary>
+            <param name="message">ユーザーに表示されるメッセージです。</param>
+            <param name="title">ダイアログボックスのタイトルです。これは null とすることができます。</param>
+            <returns>この非同期メソッドの待機を許可するタスクです。</returns>
+        </member>
+        <member name="T:GalaSoft.MvvmLight.Views.INavigationService">
+            <summary>Windows、Windows Phone、Android、iOS など、さまざまなフレームワークで、ページ間の移動を実行する方法を定義するインターフェイスです。</summary>
+        </member>
+        <member name="P:GalaSoft.MvvmLight.Views.INavigationService.CurrentPageKey">
+            <summary>現在表示されているページに対応するキーです。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Views.INavigationService.GoBack">
+            <summary>可能であれば、ナビゲーション サービスに、現在のページを破棄して、ナビゲーション スタックに前のページを表示するように指示します。</summary>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Views.INavigationService.NavigateTo(System.String)">
+            <summary>ナビゲーション サービスに、指定されたキーに対応する新しいページを表示するように指示します。プラットフォームによっては、ナビゲーション サービスをキー/ページ リストにより設定する必要があるかも知れません。</summary>
+            <param name="pageKey">表示する必要があるページに対応するキーです。</param>
+        </member>
+        <member name="M:GalaSoft.MvvmLight.Views.INavigationService.NavigateTo(System.String,System.Object)">
+            <summary>ナビゲーション サービスに、指定されたキーに対応する新しいページを表示するように指示し、パラメーターを新しいページに渡します。プラットフォームによっては、ナビゲーション サービスをキー/ページ リストにより設定する必要があるかも知れません。</summary>
+            <param name="pageKey">表示する必要があるページに対応するキーです。</param>
+            <param name="parameter">新しいページに渡す必要があるパラメーターです。</param>
+        </member>
+    </members>
+</doc>

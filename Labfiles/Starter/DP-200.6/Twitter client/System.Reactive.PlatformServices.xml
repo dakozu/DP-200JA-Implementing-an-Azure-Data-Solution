@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>System.Reactive.PlatformServices</name>
+    </assembly>
+    <members>
+        <member name="T:System.Reactive.Concurrency.EventLoopScheduler">
+            <summary>指定されたスレッドの作業単位をスケジュールするオブジェクトを表します。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler.s_counter">
+            <summary>診断目的のカウンター。スレッドに名前を付けます。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler._threadFactory">
+            <summary>スレッド ファクトリ関数。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler._stopwatch">
+            <summary>絶対時間依存関係のないタイミングのストップウォッチ。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler._thread">
+            <summary>イベント ループで作業項目を実行するために使用するスレッド。他のスレッドでは、作業を実行しないでください。ExitIfEmpty が設定されている場合、スレッドは終了でき、新しい作業がスケジュールされたときに新しいスレッドが作成されます。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler._gate">
+            <summary>作業キューや実行可能リストなどのデータ構造を保護するゲート。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler._evt">
+            <summary>スケジュール要求から、またはタイマーの有効期限が切れてキュー内の次の項目に移動したときに、要求をカウントしてキューを再評価するセマフォ。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler._queue">
+            <summary>作業項目を保持しているキュー。ゲートによって保護されます。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler._readyList">
+            <summary>できるだけ早く実行する準備ができている項目を保持しているキュー。ゲートによって保護されます。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler._nextItem">
+            <summary>次にスケジュールされる作業項目。キューの再評価後に使用され、次の項目が同じかどうかを確認します。同じでない場合は、新しいタイマーを開始する必要があります (下記参照)。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler._nextTimer">
+            <summary>キュー内の最初の要素をディスパッチするタイマーを常に保持し、破棄可能。</summary>
+        </member>
+        <member name="F:System.Reactive.Concurrency.EventLoopScheduler._disposed">
+            <summary>イベント ループを終了するかどうかを示すフラグ。これを設定すると、イベント ループ スレッドをスリープ解除するためにイベントも通知され、その後すべての作業が破棄されます。</summary>
+        </member>
+        <member name="M:System.Reactive.Concurrency.EventLoopScheduler.#ctor">
+            <summary>指定されたスレッドの作業単位をスケジュールするオブジェクトを作成します。</summary>
+        </member>
+        <member name="M:System.Reactive.Concurrency.EventLoopScheduler.#ctor(System.Func{System.Threading.ThreadStart,System.Threading.Thread})">
+            <summary>指定されたスレッドの作業単位をスケジュールするオブジェクトを作成し、指定されたファクトリを使用してスレッド作成オプションを制御します。</summary>
+            <param name="threadFactory">スレッド作成のためのファクトリ関数。</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="threadFactory"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.EventLoopScheduler.Schedule``1(``0,System.TimeSpan,System.Func{System.Reactive.Concurrency.IScheduler,``0,System.IDisposable})">
+            <summary>期日後に実行するアクションをスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <param name="dueTime">その後にアクションを実行する相対時間。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+            <exception cref="T:System.ObjectDisposedException">Scheduler は破棄されており、新しい作業を受け入れません。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.EventLoopScheduler.SchedulePeriodic``1(``0,System.TimeSpan,System.Func{``0,``0})">
+            <summary>指定されたスレッドの定期的な作業をスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">最初の繰り返し後にアクションに渡される初期状態。</param>
+            <param name="period">作業を定期的に実行する期間。</param>
+            <param name="action">実行するアクションで、状態が更新される可能性があります。</param>
+            <returns>スケジュールされた定期的なアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="period"/> は TimeSpan.Zero より小さいです。</exception>
+            <exception cref="T:System.ObjectDisposedException">Scheduler は破棄されており、新しい作業を受け入れません。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.EventLoopScheduler.StartStopwatch">
+            <summary>新しいストップウォッチ オブジェクトを開始します。</summary>
+            <returns>新しいストップウォッチ オブジェクト。要求の時点で開始されます。</returns>
+        </member>
+        <member name="M:System.Reactive.Concurrency.EventLoopScheduler.Dispose">
+            <summary>この Scheduler に関連付けられているスレッドを終了します。Scheduler キュー内の残りの作業はすべて破棄されます。</summary>
+        </member>
+        <member name="M:System.Reactive.Concurrency.EventLoopScheduler.EnsureThread">
+            <summary>イベント ループ スレッドが実行されていることを確認します。ゲートで呼び出す必要があります。</summary>
+        </member>
+        <member name="M:System.Reactive.Concurrency.EventLoopScheduler.Run">
+            <summary>指定されたイベント ループ スレッドでスケジュールされたイベント ループ。ループは、スケジュール、次の項目タイマー、または Dispose を呼び出すために呼び出しによって設定されるイベントを使用して中断/再開されます。</summary>
+        </member>
+        <member name="P:System.Reactive.Concurrency.EventLoopScheduler.ExitIfEmpty">
+            <summary>作業が残っていないときにイベント ループ スレッドを終了できるかどうかを示します。その後、新しい作業がスケジュールされると、新しいイベント ループ スレッドが作成されます。このプロパティは、再帰的な呼び出しにイベント ループを使う NewThreadScheduler によって使用されます。</summary>
+        </member>
+        <member name="T:System.Reactive.Concurrency.NewThreadScheduler">
+            <summary>各作業単位を個別のスレッドにスケジュールするオブジェクトを表します。</summary>
+        </member>
+        <member name="M:System.Reactive.Concurrency.NewThreadScheduler.#ctor">
+            <summary>各作業単位を個別のスレッドにスケジュールするオブジェクトを作成します。</summary>
+        </member>
+        <member name="M:System.Reactive.Concurrency.NewThreadScheduler.#ctor(System.Func{System.Threading.ThreadStart,System.Threading.Thread})">
+            <summary>各作業単位を個別のスレッドにスケジュールするオブジェクトを作成します。</summary>
+            <param name="threadFactory">スレッド作成のためのファクトリ関数。</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="threadFactory"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.NewThreadScheduler.Schedule``1(``0,System.TimeSpan,System.Func{System.Reactive.Concurrency.IScheduler,``0,System.IDisposable})">
+            <summary>期日後に実行するアクションをスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <param name="dueTime">その後にアクションを実行する相対時間。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.NewThreadScheduler.ScheduleLongRunning``1(``0,System.Action{``0,System.Reactive.Disposables.ICancelable})">
+            <summary>新しいスレッドを作成して、実行時間の長いタスクをスケジュールします。取り消しはポーリングによって行われます。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.NewThreadScheduler.SchedulePeriodic``1(``0,System.TimeSpan,System.Func{``0,``0})">
+            <summary>作業がディスパッチされたときにスリープ状態に入り、次の定期的な期限に再びスリープ解除する新しいスレッドを作成して、定期的な作業をスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">最初の繰り返し後にアクションに渡される初期状態。</param>
+            <param name="period">作業を定期的に実行する期間。</param>
+            <param name="action">実行するアクションで、状態が更新される可能性があります。</param>
+            <returns>スケジュールされた定期的なアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="period"/> は TimeSpan.Zero より小さいです。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.NewThreadScheduler.StartStopwatch">
+            <summary>新しいストップウォッチ オブジェクトを開始します。</summary>
+            <returns>新しいストップウォッチ オブジェクト。要求の時点で開始されます。</returns>
+        </member>
+        <member name="P:System.Reactive.Concurrency.NewThreadScheduler.Default">
+            <summary>既定のスレッド コンストラクターを使用するこの Scheduler のインスタンスを取得します。</summary>
+        </member>
+        <member name="T:System.Reactive.PlatformServices.EnlightenmentProvider">
+            <summary>他の Rx ライブラリで使用されるプラットフォームの啓発機能にアクセスして、システムのパフォーマンスとランタイムの効率を向上させます。Rx はプラットフォームの確認を読み込まずに実行できますが、アプリケーションを使用して System.Reactive.PlatformServices アセンブリをデプロイし、 <see cref="M:System.Reactive.PlatformServices.EnlightenmentProvider.EnsureLoaded"/>アプリケーションの起動時に呼び出して、啓発が正しく読み込まれていることを確認することをお勧めします。</summary>
+        </member>
+        <member name="M:System.Reactive.PlatformServices.EnlightenmentProvider.EnsureLoaded">
+            <summary>呼び出し元のアセンブリが、プラットフォームの啓発を使用して System.Reactive.PlatformServices アセンブリへの参照を持っていることを確認します。ユーザー コードから参照が行われなかった場合、ビルド プロセスが System.Reactive.PlatformServices のデプロイを削除し、ランタイム検出を妨げる可能性があります。</summary>
+            <returns>読み込まれた啓発プロバイダーが、現在のアセンブリで定義されている定義に一致する場合は true、それ以外の場合は false です。カスタムの啓発プロバイダーがホストによってインストールされると、false が返されます。</returns>
+        </member>
+        <member name="T:System.Reactive.Concurrency.TaskPoolScheduler">
+            <summary>タスク並列ライブラリ (TPL) タスク プールの作業単位をスケジュールするオブジェクトを表します。</summary>
+            <seealso cref="P:System.Reactive.Concurrency.TaskPoolScheduler.Default">既定の TaskScheduler を使用して、TPL タスク プールの作業をスケジュールする、このタイプのインスタンス。</seealso>
+        </member>
+        <member name="M:System.Reactive.Concurrency.TaskPoolScheduler.#ctor(System.Threading.Tasks.TaskFactory)">
+            <summary>提供された TaskFactory を使用して作業単位をスケジュールするオブジェクトを作成します。</summary>
+            <param name="taskFactory">タスク ファクトリは、作業単位を実行するタスクを作成するために使用されます。</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="taskFactory"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.TaskPoolScheduler.Schedule``1(``0,System.Func{System.Reactive.Concurrency.IScheduler,``0,System.IDisposable})">
+            <summary>実行するアクションをスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.TaskPoolScheduler.Schedule``1(``0,System.TimeSpan,System.Func{System.Reactive.Concurrency.IScheduler,``0,System.IDisposable})">
+            <summary>期日後に実行するアクションをスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <param name="dueTime">その後にアクションを実行する相対時間。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.TaskPoolScheduler.ScheduleLongRunning``1(``0,System.Action{``0,System.Reactive.Disposables.ICancelable})">
+            <summary>TaskCreationOptions.LongRunning を使用して新しいタスクを作成し、実行時間の長いタスクをスケジュールします。取り消しはポーリングによって行われます。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.TaskPoolScheduler.StartStopwatch">
+            <summary>新しいストップウォッチ オブジェクト。</summary>
+            <returns>新しいストップウォッチ オブジェクト。要求の時点で開始されます。</returns>
+        </member>
+        <member name="M:System.Reactive.Concurrency.TaskPoolScheduler.SchedulePeriodic``1(``0,System.TimeSpan,System.Func{``0,``0})">
+            <summary>定期的にタスクを作成するために、プラットフォーム固有のタイマーを実行して、定期的な作業をスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">最初の繰り返し後にアクションに渡される初期状態。</param>
+            <param name="period">作業を定期的に実行する期間。</param>
+            <param name="action">実行するアクションで、状態が更新される可能性があります。</param>
+            <returns>スケジュールされた定期的なアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="period"/> は TimeSpan.Zero  未満です。</exception>
+        </member>
+        <member name="P:System.Reactive.Concurrency.TaskPoolScheduler.Default">
+            <summary>既定の TaskScheduler を使用するこの Scheduler のインスタンスを取得します。</summary>
+        </member>
+        <member name="T:System.Reactive.Concurrency.ThreadPoolScheduler">
+            <summary>CLR スレッド プールの作業単位をスケジュールするオブジェクトを表します。</summary>
+            <seealso cref="P:System.Reactive.Concurrency.ThreadPoolScheduler.Instance">この静的プロパティを通じて公開されるこのタイプのシングルトン インスタンス。</seealso>
+        </member>
+        <member name="M:System.Reactive.Concurrency.ThreadPoolScheduler.Schedule``1(``0,System.Func{System.Reactive.Concurrency.IScheduler,``0,System.IDisposable})">
+            <summary>実行するアクションをスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡される状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.ThreadPoolScheduler.Schedule``1(``0,System.TimeSpan,System.Func{System.Reactive.Concurrency.IScheduler,``0,System.IDisposable})">
+            <summary>System.Threading.Timer オブジェクトを使用して、期限後に実行されるアクションをスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <param name="dueTime">その後にアクションを実行する相対時間。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.ThreadPoolScheduler.ScheduleLongRunning``1(``0,System.Action{``0,System.Reactive.Disposables.ICancelable})">
+            <summary>新しいスレッドを作成して、実行時間の長いタスクをスケジュールします。取り消しはポーリングによって行われます。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">実行するアクションに渡される状態。</param>
+            <param name="action">実行するアクション。</param>
+            <returns>スケジュールされたアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+        </member>
+        <member name="M:System.Reactive.Concurrency.ThreadPoolScheduler.StartStopwatch">
+            <summary>新しいストップウォッチ オブジェクトを開始します。</summary>
+            <returns>新しいストップウォッチ オブジェクト。要求の時点で開始されます。</returns>
+        </member>
+        <member name="M:System.Reactive.Concurrency.ThreadPoolScheduler.SchedulePeriodic``1(``0,System.TimeSpan,System.Func{``0,``0})">
+            <summary>System.Threading.Timer オブジェクトを使用して、定期的な作業をスケジュールします。</summary>
+            <typeparam name="TState">スケジュールされたアクションに渡された状態のタイプ。</typeparam>
+            <param name="state">最初の繰り返し後にアクションに渡される初期状態。</param>
+            <param name="period">作業を定期的に実行する期間。</param>
+            <param name="action">実行するアクションで、状態が更新される可能性があります。</param>
+            <returns>スケジュールされた定期的なアクション (ベスト エフォート) を取り消すために使用される破棄可能なオブジェクト。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="action"/> は null です。</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="period"/> はゼロ以下です。</exception>
+        </member>
+        <member name="P:System.Reactive.Concurrency.ThreadPoolScheduler.Instance">
+            <summary>CLR スレッド プール Scheduler のシングルトン インスタンスを取得します。</summary>
+        </member>
+        <member name="T:System.Reactive.PlatformServices.CurrentPlatformEnlightenmentProvider">
+            <summary>(インフラストラクチャ) プラットフォーム固有のフレームワークの啓発のためのプロバイダー。</summary>
+        </member>
+        <member name="M:System.Reactive.PlatformServices.CurrentPlatformEnlightenmentProvider.GetService``1(System.Object[])">
+            <summary>(インファストラクチャ) 指定されたサービスの取得を試みます。</summary>
+            <typeparam name="T">サービスのタイプ。</typeparam>
+            <param name="args">オプションの引数セット。</param>
+            <returns>サービス インスタンス、またはこれが見つからない場合は null。</returns>
+        </member>
+        <member name="T:System.Reactive.Strings_PlatformServices">
+            <summary>ローカライズされた文字列などを検索するための厳密に型指定されたリソース クラス。</summary>
+        </member>
+        <member name="P:System.Reactive.Strings_PlatformServices.ResourceManager">
+            <summary>このクラスで使用されるキャッシュ済みの ResourceManager インスタンスを返します。</summary>
+        </member>
+        <member name="P:System.Reactive.Strings_PlatformServices.Culture">
+            <summary>この厳密に型指定されたリソース クラスを使用するすべてのリソース検索に対して、現在のスレッドの CurrentUICulture プロパティをオーバーライドします。</summary>
+        </member>
+        <member name="P:System.Reactive.Strings_PlatformServices.WINRT_NO_SUB1MS_TIMERS">
+            <summary>WinRT スレッド プールに似た、ローカライズされた文字列を調べても、1 ミリ秒未満の定期タイマーの作成はサポートしていません。</summary>
+        </member>
+    </members>
+</doc>
