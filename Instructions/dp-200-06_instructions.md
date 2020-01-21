@@ -81,7 +81,7 @@ lab:
 
 1. Azure portal で、[**Create a resource**] (+ リソースを作成) を選択し、「**Event Hubs**」と入力し、 結果の検索から [**イベント ハブ名前空間**] を選択します。次に、[**作成**] を選択します。
 
-1. 次のオプションを使用してイベント ハブ名前空間を作成し、[**作成**] をクリックします。
+1. 「ネームスペースの作成」ブレードで、次のオプションを入力し、クリックしてから、**作成**をクリックします。
     - **名前**: xx-socialtwitter-eh (xx は自分のイニシャル)
     - **価格レベル**: Standard
     - **サブスクリプション**: 自分のサブスクリプション
@@ -159,8 +159,10 @@ lab:
 
     > **注記**: 運用する国に適用されるすべての法律と倫理を遵守してください
 
-1. 「Tell us about your project」] (プロジェクトについて) ページで、「What use case(s) are you interested in?」(興味がある使用ケース) のオプションを選択します。このコースの目的として、[**Student project / Learning to code**] (学生プロジェクト/コードの学習) を選択します。「Describe in your own words what you are building」(構築しているものに関して説明してください) では、使用理由について 300 語で説明します。以下は例です:
+1. 「Tell us about your project」] (プロジェクトについて) ページで、「What use case(s) are you interested in?」(興味がある使用ケース) のオプションを選択します。 このコースの目的として、**学生** を選択します。 「Describe in your own words what you are building」(構築しているものに関して説明してください) では、使用理由について 300 語で説明します。以下は例です:
 
+    > **注記**: この画面の質問とオプションは変更される場合があります。
+	
     >1.I’m using Twitter’s APIs to learn how to embed twitter statements within a learning application. this account is being used to learn how to do that (私は Twitter の API を使用して、学習アプリケーション内に Twitter のステートメントを埋め込む方法を学んでいます。このアカウントは、その方法を学ぶために使用されています)
     >2.  I plan to analyze Tweets to understand how to count and read streaming tweets in real time as part of a learning exercise (私は学習エクササイズの一環として、リアルタイムでストリーミング ツイートをカウントして読み込む方法を理解するために、Tweets を分析しようと思っています)
     >3.I do not intend on interacting with other peoples tweets in the form of retweeting or liking content. (私は、リツイートしたりコンテンツにいいねを押したりして、他の人のツイートとやり取りするつもりはありません。)I will be reading and counting tweets and looking at sentiment. (私はツイートの読み込みやカウントを行い、センチメントを見ます。)
@@ -176,9 +178,9 @@ lab:
 
 1. Twitter の「ようこそ」画面を開いていない場合は、ブラウザで新しいタブを開き、https://developer.twitter.com に移動し、Twitter アカウントでログインします。
 
-1. 「Welcome」(ようこそ) または「Apps」(アプリ) ページで、[**Create an app**](アプリの作成) ボタンをクリックします。
+1. 「Welcome」(ようこそ) または「Apps」(アプリ) ページで、[**アプリの作成**](アプリの作成) ボタンをクリックします。
 
-1. 「Create an App」(アプリの作成) ページで、次の情報を入力し、[**Create**](作成) をクリックします。 
+1. 「アプリの作成」(アプリの作成) ページで、次の情報を入力し、[**アプリの作成**](作成) をクリックします。 
     - **name (名前)**: xx-social-app (xx は自分のイニシャル)
     - **Application description (アプリケーションの説明)**: 「used to collect and aggregate tweets」(ツイートの収集と集計に使用) などの説明を追加します。
     - **website URL (Web サイト URL)** アプリケーションに使用する個人用アドレス。
@@ -254,7 +256,24 @@ lab:
 
 1. 完了すると、入力ウィンドウの下に TwitterStream 入力ジョブが表示されます。入力ウィンドウを閉じて、Streaming Analytics ジョブ ページに戻ります。
 
-### タスク 6: Stream Analytics クエリを定義する。
+### タスク 6: Stream Analytics ジョブの出力を指定する。
+
+1. **socialtwitter-asa-job** Stream Analytics ジョブ] ウィンドウで、**出力**をクリックします。
+
+1. **出力**画面で、**追加**をクリックし、**Blob Storage**をクリックします。
+
+1. **Blob Storage**ウィンドウで、ペインに次の値を入力または選択します。
+- **出力エイリアス**: 出力
+- **Select Event Hub from your subscriptions(サブスクリプションからイベント ハブを選択)**: オン
+- **サブスクリプション**: 自分のサブスクリプション名
+- **ストレージ アカウント**: awsastudxx (xx は自分のイニシャル)
+- **コンテナー**: 既存を使用して、ツイートを選択します
+
+1. 残りのエントリは既定値のままにしておきます。 最後に、**保存** をクリックします。
+
+1. 出力画面を閉じて、Stream Analytics ジョブ ページに戻ります。
+
+### タスク 7: Stream Analytics クエリを定義する。
 
 1. **socialtwitter-asa-job** ウィンドウで、ウィンドウ中央の [**クエリ**] 画面で[**Edit query**] (クエリの編集) をクリックします。
 
@@ -285,23 +304,6 @@ lab:
 
 1. [クエリ] ウィンドウを閉じて、Stream Analytics ジョブ ページに戻ります。
 
-
-### タスク 7: Stream Analytics ジョブの出力を指定する。
-
-1. [**socialtwitter-asa-job** Stream Analytics ジョブ] ウィンドウで、[**出力**] をクリックします。
-
-1. **[出力]** 画面で、[**追加**] をクリックし、[**Blob Storage**] をクリックします。
-
-1. [**Blob Storage**] ウィンドウで、ペインに次の値を入力または選択します。 
-- **出力エイリアス**: 出力
-- **Select Event Hub from your subscriptions** (サブスクリプションからイベント ハブを選択): オン
-- **サブスクリプション**: 自分のサブスクリプション名
-- **ストレージ アカウント**: awsastudxx (xx は自分のイニシャル)
-- **コンテナー**: 既存を使用して、ツイートを選択します
-
-1. 残りのエントリは既定値のままにしておきます。最後に、[**保存***] をクリックします。
-
-1. 出力画面を閉じて、Stream Analytics ジョブ ページに戻ります。
 
 ### タスク 8: Stream Analytics クエリを定義する。
 

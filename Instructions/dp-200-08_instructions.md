@@ -132,7 +132,7 @@ lab:
 
 1. Azure portal 内のブレードで、[**Resource groups**] (リソース グループ) をクリックし、**awrgstudxx** をクリックし、**awdlsstudxx** をクリックします。**xx** がイニシャルとなります。
 
-1. **DeptDatabasesxx** (**xx** は自分のイニシャル) をクリックします。
+1. Azure portal 内のブレードで、リソース グループをクリックしてから、awrgstudxx をクリックし、**AdventureWorksLT**をクリックします。
 
 1. [deptdatabasesxx (sqlservicexx/deptdatabasesxx)] 画面で、[**監査**] ブレードをクリックします。
 
@@ -166,7 +166,7 @@ lab:
 
 > **注記**: パスワードが正しくないため、エラー メッセージが返されます。正しいパスワード、**P@Ssw0rd** を入力します。
 
-1. **SQL Server Management Studio** の Object Explorer で **DeptDatabasesxx** を展開し、**テーブル** を展開します。     
+1. **SQL Server Management Studio** の Object Explorer で **AdventureWorksLT** を展開し、**テーブル** を展開します。     
 
 1. [SalesLT].[Customers] を右クリックし、[**上位 1000 行の選択**] をクリックします。
 
@@ -178,7 +178,7 @@ lab:
 
 > **結果**: このエクササイズを完了すると、データベース監査を有効にし、監査が機能することを確認することができます。
 
-## エクササイズ 4: ストリーミング データのセキュリティ保護
+## エクササイズ 5: ストリーミング データのセキュリティ保護
   
 所要時間: 15 分
 

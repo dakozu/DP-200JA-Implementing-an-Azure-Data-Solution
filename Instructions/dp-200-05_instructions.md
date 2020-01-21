@@ -65,13 +65,13 @@ lab:
 
     - リソース グループ名: **awrgstudxx **(**xx** は自分のイニシャル)
 
-    - データベース名: **DeptDatabasesxx** (**xx** は自分のイニシャル)
+    - データベース名: データ ソースの**追加設定**タブで、**サンプル**をクリックします。AdventureworksLT サンプルデータベースが自動的に選択されます。
 
-    - サーバー: 次の設定で新しいサーバーを作成し、[**選択**] をクリックします。 
+    - サーバー: 次の設定で **新規作成**をクリックして新しいサーバーを作成し、**OK**をクリックします。 
         - サーバー名: **SQLServicexx** (**xx** は自分のイニシャル)
         - サーバー管理者ログイン: **xxsqladmin**(**xx** は自分のイニシャル)
-        - パスワード: **P@ssw0rd**
-        - パスワードを確定する: **P@ssw0rd**
+        - パスワード: **Pa55w.rd**
+        - パスワードを確定する: **Pa55w.rd**
         - 場所: 近くの **場所** を選択します。 
         - Azure サービスがサーバーにアクセスできるようにする: **オンにする**
 
@@ -107,7 +107,7 @@ lab:
 
 1. [**SQL Data Warehouse**] ブレードで、[**作成**] をクリックします。
 
-1. [**SSQL Data Warehouse**] ブレードから、次の設定を使用して Azure SQL Database を作成します。
+1. **SQL Data Warehouse** ブレードから、次の設定を使用して Azure SQL Database Warehouse を作成します。
 
     - データベース名: **Warehousexx** (**xx** は自分のイニシャル)
 
@@ -115,13 +115,11 @@ lab:
 
     - リソース グループ名: **awrgstudxx **(**xx** は自分のイニシャル)
 
-    - ソースを選択: **サンプル**
-
-    - サンプルを選択: **AdventureWorksDW**
-
     - サーバー: **SQLServicexx**
 
-    - パフォーマンス レベル: **Gen1 DW200**
+    - パフォーマンス レベル: **Gen2 DW100C**
+	
+	- ソースを選択: **データ ソース**の**追加設定**タブで、**サンプル**をクリックする
 
 1. **[SQL Data Warehouse*** ] ブレードで、[**作成**] をクリックします。
 
@@ -185,7 +183,7 @@ lab:
     CREATE DATABASE DWDB COLLATE SQL_Latin1_General_CP1_CI_AS
     (
         EDITION 			= 'DataWarehouse'
-    ,	SERVICE_OBJECTIVE 	= 'DW100'
+    ,	SERVICE_OBJECTIVE 	= 'DW100C'
     ,	MAXSIZE 			= 1024 GB
     );
     ```
@@ -197,6 +195,8 @@ lab:
 ### タスク 3: SQL Data Warehouse テーブルを作成する。
 
 1. **SQL Server Management Studio** の Object Explorer で、**sqlservicexx.database.windows.net** を右クリックし、[**New Query**] (新しいクエリ) をクリックします。
+   
+   >**注記**: Transact-SQL に慣れていない場合は、**Exercise3 Task3Step2 script.sql**という Allfiles\Solution\DP-200.5\folder にスクリプトがあります。 テーブルの作成に必要なコードの大部分が含まれていますが、各テーブルに使用する配布タイプを選択してコードを完成させる必要があります 
 
 1. 次の列に **replicate** の分散を持つ **クラスター化された columnstore** インデックスを有する **dbo.Users** という名前のテーブルを作成します。
 
@@ -256,7 +256,6 @@ lab:
 
 1. Azure BLOB から PolyBase を使用し、dbo.Dates テーブルを作成する
 
-1. Azure Databricks から PolyBase を使用し、dbo.Preferences テーブルを作成する
 
 ### タスク 1: Azure BLOB アカウントとキーの詳細を収集する
 
@@ -299,16 +298,6 @@ lab:
         LOCATION = 'wasbs://data@awsastudxx.blob.core.windows.net',
         CREDENTIAL = AzureStorageCredential
     );
-    ```
-
-1. **SQL Server Management Studio** で、ステートメントをハイライトし、[**実行**] をクリック します。
-
-    ```SQL
-    CREATE DATABASE SCOPED CREDENTIAL AzureStorageCredential
-    WITH
-    IDENTITY = 'MOCID',
-    SECRET = 'Your Blob Storage key'
-    ;
     ```
 
 1. **SQL Server Management Studio** の [クエリ] ウィンドウに、formattype が **DelimitedText**、フィールド ターミネータが **コンマ** の **TextFile** という名前の外部ファイル形式を作成するコードを入力します。 
