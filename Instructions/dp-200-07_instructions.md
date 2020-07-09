@@ -94,7 +94,7 @@ Data Factory の作成[Azure  portal](https://portal.azure.com) を使用して 
 
 1. ソースとして使用する新しい HTTP データセットを作成する
 
-1. 新しい ADLS Gen2 データセット シンクの作成
+1. 新しい ADLS Gen2 シンクの作成
 
 1. コピー アクティビティのテスト
 

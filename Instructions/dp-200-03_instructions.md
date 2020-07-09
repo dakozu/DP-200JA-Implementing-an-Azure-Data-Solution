@@ -139,7 +139,7 @@ lab:
 
     - **プール**：**なし**
 
-    - **Databricks ランタイムのバージョン**: **ランタイム：6.2 (Scala 2.11、Spark 2.4.4)**
+    - **Databricks ランタイムのバージョン**: **ランタイム：6.3 (Scala 2.11、Spark 2.4.4)**
 
     - [アクティビティが **60 分間ない場合は終了する**] チェック ボックスをオンにします。クラスターが使われていない場合にクラスターを終了するまでの時間 (分単位) を指定します。
 
@@ -287,7 +287,7 @@ lab:
     val df = spark.read.json("abfss://<file-system-name>@<storage-account-name>.dfs.core.windows.net/preferences.json")
     ```
 
-1. このコード ブロックでは、**file-system-name** を **data** という単語で、又は、このコード ブロック内の **storage-account-name** プレースホルダー値を以前に収集した値で置き換え、メモ帳に保持する。
+1. このコード ブロックでは、**file-system-name** を **logs** という単語で、又は、このコード ブロック内の **storage-account-name** プレースホルダー値を以前に収集した値で置き換え、メモ帳に保持する。
 
 1. ノートブック内の **Cmd 2** の下のセルで、[**実行**] アイコンをクリックし、[**セルの実行**] をクリックします。 
 
