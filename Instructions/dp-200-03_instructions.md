@@ -265,7 +265,7 @@ lab:
     spark.conf.set("fs.azure.account.oauth2.client.endpoint.<storage-account-name>.dfs.core.windows.net", "https://login.microsoftonline.com/<tenant-id>/oauth2/token")
     ```
 
-1. このコード ブロックでは、このコード ブロック内の**application-id**、**authentication-id**、**tenant-id**、**file-system-name** 及び **storage-account-name** のプレースホルダー値を、以前に収集した値で置き換える。これらの値はメモ帳に保持される。
+1. このコード ブロックでは、このコード ブロック内の**application-id**、**authentication-key**、**tenant-id**、**file-system-name** 及び **storage-account-name** のプレースホルダー値を、以前に収集した値で置き換える。これらの値はメモ帳に保持される。
 
 1. ノートブック内の 「**Cmd 1**」 の下のセルで、「**実行**」 アイコンをクリックし、次の図形でハイライトされているように 「**セルの実行**」 をクリックします。 
 
