@@ -191,7 +191,7 @@ Data Factory の作成[Azure  portal](https://portal.azure.com) を使用して 
 
 1. データ ソースの追加
 
-1. マッピング データ フロー変換の使用
+1. データ フロー変換の使用
 
 1. データ シンクへの書き込み
 
@@ -203,13 +203,13 @@ Data Factory の作成[Azure  portal](https://portal.azure.com) を使用して 
 
     > 注: データ フロー クラスターのウォームアップには 5 ~ 7 分かかります。
 
-1. **データ フロー アクティビティの追加** 「アクティビティ」 ペインで、「移動および変換」 アコーディオンを開き、 「**データ フロー**」 アクティビティをパイプライン キャンバスにドラッグします。表示されるブレードで、「**新しいデータ フローの作成**」 をクリックし、 「**データ フローのマッピング**」 を選択して 「**OK**」 をクリックします。「**pipeline1**」タブをクリックし、コピー アクティビティの緑色のボックスからデータ フロー アクティビティにドラッグして、成功時条件を作成します。キャンバスに次の内容が表示されます。
+1. **データ フロー アクティビティの追加** 「アクティビティ」 ペインで、「移動および変換」 アコーディオンを開き、 「**データ フロー**」 アクティビティをパイプライン キャンバスにドラッグします。表示されるブレードで、「**新しいデータ フローの作成**」 をクリックし、 「**Data flow**」 を選択して 「**OK**」 をクリックします。「**pipeline1**」タブをクリックし、コピー アクティビティの緑色のボックスからデータ フロー アクティビティにドラッグして、成功時条件を作成します。キャンバスに次の内容が表示されます。
 
-    ![Azure Data Factory でのマッピング データ フローの追加](Linked_Image_Files/M07-E03-T01-img01.png)
+    ![Azure Data Factory でのデータ フローの追加](Linked_Image_Files/M07-E03-T01-img01.png)
 
 ### タスク 2: データ ソースの追加
 
-1. **ADLS ソースを追加** キャンバスの 「Mapping Data Flow」 オブジェクトをダブルクリックします。データ フロー キャンバスの 「ソースの追加」 ボタンをクリックします。「**ソース データセット**」ドロップダウンで、コピー アクティビティで使用する **ADLSG2** データセットを選択します。
+1. **ADLS ソースを追加** キャンバスの 「Data Flow」 オブジェクトをダブルクリックします。データ フロー キャンバスの 「ソースの追加」 ボタンをクリックします。「**ソース データセット**」ドロップダウンで、コピー アクティビティで使用する **ADLSG2** データセットを選択します。
 
     ![Azure Data Factory での Mapping Data Flow へのソースの追加](Linked_Image_Files/M07-E03-T02-img01.png)
 
@@ -219,17 +219,17 @@ Data Factory の作成[Azure  portal](https://portal.azure.com) を使用して 
 
     デバッグ クラスターがウォームアップされたら、「データ プレビュー」 タブでデータが正しく読み込まれているか確認します。更新ボタンをクリックすると、それぞれの変換時にデータがどのような状態になるか計算したスナップショットが Mapping Data Flow に表示されます。
   
-### タスク 3: マッピング データ フロー変換の使用
+### タスク 3: データ フロー変換の使用
 
-1. **列を変更および削除するために Select 変換を追加する** データのプレビューで、"Rotton Tomatoes" 列のスペルが間違っていることに気が付いたはずです。この名前を正しく指定して未使用の評価列を削除したいときは、ADLS ソース ノードの横にある 「+」 アイコンをクリックして、「スキーマ変更」 の下の 「Select」 を選択すると、[Select 変換](https://docs.microsoft.com/azure/data-factory/data-flow-select) を追加できます。
+1. **列を変更および削除するために Select 変換を追加する** データのプレビューで、"Rotton Tomatoes" 列のスペルが間違っていることに気が付いたはずです。この名前を正しく指定して未使用の評価列を削除したいときは、ADLS ソース ノードの横にある 「+」 アイコンをクリックして、「スキーマ変換(Schema modifier)」 の下の 「Select」 を選択すると、[Select 変換](https://docs.microsoft.com/azure/data-factory/data-flow-select) を追加できます。
     
-    ![Azure Data Factory でマッピング データ フローの変換を追加する](Linked_Image_Files/M07-E03-T03-img01.png)
+    ![Azure Data Factory でデータ フローの変換を追加する](Linked_Image_Files/M07-E03-T03-img01.png)
 
     「**名前**」フィールドで、'Rotton'を'Rotten'に変更します。「評価」 列を削除するには、その列にカーソルを合わせてごみ箱アイコンをクリックします。
 
-    ![Azure Data Factory でのマッピング データ フローへの Select 変換の使用](Linked_Image_Files/M07-E03-T03-img02.png)
+    ![Azure Data Factory でのデータ フローへの Select 変換の使用](Linked_Image_Files/M07-E03-T03-img02.png)
 
-1. **不要な年を除外するフィルター変換を追加** 1951年以降に作られた映画にのみ興味があるとします。[フィルター変換](https://docs.microsoft.com/azure/data-factory/data-flow-filter) を追加してフィルター条件を指定するには、Select 変換の横にある 「**+**」アイコンをクリックし、「**行変更(Row Modifier)**」の下の「フィルター」を選択します。**式のボックス(Filter on)** をクリックして[式ビルダ](https://docs.microsoft.com/azure/data-factory/concepts-data-flow-expression-builder)を開き、フィルター条件を入力します。[Mapping Data Flow の式言語](https://docs.microsoft.com/azure/data-factory/data-flow-expression-functions)の構文を使用すると、「**toInteger(year) > 1950**」では、文字列である年の値を整数に変換し、値が 1950 を超える行をフィルターします。
+1. **不要な年を除外するフィルター変換を追加** 1951年以降に作られた映画にのみ興味があるとします。[フィルター変換](https://docs.microsoft.com/azure/data-factory/data-flow-filter) を追加してフィルター条件を指定するには、Select 変換の横にある 「**+**」アイコンをクリックし、「**行変更(Row Modifier)**」の下の「フィルター(Filter)」を選択します。**式のボックス(Filter on)** をクリックして[式ビルダ()](https://docs.microsoft.com/azure/data-factory/concepts-data-flow-expression-builder)を開き、フィルター条件を入力します。[Mapping Data Flow の式言語](https://docs.microsoft.com/azure/data-factory/data-flow-expression-functions)の構文を使用すると、「**toInteger(year) > 1950**」では、文字列である年の値を整数に変換し、値が 1950 を超える行をフィルターします。
 
     ![Azure Data Factory での Mapping Data Flow へのフィルター変換の使用](Linked_Image_Files/M07-E03-T03-img03.png)
 
@@ -276,7 +276,7 @@ Data Factory の作成[Azure  portal](https://portal.azure.com) を使用して 
 
 1. **Azure Synapse Analytics シンクに書き込む** すべての変換ロジックが完了したので、シンクに書き込む準備が整いました。
     1. 「**シンク**」を追加するには、「upsert変換」の横にある 「**+アイコン**」をクリックし、「変換先」の下の「シンク」をクリックします。
-    1. 「シンク」 タブで、「**+ 新規ボタン**」 を使用して新しい Data Warehouse データセットを作成します。
+    1. 「シンク」 タブで、「**+ 新規ボタン**」 を使用して新しい Synapse Analytics データセットを作成します。
     1. タイル リストから 「**Azure Synapse Analytics**」 を選択します。
     1. 新しいリンクされたサービスを選択し、モジュール 5 で作成した DWDB データベースに接続するように Azure Synapse Analytics 接続を構成します。完了したら、「**作成**」 をクリックします。
     ![Azure Data Factoryでの Azure Synapse Analytics の接続を作成する](Linked_Image_Files/M07-E03-T04-img01.png)
