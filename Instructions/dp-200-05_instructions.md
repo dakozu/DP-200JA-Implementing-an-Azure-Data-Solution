@@ -187,13 +187,13 @@ lab:
 
 > [**結果**]: このエクササイズを完了すると、Azure Synapse Analytics インスタンスを作成し、サーバー ファイアウォールを構成して、それに対する接続を有効にします。
 
-### タスク 3: Warehousexx データベースを一時停止する
+### タスク 3: dedsqlxx データベースを一時停止する
 
-1. [**Warehousexx**] (**xx** は自分のイニシャル) をクリックします。
+1. [**dedsqlxx**] (**xx** は自分のイニシャル) をクリックします。
 
-1. [**Warehousexx (dwhservicexx/Warehousexx)**] 画面で、[**一時停止**] をクリックします。
+1. [**dedsqlxx (wrkspcxx/dedsqlxx)**] 画面で、[**一時停止**] をクリックします。
 
-1. [Warehousexx の一時停止] 画面で、[**はい**] をクリックします。
+1. [dedsqlxx の一時停止] 画面で、[**はい**] をクリックします。
 
 
 
@@ -215,7 +215,7 @@ lab:
 
 ### タスク 1: SQL Server Management Studio をインストールし、SQL Data Warehouse インスタンスに接続する。
 
-1. Azure portal の [**dwhservicexx - ファイアウォールと仮想ネットワーク**] ブレードで [**プロパティ**] をクリックします。
+1. Azure portal の [**wrkspcxx - ファイアウォール**] ブレードで [**プロパティ**] をクリックします。
 
 1. [**"サーバー名"**] をコピーしてメモ帳に貼り付けます。
 
@@ -224,7 +224,7 @@ lab:
 1. Windows デスクトップで [**スタート**] をクリックし、「**”SQL Server”**」と入力し、[**Microsoft SQL Server Management Studio 17**] をクリックします。
 
 1. [**サーバーに接続**] ダイアログ ボックスで、次の詳細情報を入力します。
-    - サーバー名: **dwhservicexx.database.windows.net**
+    - サーバー名: **wrkspcxx.sql.azuresynapse.net**
     - 認証: **SQL Server の認証**
     - ユーザー名: **xxsqladmin**
     - パスワード: **Pa55w.rd**
@@ -233,7 +233,7 @@ lab:
 
 ### タスク 2：SQL Data Warehouse データベースを作成します。
 
-1. **SQL Server Management Studio** の Object Explorer で、[**dwhservicexx.database.windows.net**] を右クリックし、[**新しいクエリ**] をクリックします。 
+1. **SQL Server Management Studio** の Object Explorer で、[**wrkspcxx.sql.azuresynapse.net**] を右クリックし、[**新しいクエリ**] をクリックします。 
 
 1. クエリ ウィンドウで、サービス目標を DW100、最大サイズ 1024 GB で、**DWDB** という名前の DataWarehouse データベースを作成します。
 
@@ -251,7 +251,7 @@ lab:
 
 ### タスク 3: SQL Data Warehouse テーブルを作成する。
 
-1. **SQL Server Management Studio** の Object Explorer で、[**dwhservicexx.database.windows.net**] を右クリックし、[**新しいクエリ**] をクリックします。
+1. **SQL Server Management Studio** の Object Explorer で、[**wrkspcxx.sql.azuresynapse.net**] を右クリックし、[**新しいクエリ**] をクリックします。
 
 1. [**SQL Server Management Studio**] の SQL エディター ツールバーの [**利用可能なデータベース**] で、[**DWDB**] をクリックします。
 
@@ -268,7 +268,7 @@ lab:
 
 1. **SQL Server Management Studio** で、[**実行**] をクリックします。
 
-1. **SQL Server Management Studio** の Object Explorer で、[**dwhservicexx.database.windows.net**] を右クリックし、[**新しいクエリ**] をクリックします。
+1. **SQL Server Management Studio** の Object Explorer で、[**wrkspcxx.sql.azuresynapse.net**] を右クリックし、[**新しいクエリ**] をクリックします。
 
 1. [**SQL Server Management Studio**] の SQL エディター ツールバーの [**利用可能なデータベース**] で、[**DWDB**] をクリックします。
 
@@ -289,7 +289,7 @@ lab:
 
 1. **SQL Server Management Studio** で、[**実行**] をクリックします。
 
-1. **SQL Server Management Studio** の Object Explorer で、[**dwhservicexx.database.windows.net**] を右クリックし、[**新しいクエリ**] をクリックします。
+1. **SQL Server Management Studio** の Object Explorer で、[**wrkspcxx.sql.azuresynapse.net**] を右クリックし、[**新しいクエリ**] をクリックします。
 
 1. [**SQL Server Management Studio**] の SQL エディター ツールバーの [**利用可能なデータベース**] で、[**DWDB**] をクリックします。
 
@@ -329,7 +329,7 @@ lab:
 
 ### タスク 2: Azure BLOB から PolyBase を使用し、dbo.Dates テーブルを作成する
 
-1. **SQL Server Management Studio** の Object Explorer で、[**dwhservicexx.database.windows.net**] を右クリックし、[**新しいクエリ**] をクリックします。
+1. **SQL Server Management Studio** の Object Explorer で、[**wrkspcxx.sql.azuresynapse.net**] を右クリックし、[**新しいクエリ**] をクリックします。
 
 1. [**SQL Server Management Studio**] の SQL エディター ツールバーの [**利用可能なデータベース**] で、[**DWDB**] をクリックします。
 
