@@ -205,95 +205,96 @@ lab:
 
 このエクササイズの主なタスクは次のとおりです。
 
-1. SQL Server Management Studio をインストールし、Data Warehouse インスタンスに接続する。
+1. Understand Synapse Studio and connect to a dedicated SQL Pool.
 
-1. SQL Data Warehouse データベースを作成する
+2. 専用SQL Pool databaseの作成
 
-1. SQL Data Warehouse テーブルを作成する
+3. 専用SQL Pool tablesの作成
 
     > **注記**: Transact-SQL に慣れていない場合は、次の課題のステートメントは、次の場所「**Allfiles\Labfiles\Starter\DP-200.5\SQL DW Files**」にあるものを使用することができます。
+### タスク 1: Azure Synapse Studioを使用して専用SQLプールに接続する。
 
-### タスク 1: SQL Server Management Studio をインストールし、SQL Data Warehouse インスタンスに接続する。
+1. 前の手順で作成した**dedsqlxx**のブレードを開きます。
 
-1. Azure portal の [**wrkspcxx - ファイアウォール**] ブレードで [**プロパティ**] をクリックします。
+2. **概要** セクションから **Synapse Studioの起動**をクリックします。
 
-1. [**"サーバー名"**] をコピーしてメモ帳に貼り付けます。
+3. 左側メニューより **Manage** をクリックします。
 
-1. [SQL Server Management Studio](https://docs.microsoft.com/ja-jp/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017) をダウンロードし、コンピューターにインストールします
+4. **SQL Pool** を選び **+ New**
 
-1. Windows デスクトップで [**スタート**] をクリックし、「**”SQL Server”**」と入力し、[**Microsoft SQL Server Management Studio 17**] をクリックします。
+    - 基本の詳細セクションでは、次の情報を入力します。
 
-1. [**サーバーに接続**] ダイアログ ボックスで、次の詳細情報を入力します。
-    - サーバー名: **wrkspcxx.sql.azuresynapse.net**
-    - 認証: **SQL Server の認証**
-    - ユーザー名: **xxsqladmin**
-    - パスワード: **Pa55w.rd**
+        - **Dedicated SQL pool name**: **DWDB**
 
-1. [**Connect to Server**] (サーバーに接続) ダイアログ ボックスで、[**Connect**] (接続) をクリックします。 
+    - ほかの設定はそのままにします。
 
-### タスク 2：SQL Data Warehouse データベースを作成します。
-
-1. **SQL Server Management Studio** の Object Explorer で、[**wrkspcxx.sql.azuresynapse.net**] を右クリックし、[**新しいクエリ**] をクリックします。 
-
-1. クエリ ウィンドウで、サービス目標を DW100、最大サイズ 1024 GB で、**DWDB** という名前の DataWarehouse データベースを作成します。
-
-    ```SQL
-    CREATE DATABASE DWDB COLLATE SQL_Latin1_General_CP1_CI_AS
-    (
-        EDITION             = 'DataWarehouse'
-    ,   SERVICE_OBJECTIVE   = 'DW100C'
-    ,   MAXSIZE             = 1024 GB
-    );
-    ```
-
-    > **注**: データベースの作成には約 2 分かかります。
+    -  **Review + Create** をクリックし、そのご **Create** をクリックします。
 
 
-### タスク 3: SQL Data Warehouse テーブルを作成する。
+    ![Dedicated SQL Pool creation through Synapse Workspace](Linked_Image_Files/M05-E03-T01-img01a.png)
 
-1. **SQL Server Management Studio** の Object Explorer で、[**wrkspcxx.sql.azuresynapse.net**] を右クリックし、[**新しいクエリ**] をクリックします。
+    > **Note**: 作成には約6分かかります。
 
-1. [**SQL Server Management Studio**] の SQL エディター ツールバーの [**利用可能なデータベース**] で、[**DWDB**] をクリックします。
+5. データベースの設定が完了したら、画面左側の**Data**をクリックします。**Databases**の隣にある…をクリックし、**refresh**をクリックします。新しく作成されたデータベースDWDBが表示されます。
+
+### Task 2: Create dedicated SQL Pool tables.
+
+1. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** で前の手順で新しく作成したデータベース**DWDB**に移動します。
+
+2. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+3. **New SQL script**を選択し、**empty script**を選択します。
 
     >**注**: Transact-SQL に慣れていない場合は、「**Exercise3 Task3Step2 script.sql**」という名前の Allfiles\Solution\DP-200.5\folder にスクリプトがあります。テーブルの作成に必要なコードの大部分が含まれていますが、各テーブルに使用する配分タイプを選択してコードを完成させる必要があります 
+
 
 1. 次の列に **replicate** の分散を持つ [**クラスター化された columnstore**] インデックスを有する「**dbo.Users**」という名前のテーブルを作成します。
 
     | 列名 | データ型 | NULL 値の許容|
     |-------------|-----------|------------|
     | userId | int | NULL|
-    | 都市 | nvarchar(100) | NULL|
-    | リージョン | nvarchar(100) | NULL 値|
-    | 国 | nvarchar(100) | NULL|
+    | City | nvarchar(100) | NULL|
+    | Region | nvarchar(100) | NULL|
+    | Country | nvarchar(100) | NULL|
 
-1. **SQL Server Management Studio** で、[**実行**] をクリックします。
+      >**注**。スクリプトが**DWDB**に接続されており、**DWDB**データベースを使用していることを確認してください。
 
-1. **SQL Server Management Studio** の Object Explorer で、[**wrkspcxx.sql.azuresynapse.net**] を右クリックし、[**新しいクエリ**] をクリックします。
+5. **Synapse Studio** で **Run** をクリックすると、クエリが実行されます。**dbo.Users** テーブルが作成されたかどうかを確認するには、refreshをクリックして **tables** に移動し、展開するとテーブルが表示されます。
 
-1. [**SQL Server Management Studio**] の SQL エディター ツールバーの [**利用可能なデータベース**] で、[**DWDB**] をクリックします。
 
-1. 次の列に **round robin** の分散を持つ [**クラスター化された columnstore**] インデックスを有する「**dbo.Products** 」という名前のテーブルを作成します。
+6. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** で前の手順で新しく作成したデータベース**DWDB**に移動します。
+
+7. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+8. **New SQL script**を選択し、**empty script**を選択します。
+
+9. 次の列を持つ **SalesUnit** での **ハッシュ** 分散を使用して、**クラスター化列ストア** インデックスを有する **dbo.FactSales** という名前のテーブルを作成します。
 
     | 列名 | データ型 | NULL 値の許容|
     |-------------|-----------|------------|
     | ProductId | int | NULL|
     | EnglishProductName | nvarchar(100) | NULL|
-    | 色 | nvarchar(100) | NULL|
+    | Color | nvarchar(100) | NULL|
     | StandardCost | int | NULL|
     | ListPrice | int | NULL|
-    | サイズ | nvarchar(100) | NULL|
-    | 重量 | int | NULL|
+    | Size | nvarchar(100) | NULL|
+    | Weight | int | NULL|
     | DaysToManufacture | int | NULL|
-    | クラス | nvarchar(100) | NULL|
-    | Style (スタイル) | nvarchar(100) | NULL|
+    | Class | nvarchar(100) | NULL|
+    | Style | nvarchar(100) | NULL|
 
-1. **SQL Server Management Studio** で、[**実行**] をクリックします。
+      >**注**。スクリプトが**DWDB**に接続されており、**DWDB**データベースを使用していることを確認してください。
 
-1. **SQL Server Management Studio** の Object Explorer で、[**wrkspcxx.sql.azuresynapse.net**] を右クリックし、[**新しいクエリ**] をクリックします。
+10. **Synapse Studio** で **Run** をクリックすると、クエリが実行されます。**dbo.Product** テーブルが作成されたかどうかを確認するには、refreshをクリックして **tables** に移動し、展開するとテーブルが表示されます。
 
-1. [**SQL Server Management Studio**] の SQL エディター ツールバーの [**利用可能なデータベース**] で、[**DWDB**] をクリックします。
+11. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** で前の手順で新しく作成したデータベース**DWDB**に移動します。
 
-1. 次の列を持つ **SalesUnit** での **ハッシュ** 分散を使用して、**クラスター化列ストア** インデックスを有する **dbo.FactSales** という名前のテーブルを作成します。
+12. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+13. **New SQL script**を選択し、**empty script**を選択します。
+
+14. 次の列を持つ **SalesUnit** での **ハッシュ** 分散を使用して、**クラスター化列ストア** インデックスを有する **dbo.FactSales** という名前のテーブルを作成します。
+
 
     | 列名 | データ型 | NULL 値の許容|
     |-------------|-----------|------------|
@@ -303,9 +304,12 @@ lab:
     | UserPreferenceId | int | NULL|
     | SalesUnit | int | NULL|
 
-1. **SQL Server Management Studio** で、[**実行**] をクリックします。
+      >**注**。スクリプトが**DWDB**に接続されており、**DWDB**データベースを使用していることを確認してください。
 
-> **結果**: このエクササイズを完了すると、SQL Server Management Studio をインストールして、DWDB という名前のデータ ウェアハウスと、Users、Products、FactSales という名前の 3 つのテーブルが作成されます。
+15. **Synapse Studio** で **Run** をクリックすると、クエリが実行されます。**dbo.FactSales** テーブルが作成されたかどうかを確認するには、refreshをクリックして **tables** に移動し、展開するとテーブルが表示されます。
+
+> **結果**: このエクササイズを完了すると、Synapse Studioを使用して、DWDB という名前のデータ ウェアハウスと、Users、Products、FactSales という名前の 3 つのテーブルが作成されます。
+
 
 ## エクササイズ 4: PolyBase を使用した Azure Synapse Analytics へのデータ読み込み 
 
@@ -326,6 +330,227 @@ lab:
 1. [**awdlsstudxx**] 画面で、[**アクセス キー**] をクリックします。[**ストレージ アカウント名**] の横にあるアイコンをクリックし、メモ帳に貼り付けます。
 
 1. [**awsastudxx - アクセス キー**] 画面の [**key1**] で、[**キー**] の横にあるアイコンをクリックし、メモ帳に貼り付けます。
+
+
+### Task 2: Azure BLOB から PolyBase を使用し、dbo.Dates テーブルを作成する
+
+
+1. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** から**DWDB**に移動します。
+
+2. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+3. **New SQL script**を選択し、**empty script**を選択します。
+
+4. **DWDB** データベースに対して **マスター キー** を作成します。クエリ エディターで、次のコードを入力します。
+
+    ```SQL
+    CREATE MASTER KEY;
+    ```
+    >**Note**:  スクリプトが**DWDB**に接続され、**DWDB**データベースを使用していることを確認してください。
+
+5.  **Synapse Studio** で **Run** をクリックして、クエリを実行します。
+
+
+6. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** から**DWDB**に移動します。
+
+7. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+8. **New SQL script**を選択し、**empty script**を選択します。
+
+
+9. 次のコードを入力して、次の詳細を含む、「**AzureStorageCredential**」という名前のデータベース スコープの資格情報を作成します。
+    - ID: **MOCID**
+    - シークレット: **ストレージ アカウントのアクセス キー**
+
+    ```SQL
+    CREATE DATABASE SCOPED CREDENTIAL AzureStorageCredential
+    WITH
+    IDENTITY = 'MOCID',
+    SECRET = 'Your storage account key';
+    ```
+
+    >**Note**: スクリプトが**DWDB**に接続され、**DWDB**データベースを使用していることを確認してください。
+
+10.  **Synapse Studio** で **Run** をクリックして、クエリを実行します。
+
+
+11. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** から**DWDB**に移動します。
+
+12. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+13. **New SQL script**を選択し、**empty script**を選択します。
+
+
+14. クエリ ウィンドウに、**AzureStorageCredential** を使用する **HADOOP** タイプで作成された BLOB ストレージ アカウントとデータ コンテナー用に「**AzureStorage**」という名前の外部データ ソースを作成するコードを入力します。場所キーの **awdlsstudxx** を自分のストレージ アカウントで自分のイニシャルに置き換える必要があります。 
+
+    ```SQL
+	CREATE EXTERNAL DATA SOURCE AzureStorage
+    WITH (
+        TYPE = HADOOP,
+        LOCATION = 'abfs://data@awdlsstudxx.dfs.core.windows.net',
+        CREDENTIAL = AzureStorageCredential
+    );
+    ```
+    >**Note**: スクリプトが**DWDB**に接続され、**DWDB**データベースを使用していることを確認してください。
+
+15.  **Synapse Studio** で **Run** をクリックして、クエリを実行します。
+
+
+16. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** から**DWDB**に移動します。
+
+17. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+18. **New SQL script**を選択し、**empty script**を選択します。
+
+19. クエリ ウィンドウに、formattype が **DelimitedText**、フィールド ターミネータが **コンマ** の「**TextFile**」という名前の外部ファイル形式を作成するコードを入力します。
+
+    ```SQL
+    CREATE EXTERNAL FILE FORMAT TextFile
+    WITH (
+        FORMAT_TYPE = DelimitedText,
+        FORMAT_OPTIONS (FIELD_TERMINATOR = ',')
+    );
+    ```
+    >**Note**: スクリプトが**DWDB**に接続され、**DWDB**データベースを使用していることを確認してください。
+
+20.  **Synapse Studio** で **Run** をクリックして、クエリを実行します。
+
+
+21. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** から**DWDB**に移動します。
+
+22. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+23. **New SQL script**を選択し、**empty script**を選択します。
+
+24. クエリ ウィンドウに、ルート ファイルとして「**場所**」、データ ソースとして「**AzureStorage**」、次の列を持つ「**TextFile**」のFile_format で、「**dbo.DimDate2External**」という名前の外部テーブルを作成するコードを入力します。
+
+    | column name | data type | Nullability|
+    |-------------|-----------|------------|
+    | Date | datetime2(3) | NULL|
+    | DateKey | decimal(38, 0) | NULL|
+    | MonthKey | decimal(38, 0) | NULL|
+    | Month | nvarchar(100) | NULL|
+    | Quarter | nvarchar(100) | NULL|
+    | Year | decimal(38, 0) | NULL|
+    | Year-Quarter | nvarchar(100) | NULL|
+    | Year-Month | nvarchar(100) | NULL|
+    | Year-MonthKey | nvarchar(100) | NULL|
+    | WeekDayKey| decimal(38, 0) | NULL|
+    | WeekDay| nvarchar(100) | NULL|
+    | Day Of Month| decimal(38, 0) | NULL|
+
+    ```SQL
+	CREATE EXTERNAL TABLE dbo.DimDate2External (
+    [Date] datetime2(3) NULL,
+    [DateKey] decimal(38, 0) NULL,
+    [MonthKey] decimal(38, 0) NULL,
+    [Month] nvarchar(100) NULL,
+    [Quarter] nvarchar(100) NULL,
+    [Year] decimal(38, 0) NULL,
+    [Year-Quarter] nvarchar(100) NULL,
+    [Year-Month] nvarchar(100) NULL,
+    [Year-MonthKey] nvarchar(100) NULL,
+    [WeekDayKey] decimal(38, 0) NULL,
+    [WeekDay] nvarchar(100) NULL,
+    [Day Of Month] decimal(38, 0) NULL
+    )
+    WITH (
+        LOCATION='/DimDate2.txt',
+        DATA_SOURCE=AzureStorage,
+        FILE_FORMAT=TextFile
+    );
+    ```
+    >**Note**: スクリプトが**DWDB**に接続され、**DWDB**データベースを使用していることを確認してください。
+
+
+25.  **Synapse Studio** で **Run** をクリックして、クエリを実行します。
+
+
+26. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** から**DWDB**に移動します。
+
+27. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+28. **New SQL script**を選択し、**empty script**を選択します。
+
+29. テーブルに対して select ステートメントを実行して、テーブルが作成されたことをテストします。
+
+
+    ```SQL
+    SELECT * FROM dbo.DimDate2External;
+    ```
+    >**Note**: スクリプトが**DWDB**に接続され、**DWDB**データベースを使用していることを確認してください。 
+
+
+30.  **Synapse Studio** で **Run** をクリックして、クエリを実行します。
+
+
+31. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** から**DWDB**に移動します。
+
+32. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+33. **New SQL script**を選択し、**empty script**を選択します。
+
+34. **SQL Server Management Studio** のクエリ ウィンドウに、**columnstore** インデックス、および **dbo.DimDate2External** テーブルからデータを読み込む **ラウンド ロビン** の **分散** を含む、「**dbo.Dates**」という名前のテーブルを作成する **CTAS** ステートメントを入力します。
+
+    ```SQL
+    CREATE TABLE dbo.Dates
+    WITH
+    (   
+        CLUSTERED COLUMNSTORE INDEX,
+        DISTRIBUTION = ROUND_ROBIN
+    )
+    AS
+    SELECT * FROM [dbo].[DimDate2External];
+    ```
+    >**Note**: スクリプトが**DWDB**に接続され、**DWDB**データベースを使用していることを確認してください。
+
+35.  **Synapse Studio** で **Run** をクリックして、クエリを実行します。
+
+
+36. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** から**DWDB**に移動します。
+
+37. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+38. **New SQL script**を選択し、**empty script**を選択します。
+ 
+39.  **SQL Server Management Studio** のクエリ ウィンドウに、**DateKey**、**Quarter**、**Month** 列の統計を作成するクエリを入力します。
+
+```SQL
+CREATE STATISTICS [DateKey] on [Dates] ([DateKey]);
+CREATE STATISTICS [Quarter] on [Dates] ([Quarter]);
+CREATE STATISTICS [Month] on [Dates] ([Month]);
+```
+
+
+>**Note**: スクリプトが**DWDB**に接続され、**DWDB**データベースを使用していることを確認してください。
+
+40.  **Synapse Studio** で **Run** をクリックして、クエリを実行します。
+
+
+41. Synapse Studio で、画面左側の**Data** をクリックし、**Databases** から**DWDB**に移動します。
+
+42. DWDB**データベースの隣にある省略マーク(...)を選択します。
+
+43. **New SQL script**を選択し、**empty script**を選択します。
+
+44. テーブルに対して select ステートメントを実行して、テーブルが作成されたことをテストします。
+
+
+    ```SQL
+    SELECT * FROM dbo.Dates;
+    ```
+>**Note**: スクリプトが**DWDB**に接続され、**DWDB**データベースを使用していることを確認してください。
+
+
+45.  **Synapse Studio** で **Run** をクリックして、クエリを実行します。
+
+
+
+
+
+
+
+# ---------------------------------------------------
 
 ### タスク 2: Azure BLOB から PolyBase を使用し、dbo.Dates テーブルを作成する
 
@@ -353,7 +578,7 @@ lab:
 
 1. **SQL Server Management Studio** で、両方のステートメントをハイライトし、[**実行**] をクリックします。
 
-1. **SQL Server Management Studio** のクエリ ウィンドウに、**AzureStorageCredential** を使用する **HADOOP** タイプで作成された BLOB ストレージ アカウントとデータ コンテナー用に「**AzureStorage**」という名前の外部データ ソースを作成するコードを入力します。場所キーの **awdlsstudxx** を自分のストレージ アカウントで自分のイニシャルに置き換える必要があります。 
+1. クエリ ウィンドウに、**AzureStorageCredential** を使用する **HADOOP** タイプで作成された BLOB ストレージ アカウントとデータ コンテナー用に「**AzureStorage**」という名前の外部データ ソースを作成するコードを入力します。場所キーの **awdlsstudxx** を自分のストレージ アカウントで自分のイニシャルに置き換える必要があります。 
 
     ```SQL
 	CREATE EXTERNAL DATA SOURCE AzureStorage
@@ -364,7 +589,7 @@ lab:
     );
     ```
 
-1. **SQL Server Management Studio** のクエリ ウィンドウに、formattype が **DelimitedText**、フィールド ターミネータが **コンマ** の「**TextFile**」という名前の外部ファイル形式を作成するコードを入力します。
+1.  クエリ ウィンドウに、formattype が **DelimitedText**、フィールド ターミネータが **コンマ** の「**TextFile**」という名前の外部ファイル形式を作成するコードを入力します。
 
     ```SQL
     CREATE EXTERNAL FILE FORMAT TextFile
