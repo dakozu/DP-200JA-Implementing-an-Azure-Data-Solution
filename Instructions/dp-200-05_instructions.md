@@ -130,7 +130,7 @@
         - **リージョン**：最寄りの地域とリソースグループをデプロイした場所を選択します
         - **Data Lake Storage Gen2 の選択**：「サブスクリプションから」
         - **アカウント名**：**awdlsstudxx** を選択します（**xx** は自分のイニシャル）
-        - **ファイルシステム名**： **データ** を選択します
+        - **ファイルシステム名**： **data** を選択します
         - 「Data Lake Storage Gen 2 アカウント「awdlsstudxx」の Storage BLOB Data Contributor の役割を自分に割り当てる」のチェックボックスをクリックします 
 
         ![Synapse ワークスペースを作成する](Linked_Image_Files/M05-E02-T01-img01a.png) 
@@ -142,14 +142,14 @@
         - **パスワードを確認**: **Pa55w.rd**
         - 他の設定はすべて **規定値** のままにします。 
 
-    - スクリーンで、「**Review + create**」 をクリックします。
+    - スクリーンで、「**確認および作成**」 をクリックします。
     - このブレードで **「作成」** をクリックします。
 
    > **注**: プロビジョニングの所要時間は約 7 分です。
 
 6. プロビジョニングが完了したら、**「リソースに移動」** を選択すると、Azure Synapse Analytics ワークスペースの **概要** ページが開きます。  
 
-7. **新しい専用 SQL プール** を作成する
+7. **新しい専用 SQL プール** を選択する
 
 8. **専用 SQL プールの作成** ブレードの **基本** ページで、次の設定を構成します。
         - 専用 SQL プール名：**dedsqlxx** （**xx** は自分のイニシャル）
@@ -212,93 +212,73 @@
 
 2. **「概要」** セクションで、**「Synapse Studio の起動」** に移動します
 
-3. スクリーン左側の **データ ハブ** をクリックします
+3. スクリーン左側の **管理** をクリックします
 
-4. **dedsqlxx** プールを開きます 
+4. **SQL プール** を選択し、「新規」をクリックします。 
 
-5. **dedsqlxx** プールの横にある Eclipse を選択します。 
+	**基本** タブで以下の値を入力します。
+	
+	Dedicated SQL pool name: DWDB	
+	
+	**確認および作成** をクリックし、**作成**をクリックします。
 
-6. **新しい SQL スクリプト** と **空のスクリプト** を選択します
+5. データベースの作成が完了したら左側のメニューから**データ**に移動し、ワークスペース配下に **DWDB**が作成されていることを確認します。
 
     ![Dedicated SQL Pool New SQL Script](Linked_Image_Files/M05-E03-T01-img01a.png)
 
 
-7. クエリ ウィンドウで、**DWDB** という名前のデータベースを作成する以下のクエリを貼り付け、サービス目標を DW100 に、最大サイズを 1024 GB に設定します。
+### タスク 2: 専用 SQL プール テーブルの作成。
 
-    ```SQL
-    CREATE DATABASE DWDB COLLATE SQL_Latin1_General_CP1_CI_AS
-    (
-        EDITION             = 'DataWarehouse'
-    ,   SERVICE_OBJECTIVE   = 'DW100C'
-    ,   MAXSIZE             = 1024 GB
-    );
-    ```
+1. Synapse Studio で、**「Data」** タブで **「DWDB」** をクリックします。
 
-8. **「データベースの使用」** に移動して **「マスター」** を選択します。 
-
-9. **「実行」** をクリックします 
-
- > **注**: データベースの作成には約 6 分かかります。
-
-10. クエリが終了したら、「更新」 をクリックして、Eclipse を開くときに、**「Databases」** に新しく作成されたデータベースに移動します。
-
-
-### タスク 3: 専用 SQL プール テーブルの作成。
-
-1. Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
-
-2. **DWDB** データベースの横にある Eclipse を選択します。
+2. **DWDB** データベースの横にある Eclipse(...) を選択します。
 
 3. **新しい SQL スクリプト** と **空のスクリプト** を選択します
 
-    > **注**: Transact-SQL に慣れていない場合は、「**Exercise3 Task3Step2 script.sql**」という名前の Allfiles\Solution\DP-200.5\folder にスクリプトがあります。テーブルの作成に必要なコードの大部分が含まれていますが、各テーブルに使用する配分タイプを選択してコードを完成させる必要があります 
+4. 次の列に **replicate** の分散を持つ 「**Clustered columnstore**」 インデックスを有する 「**dbo.Users**」 という名前のテーブルを作成します。
 
-4. 次の列に **replicate** の分散を持つ 「**クラスター化された columnstore**」 インデックスを有する 「**dbo.Users**」 という名前のテーブルを作成します。
-
+    
     | 列名 | データ型 (data type) | NULL 値の許容|
     |-------------|-----------|------------|
-    | userId | int | NULL 値|
-    | 市 | nvarchar(100) | NULL 値|
-    | リージョン | nvarchar(100) | NULL 値|
-    | 国 | nvarchar(100) | NULL 値|
+    | UserId | int | NULL 値|
+    | City | nvarchar(100) | NULL 値|
+    | Region | nvarchar(100) | NULL 値|
+    | Country | nvarchar(100) | NULL 値|
 
-      > **注**: スクリプトが **DWDB** に接続され、データベース **DWDB** を使用していることを確認します。 
+    	> **注**: Transact-SQL に慣れていない場合は、"Allfiles\Solution\DP-200.5\SQL DW Files\Lab 5.3.3. Creating Tables" に 1_Creating Tables.sql スクリプトがあります。テーブルの作成に必要なコードの大部分が含まれていますが、適宜修正してください。
+	
+	> **注**: スクリプトが **DWDB** に接続され、データベース **DWDB** を使用していることを確認します。 
 
+5. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。**dbo.Users** テーブルが作成されたかどうかを確認するには、「更新」 をクリックして **テーブル** を展開すると dbo.Users が表示されるはずです。 
 
-5. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。**dbo.Users** テーブルが作成されたかどうかを確認するには、「更新」 をクリックして **テーブル** に移動し、展開するとテーブルが表示されるはずです。 
-
-6. Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
-
-7. **DWDB** データベースの横にある Eclipse を選択します。
+7. 再度、**DWDB** データベースの横にある Eclipse を選択します。
 
 8. **新しい SQL スクリプト** と **空のスクリプト** を選択します
 
-9. 次の列に **round robin** の分散を持つ 「**クラスター化された columnstore**」 インデックスを有する 「**dbo.Products**」 という名前のテーブルを作成します。
+9. 次の列に **round robin** の分散を持つ 「**Clustered columnstore**」 インデックスを有する 「**dbo.Products**」 という名前のテーブルを作成します。
 
     | 列名 | データ型 (data type) | NULL 値の許容|
     |-------------|-----------|------------|
     | ProductId | int | NULL 値|
     | EnglishProductName | nvarchar(100) | NULL 値|
-    | 色 | nvarchar(100) | NULL 値|
+    | Color | nvarchar(100) | NULL 値|
     | StandardCost | int | NULL 値|
     | ListPrice | int | NULL 値|
-    | サイズ | nvarchar(100) | NULL 値|
-    | 重み | int | NULL 値|
+    | Size | nvarchar(100) | NULL 値|
+    | Weight | int | NULL 値|
     | DaysToManufacture | int | NULL 値|
-    | クラス | nvarchar(100) | NULL 値|
+    | Class | nvarchar(100) | NULL 値|
     | Style | nvarchar(100) | NULL 値|
 
     > **注**: スクリプトが **DWDB** に接続され、データベース **DWDB** を使用していることを確認します。 
 
 10. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。**dbo.Products** テーブルが作成されたかどうかを確認するには、「更新」 をクリックして **テーブル** に移動し、展開するとテーブルが表示されるはずです。 
 
-11. Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
-
-12. **DWDB** データベースの横にある Eclipse を選択します。
+12. 再度 **DWDB** データベースの横にある Eclipse を選択します。
 
 13. **新しい SQL スクリプト** と **空のスクリプト** を選択します
 
-14. 次の列を持つ **SalesUnit** での**ハッシュ**分散を使用して、**クラスター化列ストア** インデックスを有する **dbo.FactSales** という名前のテーブルを作成します。
+14. 次の列を持つ **SalesUnit** での**Hash**分散を使用して、**clustered columnstore** インデックスを有する **dbo.FactSales** という名前のテーブルを作成します。
 
     | 列名 | データ型 (data type) | NULL 値の許容|
     |-------------|-----------|------------|
@@ -332,7 +312,7 @@
 
 2. 「**awdlsstudxx**」 画面で、「**アクセス キー**」 をクリックします。「**ストレージ アカウント名**」 の横にあるアイコンをクリックし、メモ帳に貼り付けます。
 
-3. 「**awsastudxx - アクセス キー**」 画面の 「**key1**」 で、「**キー**」 の横にあるアイコンをクリックし、メモ帳に貼り付けます。
+3. 「**awsastudxx - アクセス キー**」 画面で、**キーの表示** をクリックし、「**key1**」 で、「**キー**」 の横にあるアイコンをクリックしてコピーしたらメモ帳に貼り付けます。
 
 ### タスク 2: Azure BLOB から PolyBase を使用し、dbo.Dates テーブルを作成する
 
@@ -351,15 +331,13 @@
 
 5. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
 
-6. Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
-
-7. **DWDB** データベースの横にある Eclipse を選択します。
+7. 再度 **DWDB** データベースの横にある Eclipse を選択します。
 
 8. **新しい SQL スクリプト** と **空のスクリプト** を選択します
 
 9. 次のコードをクエリ エディターに入力して、次の詳細を含む、「**AzureStorageCredential**」 という名前のデータベース スコープの資格情報を作成します。
-    - ID: **MOCID**
-    - シークレット: **ストレージ アカウントのアクセス キー**
+    - IDENTITY: **MOCID**
+    - SECRET: **ストレージ アカウントのアクセス キー**
 
     ```SQL
     CREATE DATABASE SCOPED CREDENTIAL AzureStorageCredential
@@ -372,9 +350,7 @@
 
 10. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
 
-11. Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
-
-12. **DWDB** データベースの横にある Eclipse を選択します。
+11. 再度 **DWDB** データベースの横にある Eclipse を選択します。
 
 13. **新しい SQL スクリプト** と **空のスクリプト** を選択します
 
@@ -411,13 +387,28 @@
 
 20. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
 
-21. .Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
-
 22. **DWDB** データベースの横にある Eclipse を選択します。
 
 23. **新しい SQL スクリプト** と **空のスクリプト** を選択します   
 
-24. 「クエリ」 ウィンドウに、**場所** がルート ファイル、データ ソースが **AzureStorage**、File-format が **TextFile** で次の列を有する **dbo.DimDate2External** という名前の外部テーブルを作成するコードを入力します。
+24. クエリウィンドウで、以下のコードを入力し、TextFile というファイルフォーマットを作成します。これは、カンマ区切りのフォーマットを定義しています。
+
+    ```SQL
+	CREATE EXTERNAL FILE FORMAT TextFile
+	WITH (
+	    FORMAT_TYPE = DelimitedText,
+	    FORMAT_OPTIONS (FIELD_TERMINATOR = ',')
+	);
+    ```
+    > **注**: スクリプトが **DWDB** に接続され、データベース **DWDB** を使用していることを確認します。 
+
+25. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
+
+26. **DWDB** データベースの横にある Eclipse を選択します。
+
+27. **新しい SQL スクリプト** と **空のスクリプト** を選択します   
+
+28. 「クエリ」 ウィンドウに、**Location** がルート ファイル、データ ソースが **AzureStorage**、File-format が **TextFile** で次の列を有する **dbo.DimDate2External** という名前の外部テーブルを作成するコードを入力します。
 
     | 列名 | データ型 (data type) | NULL 値の許容|
     |-------------|-----------|------------|
@@ -457,26 +448,20 @@
     ```
     > **注**: スクリプトが **DWDB** に接続され、データベース **DWDB** を使用していることを確認します。 
 
+29. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
 
-25. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
+30. **DWDB** データベースの横にある Eclipse を選択します。
 
-26. Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
+31. **新しい SQL スクリプト** と **空のスクリプト** を選択します  
 
-27. **DWDB** データベースの横にある Eclipse を選択します。
-
-28. **新しい SQL スクリプト** と **空のスクリプト** を選択します  
-
-29. テーブルに対して select ステートメントを実行して、テーブルが作成されたことをテストします。
+32. テーブルに対して select ステートメントを実行して、テーブルが作成されたことをテストします。
 
     ```SQL
     SELECT * FROM dbo.DimDate2External;
     ```
 > **注**: スクリプトが **DWDB** に接続され、データベース **DWDB** を使用していることを確認します。 
 
-
-30. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
-
-31. Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
+31. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
 
 32. **DWDB** データベースの横にある Eclipse を選択します。
 
@@ -498,13 +483,11 @@
 
 35. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
 
-36. Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
+36. **DWDB** データベースの横にある Eclipse を選択します。
 
-37. **DWDB** データベースの横にある Eclipse を選択します。
-
-38. **新しい SQL スクリプト** と **空のスクリプト** を選択します  
+37. **新しい SQL スクリプト** と **空のスクリプト** を選択します  
  
-39. 「クエリ」 ウィンドウに、**DateKey**、**Quarter**、**Month** 列の統計を作成するクエリを入力します。
+38. 「クエリ」 ウィンドウに、**DateKey**、**Quarter**、**Month** 列の統計を作成するクエリを入力します。
 
     ```SQL
     CREATE STATISTICS [DateKey] on [Dates] ([DateKey]);
@@ -515,11 +498,9 @@
 
 40. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
 
-41. Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
+41. **DWDB** データベースの横にある Eclipse を選択します。
 
-42. **DWDB** データベースの横にある Eclipse を選択します。
-
-43. **新しい SQL スクリプト** と **空のスクリプト** を選択します
+42. **新しい SQL スクリプト** と **空のスクリプト** を選択します
 
 44. テーブルに対して select ステートメントを実行して、テーブルが作成されたことをテストします
 
