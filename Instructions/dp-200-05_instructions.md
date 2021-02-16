@@ -343,8 +343,7 @@
     CREATE DATABASE SCOPED CREDENTIAL AzureStorageCredential
     WITH
     IDENTITY = 'MOCID',
-    SECRET = 'Your storage account key'
-;
+    SECRET = 'Your storage account key';
     ```
     > **注**: スクリプトが **DWDB** に接続され、データベース **DWDB** を使用していることを確認します。 
 
@@ -368,11 +367,9 @@
 
 15. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
 
-16. Synapse Studio で、**「Data hub」** タブで Eclipse を開くときに、**「Databases」** にある新しく作成されたデータベースに移動します。**「DWDB」** をクリックします。
+16. **DWDB** データベースの横にある Eclipse を選択します。
 
-17. **DWDB** データベースの横にある Eclipse を選択します。
-
-18. **新しい SQL スクリプト** と **空のスクリプト** を選択します
+17. **新しい SQL スクリプト** と **空のスクリプト** を選択します
 
 19. 「クエリ」 ウィンドウに、formattype が **DelimitedText**、フィールド ターミネータが **コンマ**の **TextFile** という名前の外部ファイル形式を作成するコードを入力します。
 
@@ -388,23 +385,6 @@
 20. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
 
 22. **DWDB** データベースの横にある Eclipse を選択します。
-
-23. **新しい SQL スクリプト** と **空のスクリプト** を選択します   
-
-24. クエリウィンドウで、以下のコードを入力し、TextFile というファイルフォーマットを作成します。これは、カンマ区切りのフォーマットを定義しています。
-
-    ```SQL
-	CREATE EXTERNAL FILE FORMAT TextFile
-	WITH (
-	    FORMAT_TYPE = DelimitedText,
-	    FORMAT_OPTIONS (FIELD_TERMINATOR = ',')
-	);
-    ```
-    > **注**: スクリプトが **DWDB** に接続され、データベース **DWDB** を使用していることを確認します。 
-
-25. **Synapse Studio** で、**「実行」** をクリックすると、クエリが実行されます。
-
-26. **DWDB** データベースの横にある Eclipse を選択します。
 
 27. **新しい SQL スクリプト** と **空のスクリプト** を選択します   
 
