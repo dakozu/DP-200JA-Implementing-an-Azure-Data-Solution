@@ -268,6 +268,7 @@
     - **サブスクリプション**： お使いのサブスクリプション名
     - **ストレージ アカウント**: **awsastudxx** (xx は自分のイニシャル)
     - **コンテナー**: 「**既存のものを使用**」で、**phonecalls** 選択します
+    - **認証モード**: **接続文字列**
     - 他のエントリは既定値のままにします。最後に、「**保存**」 をクリックします。
 
         ![Azure portal でのStream Analytics Job のジョブ出力の作成](Linked_Image_Files/M06-E04-T03-img01.png)
@@ -276,11 +277,9 @@
 
 ### タスク 4: Stream Analytics クエリを定義します。
 
-1. **phoneanalysis-asa-job** をクリックします。
+1. **phoneanalysis-asa-job** ウィンドウで、ウィンドウ中央の **クエリ** 画面で **クエリの編集** をクリックします。
 
-2. **phoneanalysis-asa-job** ウィンドウで、ウィンドウ中央の **クエリ** 画面で **クエリの編集** をクリックします。
-
-3. コード エディタで次のクエリを置き換えます。
+1. コード エディタで次のクエリを置き換えます。
 
     ```SQL
     SELECT
@@ -291,7 +290,7 @@
         [YourInputAlias]
     ```
 
-4. 置換後の文字列
+1. 置換後の文字列
 
     ```SQL
     SELECT System.Timestamp AS WindowEnd, COUNT(*) AS FraudulentCalls
@@ -316,7 +315,7 @@
 
 ### タスク 5: Stream Analytics ジョブの開始
 
-1. **phoneanalysis-asa-job** ウィンドウで、**開始** をクリックします。
+1. **phoneanalysis-asa-job** の **概要** ウィンドウで、**開始** をクリックします。
  
 2. **ジョブの開始** ダイアログで、**現在** をクリックし、「**開始**」 をクリックします。 
 
