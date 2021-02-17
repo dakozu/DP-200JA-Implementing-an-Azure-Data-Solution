@@ -208,7 +208,7 @@ Data Factory の作成[Azure  portal](https://portal.azure.com) を使用して 
 
     ![Azure Data Factory でのマッピング データ フローの追加](Linked_Image_Files/M07-E03-T01-img01.png)
 
-3. **設定** タブで、変数 **Dataflow** の **「+ 新規」** をクリックします。
+3. **設定** タブで、変数 **データ フロー** の **「+ 新規」** をクリックします。
 
 ### タスク 2: データ ソースの追加
 
@@ -224,7 +224,9 @@ Data Factory の作成[Azure  portal](https://portal.azure.com) を使用して 
   
 ### タスク 3: マッピング データ フロー変換の使用
 
-1. **列を変更および削除するために Select 変換を追加する** データのプレビューで、「Rotton Tomato」 列のスペルが間違っていることに気が付いたはずです（正しくは Rotten Tomatoes」）。この名前を正しく指定したり、「Rating」列を削除したいときは、ADLS ソース ノード **Source1** の横にある 「+」 アイコンをクリックして、「スキーマ装飾子」 の下の 「選択(Select)」 を選択すると、[Select 変換](https://docs.microsoft.com/azure/data-factory/data-flow-select) を追加できます。
+1. **列を変更および削除するために Select 変換を追加する** 
+
+データのプレビューで、「Rotton Tomato」 列のスペルが間違っていることに気が付いたはずです（正しくは Rotten Tomatoes」）。この名前を正しく指定したり、「Rating」列を削除したいときは、ADLS ソース ノード **Source1** の横にある 「+」 アイコンをクリックして、「スキーマ装飾子」 の下の 「選択(Select)」 を選択すると、[Select 変換](https://docs.microsoft.com/azure/data-factory/data-flow-select) を追加できます。
     
     ![Azure Data Factory でマッピング データ フローの変換を追加する](Linked_Image_Files/M07-E03-T03-img01.png)
 
