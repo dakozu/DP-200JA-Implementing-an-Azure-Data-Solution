@@ -153,7 +153,13 @@ Data Factory の作成[Azure  portal](https://portal.azure.com) を使用して 
 
 6. 「**作成**」 をクリックします
 
-7. リンクされたサービスを構成したら、「**プロパティの設定**」 ブレードを入力します。このデータセットに書き込む際には、moviesDB.csv のコピー先フォルダーを指定します。次の例では、ファイル システム 「**data**」の「**output**」フォルダに書き込みます。フォルダーは動的に作成されますが、ファイル システムは、書き込む前に存在していなければなりません。**最初の行をヘッダーとする**をチェックします。**スキーマのインポート** で **サンプルファイルから** を選択し、**Labfiles\Starter\DP-200.7\SampleFiles**から **moviesDB.csv** ファイルをインポートします。  
+7. **プロパティの設定** 画面で、リンクサービスとして先ほど作成したリンクが表示されていることを確認します。
+
+8. **ファイルパス** で、moviesDB.csv のコピー先フォルダーを指定します。次の例では、ファイル システム 「**data**」の「**output**」フォルダに書き込みます。フォルダーは動的に作成されますが、ファイル システムは、書き込む前に存在していなければなりません。
+
+9. **先頭行をヘッダーとして**をチェックします。
+
+10. **スキーマのインポート** で **サンプルファイルから** を選択し、**Labfiles\Starter\DP-200.7\SampleFiles**から **moviesDB.csv** ファイルをインポートします。  
 
    ![Azure portal における Azure Data Factory のシンクのプロパティの設定](Linked_Image_Files/M07-E02-T03-img02.png)
 
@@ -202,7 +208,7 @@ Data Factory の作成[Azure  portal](https://portal.azure.com) を使用して 
 
     ![Azure Data Factory でのマッピング データ フローの追加](Linked_Image_Files/M07-E03-T01-img01.png)
 
-3. **設定** タブで、変数 **Dataflow** の **「+ 新規」** をクリックします。
+3. **設定** タブで、変数 **データ フロー** の **「+ 新規」** をクリックします。
 
 ### タスク 2: データ ソースの追加
 
@@ -218,7 +224,9 @@ Data Factory の作成[Azure  portal](https://portal.azure.com) を使用して 
   
 ### タスク 3: マッピング データ フロー変換の使用
 
-1. **列を変更および削除するために Select 変換を追加する** データのプレビューで、「Rotton Tomato」 列のスペルが間違っていることに気が付いたはずです（正しくは Rotten Tomatoes」）。この名前を正しく指定したり、「Rating」列を削除したいときは、ADLS ソース ノード **Source1** の横にある 「+」 アイコンをクリックして、「スキーマ装飾子」 の下の 「選択(Select)」 を選択すると、[Select 変換](https://docs.microsoft.com/azure/data-factory/data-flow-select) を追加できます。
+1. **列を変更および削除するために Select 変換を追加する** 
+
+データのプレビューで、「Rotton Tomato」 列のスペルが間違っていることに気が付いたはずです（正しくは Rotten Tomatoes」）。この名前を正しく指定したり、「Rating」列を削除したいときは、ADLS ソース ノード **Source1** の横にある 「+」 アイコンをクリックして、「スキーマ装飾子」 の下の 「選択(Select)」 を選択すると、[Select 変換](https://docs.microsoft.com/azure/data-factory/data-flow-select) を追加できます。
     
     ![Azure Data Factory でマッピング データ フローの変換を追加する](Linked_Image_Files/M07-E03-T03-img01.png)
 
