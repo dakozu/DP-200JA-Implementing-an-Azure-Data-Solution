@@ -37,7 +37,7 @@
 
 ## 演習 1: Azure Databricks について説明する
 
->**重要**: **最初に演習 2 **を実行し、演習 2 で Databricks クラスターの作成を開始した後に演習 1 に戻ります (プロビジョニングに10 分間かかるため)。
+>**重要**: **最初に演習 2** を実行し、演習 2 で Databricks クラスターの作成を開始した後に演習 1 に戻ります (プロビジョニングに10 分間かかるため)。
 
 推定時間: 15 分
 
@@ -110,7 +110,7 @@
 
 2. Azure portal で 「**リソース グループ**」 画面に移動します。
 
-3. 「リソース グループ」 画面で、「****awrgstudxx**」 リソース グループ (**xx** は自分のイニシャル) をクリックします。
+3. 「リソース グループ」 画面で、「**awrgstudxx**」 リソース グループ (**xx** は自分のイニシャル) をクリックします。
 
 4. 「**awrgstudxx**」 画面で、「**awdbwsstudxx**」 (**xx** は自分のイニシャル) をクリックして、Azure Databricks を開きます。これで、Azure Databricks サービスが開きます。
 
@@ -270,7 +270,7 @@
 
     ![Azure Databricks でノートブックで cvode を実行する](Linked_Image_Files/M03-E03-T04-img02.png)
 
-    >**注 **"Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" というメッセージがセルの下部に表示されます。
+    >**注** "Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" というメッセージがセルの下部に表示されます。
 
 ### タスク 5: Azure Databricks でデータを読み取る
 
@@ -306,7 +306,7 @@
 
 7. ノートブックの **Cmd 3** の下のセルで、「**実行**」 アイコンをクリックし、「**セルの実行**」 をクリックします。
 
-    >**注 **Spark ジョブが実行されたことを示すメッセージがセルの下部に表示され、結果テーブルが返され、"Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" と表示されます。
+    >**注** Spark ジョブが実行されたことを示すメッセージがセルの下部に表示され、結果テーブルが返され、"Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" と表示されます。
 
 8. Azure Databricks ノートブックを開いたままにします。
 
@@ -343,7 +343,7 @@
 
 3. ノートブックの **Cmd 4** の下のセルで、「**実行**」 アイコンをクリックし、「**セルの実行**」 をクリックします。 
 
-    >**注 **Spark ジョブが実行されたことを示すメッセージがセルの下部に表示され、結果テーブルが返され、"Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" と表示されます。
+    >**注** Spark ジョブが実行されたことを示すメッセージがセルの下部に表示され、結果テーブルが返され、"Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" と表示されます。
 
     ![Azure Databricks のノートブックでのスカラ クエリの実行](Linked_Image_Files/M03-E04-T01-img01.png)
 
@@ -362,7 +362,7 @@
 
 3. ノートブックの **Cmd 5** の下のセルで、「**実行**」 アイコンをクリックし、「**セルの実行**」 をクリックします。 
 
-    >**注 **Spark ジョブが実行されたことを示すメッセージがセルの下部に表示され、結果テーブルが返され、"Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" と表示されます。
+    >**注** Spark ジョブが実行されたことを示すメッセージがセルの下部に表示され、結果テーブルが返され、"Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" と表示されます。
 
     ![Azure Databricks のノートブックのクエリの列の名前を変更する](Linked_Image_Files/M03-E04-T02-img01.png)
 
