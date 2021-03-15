@@ -87,7 +87,7 @@
 
 5. 「**Azure Databricks サービス**」 ブレードから、次の設定を使用してAzure Databricks ワークスペースを作成します。
 
-    - **ワークスペース名**: **Warehousexx** (**xx** は自分のイニシャル)。
+    - **ワークスペース名**: **awdbwsstudxx** (**xx** は自分のイニシャル)。
 
     - **サブスクリプション**: このラボで使用するサブスクリプションの名前
 
@@ -122,25 +122,25 @@
 
     > **注**: Microsoft Edge の別のタブで、Azure Databricks ワークスペースにサインインします。
 
-2. 「**一般的なタスク**」 で、「**新規クラスター**」 をクリック します。
+2. 「**Common Tasks**」 で、「**New Cluster**」 をクリック します。
 
-3. 「**クラスターの作成**」 画面の 「新規クラスター」 で、次の設定を使って Databricks クラスターを作成し、「**クラスターの作成**」 をクリックします。
+3. 「**Create Cluster**」 画面の 「New Cluster」 で、次の設定を使って Databricks クラスターを作成し、「**Create Cluster**」 をクリックします。
 
-    - **クラスター名**: **awdbclstudxx** (**xx** は自分のイニシャル)。
+    - **Cluster Name**: **awdbclstudxx** (**xx** は自分のイニシャル)。
 
-    - **クラスター モード**: **Standard**
+    - **Cluster Mode**: **Standard**
 
-    - **プール**: **None**
+    - **Pool**: **None**
 
-    - **Databricks ランタイムのバージョン**: **ランタイム: 7.4 (Scala 2.12、Spark 3.0.1)**
+    - **Databricks Runtime Version**: **ランタイム: 7.4 (Scala 2.12、Spark 3.0.1)**
     
     - **Python バージョン**: **2**
 
-    - 「**アクティビティが 60 分間ない場合は終了する**」 チェック ボックスをオンにします。クラスターが使われていない場合は、クラスターを終了するまでの時間 (分単位) を指定します。
+    - 「**Terminate after 60 minutes of inactivity**」 チェック ボックスをオンにします。クラスターが使われていない場合は、クラスターを終了するまでの時間 (分単位) を指定します。
 
-    - **最少作業者数**: **1**
+    - **Min Workers**: **1**
 
-    - **最多作業者数**: **2**
+    - **Max Workers**: **2**
 
     - 残りのオプションはすべて現在の設定のままにしておきます。
 
@@ -172,11 +172,11 @@
 
 ### タスク 1: Databricks クラスターの作成を確認する
 
-1. Microsoft Edge に戻り、「**インタラクティブ クラスター**」 で **awdbclstudxx** という名前のクラスター (**xx** は自分のイニシャル) の 「状態」 が 「**実行中**」 になっていることを確認します。
+1. Microsoft Edge に戻り、「**Clusters**」 で **awdbclstudxx** という名前のクラスター (**xx** は自分のイニシャル) の 「state」 が 「**Running**」 になっていることを確認します。
 
-### タスク 2: Azure Data Lake Store Gen II アカウント名を収集する
+### タスク 2: Azure Data Lake Store Gen II アカウント名を確認する
 
-1. Microsoft Edge で 「Azure portal」 タブ、「**リソース グループ**」、**awrgstudxx** の順にクリックし、**awdlsstudxx** をクリックします。**xx** は自分のイニシャルです。
+1. Microsoft Edge で 「Azure portal」 タブ、「**リソース グループ**」、**awrgstudxx** の順にクリックし、**awdlsstudxx** をクリックします。(**xx** は自分のイニシャルです)
 
 2. 「**awdlsstudxx**」 画面で 「**アクセス キー**」 をクリックし、「**ストレージアカウント名**」 の横にあるコピー アイコンをクリックして、メモ帳に貼り付けます。
 
@@ -186,11 +186,11 @@
 
 1. Azure portal で、「**ホーム**」 ハイパーリンクをクリックし、「**Azure Active Directory**」 アイコンをクリックします。
 
-2. 「**Microsoft - 概要**」 画面で、「**アプリの登録**」 をクリックします。
+2. 「**概要**」 画面で、「**アプリの登録**」 をクリックします。
 
-3. 「**Microsoft - アプリの登録**」 画面で、「**+ 新規アプリの登録**」 ボタンをクリックします。
+3. 「**アプリの登録**」 画面で、「**+ 新規登録**」 ボタンをクリックします。
 
-4. アプリケーションの登録画面で、**DLAccess** の **名前** を入力し、「**リダイレクトURI (オプション)**」 セクションで、「**Web**」 が選択されていることを確認し、アプリケーションの値に **http://localhost** を入力します。
+4. アプリケーションの登録画面で、**名前** に **DLAccess** と入力し、「**リダイレクトURI (オプション)**」 セクションで、「**Web**」 が選択されていることを確認し、アプリケーションの値に **http://localhost** を入力します。
 
     ![Azure portal でアプリを登録します。](Linked_Image_Files/M03-E03-T03-img01.png)
 
@@ -200,11 +200,11 @@
 
 7. 「**DLAccess**」 登録アプリ画面で、「**証明書とシークレット**」 をクリックして、「**+ 新しいクライアント シークレット**」 をクリックします。
 
-8. 「クライアント シークレットの追加」 画面で、「**DL アクセス キー**」 の 「**説明**」 を入力し、キーの 「**期間**」 を 「**1 年間**」 に指定します。完了したら、「**追加**」 をクリックします。
+8. 「クライアント シークレットの追加」 画面で、「**説明**」 を「**DL アクセス キー**」 と入力し、キーの 「**期間**」 を 「**1 年間**」 に指定します。完了したら、「**追加**」 をクリックします。
 
     ![Azure portal でのクライアント シークレットの追加しています](Linked_Image_Files/M03-E03-T03-img02.png)
 
-    >**重要**: 「**追加**」 をクリックすると、キーは下の図のように表示されます。このキー値をノートパッドにコピーできるのは 1 度だけです。
+    >**重要**: 「**追加**」 をクリックすると、キーは下の図のように表示されます。このキー値をコピーできるのは 1 度だけです。
 
     ![DL アクセス キーの場所](Linked_Image_Files/M03-E03-T03-img03.png)
 
@@ -240,13 +240,13 @@
 
     > **注**: クラスター ページが表示されます。
 
-2. Microsoft Edge の左側にある 「Azure Databricks」 ブレードで、「**ワークスペース**」 の下をクリックし、**ワークスペース**の横にあるドロップダウンをクリックし、「**作成**」 をクリックして 「**Notebook**」 をクリックします。
+2. Microsoft Edge の左側にある 「Azure Databricks」 ブレードで、「**Workspace**」 をクリックし、**Workspace**の横にあるドロップダウンをクリックし、「**Create**」 をクリックして 「**Notebook**」 をクリックします。
 
-3. 「**Notebook の作成**」 画面で、「名前」 の横に 「**My Notebook**」 を入力します。
+3. 「**Create Notebook**」 画面で、「Name」 に 「**My Notebook**」 を入力します。
 
-4. 「**言語**」 ドロップダウン リストの横にある 「**Scala**」 を選択します。
+4. 「**Default Language**」 ドロップダウン リストで 「**Scala**」 を選択します。
 
-5. 以前に作成したクラスターの名前がクラスターに表示されていることを確認し、「**作成**」 をクリックします。
+5. 以前に作成したクラスターの名前がクラスターに表示されていることを確認し、「**Create**」 をクリックします。
 
     ![Azure Databricks でのノートブックの作成](Linked_Image_Files/M03-E03-T04-img01.png)
 
@@ -260,21 +260,21 @@
     spark.conf.set("fs.azure.account.auth.type", "OAuth")
     spark.conf.set("fs.azure.account.oauth.provider.type", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
     spark.conf.set("fs.azure.account.oauth2.client.id.<storage-account-name>.dfs.core.windows.net", "<application-id>")
-    spark.conf.set("fs.azure.account.oauth2.client.secret.<storage-account-name>.dfs.core.windows.net", "<authentication-key>")
+    spark.conf.set("fs.azure.account.oauth2.client.secret.<storage-account-name>.dfs.core.windows.net", "<application-key>")
     spark.conf.set("fs.azure.account.oauth2.client.endpoint.<storage-account-name>.dfs.core.windows.net", "https://login.microsoftonline.com/<tenant-id>/oauth2/token")
     ```
 
-7. このコード ブロックでは、コード ブロック内の**application-id**、**authentication-id**、**tenant-id**、**file-system-name** および **storage-account-name** のプレースホルダー値を、以前に収集した値で置き換えます。これらの値は メモ帳 に保持されます。
+7. このコード ブロックでは、コード ブロック内の**application-id**、**application-id**、**tenant-id**、および **storage-account-name** のプレースホルダー値を、以前に収集した値で置き換えます。これらの値は メモ帳 に保持されます。
 
-8. ノートブックの **Cmd 1** の下のセルで 「**実行**」 アイコンをクリックし、次の図でハイライトされているように 「**セルの実行**」 をクリックします。 
+8. ノートブックの **Cmd 1** の下のセルで 「**Run**」 アイコンをクリックし、次の図でハイライトされているように 「**Run Cell**」 をクリックします。 
 
     ![Azure Databricks でノートブックで cvode を実行する](Linked_Image_Files/M03-E03-T04-img02.png)
 
-    >**注** "Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" というメッセージがセルの下部に表示されます。
+    >**注** "Command took 0.0X seconds -- by XXXXX at 4/4/2019, 2:46:48 PM on awdbclstudxx" というメッセージがセルの下部に表示されます。
 
 ### タスク 5: Azure Databricks でデータを読み取る
 
-1. ノートブックの **Cmd 1** セルの右上にマウスを移動し、「**+**」 アイコンをクリックします。**Cmd2** という名前の新しいセルが表示されます。
+1. ノートブックの **Cmd 1** セルの右上にマウスを移動し、「**▽**」 アイコンをクリックし **Add Cell Below** をクリックします。**Cmd2** という名前の新しいセルが表示されます。
 
     ![Azure Databricks のノートブックでのセルの追加](Linked_Image_Files/M03-E03-T04-img03.png)
 
@@ -288,11 +288,11 @@
 
 3. このコード ブロックでは、**file-system-name** を **logs** という単語で、またこのコード ブロック内の **storage-account-name** プレースホルダー値を以前に収集した値で置き換え、メモ帳 に保持します。
 
-4. ノートブックの **Cmd 2** の下のセルで、「**実行**」 アイコンをクリックし、「**セルの実行**」 をクリックします。 
+4. ノートブックの **Cmd 2** の下のセルで、「**Run**」 アイコンをクリックし、「**Run Cell**」 をクリックします。 
 
-    >**注** Spark ジョブが実行されたこと、および「Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx」を示すメッセージが、セルの下部に戻ります。
+    >**注** Spark ジョブが実行されたこと、および「Command took 0.0X seconds -- by XXXXX at 4/4/2019, 2:46:48 PM on awdbclstudxx」を示すメッセージが、セルの下部に表示されます。
 
-5. ノートブックの **Cmd 2** セルの右上にマウスを移動し、「**+**」 アイコンをクリックします。**Cmd3** という名前の新しいセルが表示されます。
+5. ノートブックの **Cmd 2** セルの右上にマウスを移動し、「**▽**」 アイコンをクリックし **Add Cell Below** をクリックします。**Cmd3** という名前の新しいセルが表示されます。
 
 6. ノートブックのセル **Cmd 3** で、次のコードをコピーし、セルに貼り付けます。
 
@@ -302,12 +302,12 @@
     df.show()
     ```
 
-    ![Azure Databricks での Notebook の結果の実行](Linked_Image_Files/M03-E03-T04-img04.png)
 
-7. ノートブックの **Cmd 3** の下のセルで、「**実行**」 アイコンをクリックし、「**セルの実行**」 をクリックします。
+
+7. ノートブックの **Cmd 3** の下のセルで、「**Run**」 アイコンをクリックし、「**Run Cell**」 をクリックします。
 
     >**注** Spark ジョブが実行されたことを示すメッセージがセルの下部に表示され、結果テーブルが返され、"Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" と表示されます。
-
+    ![Azure Databricks での Notebook の結果の実行](Linked_Image_Files/M03-E03-T04-img04.png)
 8. Azure Databricks ノートブックを開いたままにします。
 
 >**結果** この演習では、Azure Databricks が Azure Data Lake Store Gen2 のデータにアクセスするためのアクセス許可を設定する上で必要なステップを実行しました。次に、scala を使用して Data Lake Store に接続し、データを読み取り、ユーザーの好みを示すテーブル出力を作成しました。
@@ -330,7 +330,7 @@
 
 ### タスク 1: データセットの特定の列を取得する
 
-1. ノートブックの **Cmd 3** セルの右上にマウスを移動し、「**+**」 アイコンをクリックします。**Cmd4** という名前の新しいセルが表示されます。
+1. ノートブックの **Cmd 3** セルの右上にマウスを移動し、「**▽**」 アイコンをクリックし **Add Cell Below** をクリックします。**Cmd4** という名前の新しいセルが表示されます。
 
 2. ノートブックのセル **Cmd 4** で、次のコードをコピーし、セルに貼り付けます。
 
@@ -341,15 +341,15 @@
     specificColumnsDf.show()
     ```
 
-3. ノートブックの **Cmd 4** の下のセルで、「**実行**」 アイコンをクリックし、「**セルの実行**」 をクリックします。 
+3. ノートブックの **Cmd 4** の下のセルで、「**Run**」 アイコンをクリックし、「**Run Cell**」 をクリックします。 
 
-    >**注** Spark ジョブが実行されたことを示すメッセージがセルの下部に表示され、結果テーブルが返され、"Command took 0.0X seconds -- by person at 4/4/2019, 2:46:48 PM on awdbclstudxx" と表示されます。
+    >**注** Spark ジョブが実行されたことを示すメッセージがセルの下部に表示され、結果テーブルが返され、"Command took 0.0X seconds -- by XXXXX at 4/4/2019, 2:46:48 PM on awdbclstudxx" と表示されます。
 
     ![Azure Databricks のノートブックでのスカラ クエリの実行](Linked_Image_Files/M03-E04-T01-img01.png)
 
 ### タスク 2: データセットで列の名前の変更を実行する
 
-1. ノートブックの **Cmd 4** セルの右上にマウスを移動し、「**+**」 アイコンをクリックします。**Cmd5** という名前の新しいセルが表示されます。
+1. ノートブックの **Cmd 4** セルの右上にマウスを移動し、「**▽**」 アイコンをクリックし **Add Cell Below** をクリックします。**Cmd5** という名前の新しいセルが表示されます。
 
 2. ノートブックのセル **Cmd 5** で、次のコードをコピーし、セルに貼り付けます。
 
@@ -368,15 +368,15 @@
 
 ### タスク 3: コメントを追加する
 
-1. ノートブックの **Cmd 5** セルの右上にマウスを移動し、「**+**」 アイコンをクリックします。**Cmd6** という名前の新しいセルが表示されます。
+1. ノートブックの **Cmd 5** セルの右上にマウスを移動し、「**▽**」 アイコンをクリックし **Add Cell Below** をクリックします。**Cmd6** という名前の新しいセルが表示されます。
 
 2. ノートブックのセル **Cmd 6** で、次のコードをコピーし、セルに貼り付けます。
 
     ```text
-    このコードは、「Data」という名前の Data Lake Storage ファイルシステムに接続し、その Data Lake に保存されている preference.json ファイルのデータを読み取ります。次に、データを取得する為の簡単なクエリが作成され、「ページ」列の名前が「bike_preference」に変更された。
+    このコードは、「Data」という名前の Data Lake Storage ファイルシステムに接続し、その Data Lake に保存されている preference.json ファイルのデータを読み取ります。次に、データを取得する為の簡単なクエリが作成され、「ページ」列の名前が「bike_preference」に変更します。
     ```
 
-3. ノートブックの **Cmd 6** の下のセルで、**下向きの矢印** アイコンをクリックし、「**上へ移動**」 をクリックします。セルがノートブックの上部に表示されるまで繰り返します。
+3. ノートブックの **Cmd 6** の下のセルで、「**▽**」 アイコンをクリックし、「**Move Up**」 をクリックします。セルがノートブックの上部に表示されるまで繰り返します。
 
 4. Azure Databricks ノートブックを開いたままにします。
 
@@ -392,17 +392,17 @@ URL にアクセスできない場合は、_Allfiles\Labfiles\Starter\DP-200.3\P
 
 **基本的な変換**
 
-1. ワークスペース内で、左側のコマンド バーを使用して、「**ワークスペース**」、「**ユーザー**」 を選択し、「**ユーザー名**」 (家のアイコンのエントリ) を選択します。
+1. ワークスペース内で、左側のコマンド バーを使用して、「**Workspace**」、「**Users**」 を選択し、「**ユーザー名**」 (家のアイコンのエントリ) を選択します。
 
-2. ブレードが表示されるので、**名前の横にある下向きのシェブロン**を選択し、「**インポート**」 を選択します。
+2. ブレードが表示されるので、**名前の横にある下向きのシェブロン**を選択し、「**Import**」 を選択します。
 
-3. 「ノートブックのインポート」 ダイアログ ボックスで、「**下の URL**」 を選択し、次の URL に貼り付けます。 
+3. 「Import Notebooks」 ダイアログ ボックスで、「**URL**」 を選択し、次の URL に貼り付けます。 
 
 ```url
     https://github.com/MicrosoftDocs/mslearn-perform-basic-data-transformation-in-azure-databricks/blob/master/DBC/05.1-Basic-ETL.dbc?raw=true
 ```
 
-4. 「**インポート**」 を選択します。
+4. 「**Import**」 を選択します。
 
 5. インポート後に **05.1-Basic-ETL** という名前のフォルダーが表示されます。そのフォルダーを選択します。
 
@@ -423,17 +423,17 @@ URL にアクセスできない場合は、_Allfiles\Labfiles\Starter\DP-200.3\P
 
 **詳細な変換**
 
-1. ワークスペース内で、左側のコマンド バーを使用して、「**ワークスペース**」、「**ユーザー**」 を選択し、「**ユーザー名**」 (家のアイコンのエントリ) を選択します。
+1. ワークスペース内で、左側のコマンド バーを使用して、「**Workspace**」、「**Users**」 を選択し、「**ユーザー名**」 (家のアイコンのエントリ) を選択します。
 
-2. ブレードが表示されるので、**自分の名前の横にある下向きの山型の記号**を選択し、「**インポート**」 を選択します。
+2. ブレードが表示されるので、**名前の横にある下向きのシェブロン**を選択し、「**Import**」 を選択します。
 
-3. 「ノートブックのインポート」 ダイアログ ボックスで 「**下の URL**」 を選択し、次の URL に貼り付けます。 
+3. 「ノートブックのインポート」 ダイアログ ボックスで 「**URL**」 を選択し、次の URL に貼り付けます。 
 
 ```url
     https://github.com/MicrosoftDocs/mslearn-perform-advanced-data-transformation-in-azure-databricks/blob/master/DBC/05.2-Advanced-ETL.dbc?raw=true
 ```
 
-4. 「**インポート**」 を選択します。
+4. 「**Import**」 を選択します。
 
 5. インポート後に **05.2-Advanced-ETL** という名前のフォルダーが表示されます。そのフォルダーを選択します。
 
