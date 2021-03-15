@@ -63,7 +63,7 @@ AdventureWorks の開発者と情報サービス部門は、Azure で最近リ�
 
     - 画面のインスタンスの詳細で、次の情報を入力します。
 
-        - **アカウント名**: **Warehousexx** (**xx** は自分のイニシャル)
+        - **アカウント名**: **awcdbstudxx** (**xx** は自分のイニシャル)
 
         - **API**: **Core(SQL)**
 
@@ -75,7 +75,7 @@ AdventureWorks の開発者と情報サービス部門は、Azure で最近リ�
 
             ![Azure portal で新しい Azure Cosmos DB アカウントを作成します。](Linked_Image_Files/M04-E01-T01-img01.png)
 
-6. 「**Azure Cosmos DB アカウントの作成**」 ブレードで 「 **レビューと作成**」 をクリックします。
+6. 「**Azure Cosmos DB アカウントの作成**」 ブレードで 「 **確認と作成**」 をクリックします。
 
 7. 「**Azure Cosmos DB アカウントの作成**」 ブレードの検証後、「**作成**」 をクリックします。
 
