@@ -284,12 +284,12 @@ Data Factory の作成[Azure portal](https://portal.azure.com) を使用して D
 
     「集約」 タブでは、列で指定したグループで集計できます。すべてのジャンルと年ごとに、Rotten Tomatoes評価の平均値、最高評価と最低評価の映画(ウィンドウ機能を利用)、各グループ内の映画の数を取得することができます。集計では、変換ストリームの行数が大幅に減少し、変換で指定されたグループ化と集計列のみが反映されます。
 
-| 列 | 式 |
-|-------|--------|
-| AverageRating | avg(toInteger({Rotten Tomato})) |
-| HighestRated | first(title) |
-| LowestRated | last(title) |
-| NumberOfMovies | count() |
+    | 列 | 式 |
+    |-------|--------|
+    | AverageRating | avg(toInteger({Rotten Tomato})) |
+    | HighestRated | first(title) |
+    | LowestRated | last(title) |
+    | NumberOfMovies | count() |
 
 
     ![Azure Data Factory でのマッピング データ フローへの集計変換の構成](Linked_Image_Files/M07-E03-T03-img11.png)
@@ -320,7 +320,7 @@ Data Factory の作成[Azure portal](https://portal.azure.com) を使用して D
     ![Azure Data Factory でのシンク設定の構成](Linked_Image_Files/M07-E03-T04-img03.png)
 これで、8 つの変換マッピング データ フローの構築が完了しました。パイプラインを実行して結果を確認してみましょう！
 
-![Azure Data Factory でのデータ フローのマッピングが完了しました](Linked_Image_Files/M07-E03-T04-img04.png)
+    ![Azure Data Factory でのデータ フローのマッピングが完了しました](Linked_Image_Files/M07-E03-T04-img04.png)
 
 ## タスク 5: パイプラインを実行する
 
