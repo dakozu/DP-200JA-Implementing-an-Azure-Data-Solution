@@ -134,9 +134,7 @@
 
     - **Databricks Runtime Version**: **ランタイム: 7.4 (Scala 2.12、Spark 3.0.1)**
     
-    - **Python バージョン**: **2**
-
-    - 「**Terminate after 60 minutes of inactivity**」 チェック ボックスをオンにします。クラスターが使われていない場合は、クラスターを終了するまでの時間 (分単位) を指定します。
+    - 「**Terminate after 60 minutes of inactivity**」 チェック ボックスをオンにします。クラスターが使われていない場合にクラスターを終了するまでの時間 (分単位) を指定します。
 
     - **Min Workers**: **1**
 
