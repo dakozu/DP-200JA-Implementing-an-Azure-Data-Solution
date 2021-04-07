@@ -327,7 +327,7 @@ Data Factory の作成[Azure portal](https://portal.azure.com) を使用して D
 
 ## タスク 5: パイプラインを実行する
 
-1. キャンバスの 「pipeline1」 タブに移動します。Data Flow の Azure Synapse Analytics では [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-2017) が使用されるため、BLOB または ADLS ステージング フォルダーを指定する必要があります。「データ フローの実行」 アクティビティの設定タブで、PolyBase アコーディオンを開き、ADLS にリンクされたサービスを選択し、ステージング フォルダーのパスを指定します。
+1. キャンバスの 「pipeline1」 タブに移動します。Data Flow の Azure Synapse Analytics では [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-2017) が使用されるため、BLOB または ADLS ステージング フォルダーを指定する必要があります。「データ フローの実行」 アクティビティの設定タブで、ステージング アコーディオンを開き、ADLS にリンクされたサービスを選択し、ステージング フォルダーのパスを指定します。
 
     ![Azure Data Factory の PolyBase 構成](Linked_Image_Files/M07-E03-T05-img01.png)
 
