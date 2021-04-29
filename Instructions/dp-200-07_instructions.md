@@ -327,7 +327,7 @@ Data Factory の作成[Azure portal](https://portal.azure.com) を使用して D
 
 ## タスク 5: パイプラインを実行する
 
-1. キャンバスの 「pipeline1」 タブに移動します。Data Flow の Azure Synapse Analytics では [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-2017) が使用されるため、BLOB または ADLS ステージング フォルダーを指定する必要があります。「データ フローの実行」 アクティビティの設定タブで、PolyBase アコーディオンを開き、ADLS にリンクされたサービスを選択し、ステージング フォルダーのパスを指定します。
+1. キャンバスの 「pipeline1」 タブに移動します。Data Flow の Azure Synapse Analytics では [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-2017) が使用されるため、BLOB または ADLS ステージング フォルダーを指定する必要があります。「データ フローの実行」 アクティビティの設定タブで、ステージング アコーディオンを開き、ADLS にリンクされたサービスを選択し、ステージング フォルダーのパスを指定します。
 
     ![Azure Data Factory の PolyBase 構成](Linked_Image_Files/M07-E03-T05-img01.png)
 
@@ -421,7 +421,7 @@ Data Factory の作成[Azure portal](https://portal.azure.com) を使用して D
 
 2. パイプライン デザイナーの下部にある 「パラメーター」 タブをクリックし、「**+ 新規**」 をクリックします。
 
-3. **name** の名前と **string** のタイプを有するパラメーターを作成します。
+3. 名前が**name**、種類が  **文字列** のパラメーターを作成します。
 
 4. 「**アクティビティ**」 メニューで、「**Databricks**」 を展開します。
 
@@ -438,9 +438,9 @@ Data Factory の作成[Azure portal](https://portal.azure.com) を使用して D
 7. **ノートブック 1** で、「テンプレートとして保存」 ボタンの横にある 「**検証**」 をクリックします。画面の右側にウィンドウが表示され、「パイプラインを検証しました。
 エラーは見つかりませんでした。」と表示されます。「閉じる」 をクリックしてウィンドウを閉じます。
 
-8. リンクされたサービスとパイプラインを公開するには、「**すべて公開**」をクリックします。
+8. リンクされたサービスとパイプラインを公開するには、「**すべて発行**」をクリックします。
 
-9. 「すべて公開」ウィンドウで、「**公開**」をクリックします。
+9. 「すべて発行」ウィンドウで、「**発行**」をクリックします。
 
     > **注**: 展開が成功したことを知らせるメッセージが表示されます。
 
