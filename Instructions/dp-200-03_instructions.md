@@ -132,7 +132,7 @@
 
     - **Pool**: **None**
 
-    - **Databricks Runtime Version**: **ランタイム: 7.4 (Scala 2.12、Spark 3.0.1)**
+    - **Databricks Runtime Version**: **Runtime: 8.3 (Scala 2.12, Spark 3.1.1)**
     
     - 「**Terminate after 60 minutes of inactivity**」 チェック ボックスをオンにします。クラスターが使われていない場合にクラスターを終了するまでの時間 (分単位) を指定します。
 
@@ -258,11 +258,11 @@
     spark.conf.set("fs.azure.account.auth.type", "OAuth")
     spark.conf.set("fs.azure.account.oauth.provider.type", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
     spark.conf.set("fs.azure.account.oauth2.client.id.<storage-account-name>.dfs.core.windows.net", "<application-id>")
-    spark.conf.set("fs.azure.account.oauth2.client.secret.<storage-account-name>.dfs.core.windows.net", "<application-key>")
+    spark.conf.set("fs.azure.account.oauth2.client.secret.<storage-account-name>.dfs.core.windows.net", "<authentication-key>")
     spark.conf.set("fs.azure.account.oauth2.client.endpoint.<storage-account-name>.dfs.core.windows.net", "https://login.microsoftonline.com/<tenant-id>/oauth2/token")
     ```
 
-7. このコード ブロックでは、コード ブロック内の**application-id**、**application-id**、**tenant-id**、および **storage-account-name** のプレースホルダー値を、以前に収集した値で置き換えます。これらの値は メモ帳 に保持されます。
+7. このコード ブロックでは、コード ブロック内の**application-id**、**authentication-key**、**tenant-id**、および **storage-account-name** のプレースホルダー値を、以前に収集した値で置き換えます。これらの値は メモ帳 に保持されます。
 
 8. ノートブックの **Cmd 1** の下のセルで 「**Run**」 アイコンをクリックし、次の図でハイライトされているように 「**Run Cell**」 をクリックします。 
 
