@@ -284,7 +284,7 @@
     val df = spark.read.json("abfss://<file-system-name>@<storage-account-name>.dfs.core.windows.net/preferences.json")
     ```
 
-3. このコード ブロックでは、**file-system-name** を **logs** という単語で、またこのコード ブロック内の **storage-account-name** プレースホルダー値を以前に収集した値で置き換え、メモ帳 に保持します。
+3. このコード ブロックでは、**file-system-name** を **logs** という単語で、またこのコード ブロック内の **storage-account-name** プレースホルダー値を以前に収集してメモ帳 に保持した値で置き換えます。
 
 4. ノートブックの **Cmd 2** の下のセルで、「**Run**」 アイコンをクリックし、「**Run Cell**」 をクリックします。 
 
