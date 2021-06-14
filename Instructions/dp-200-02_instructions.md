@@ -125,9 +125,8 @@
 
         - **パフォーマンス**: **Standard**:
 
-        - **アカウントの種類**: **StorageV2 (general purpose v2)**。
+        - **Redundancy**: **geo 冗長ストレージ (RA_GRS)**
 
-        - **レプリケーション**: **読み取りアクセス geo 冗長ストレージ (RA_GRS)**
 
             ![Azure portal でストレージ アカウント設定を作成します](Linked_Image_Files/M02-E02-T02-img01.png)
 
